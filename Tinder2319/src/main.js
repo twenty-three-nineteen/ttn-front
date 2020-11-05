@@ -1,11 +1,4 @@
-'use strict';
-
-function counter() {
-  let seconds = 0;
-  setInterval(() => {
-    seconds += 1;
-    document.getElementById('app').innerHTML = `<p>You have been here for ${seconds} seconds.</p>`;
-  }, 1000);
-}
-
-counter();
+import ReactDOM from 'react-dom';
+import React from 'react';
+import LoginSignUp from './views/pages/LoginSignUp'
+ReactDOM.render(<LoginSignUp />, document.getElementById('app'));
