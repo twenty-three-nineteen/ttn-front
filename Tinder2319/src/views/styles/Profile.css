@@ -1,0 +1,52 @@
+/* @import '~antd/dist/antd.css'; */
+
+@import '../../../node_modules/antd/dist/antd.css';
+
+/* @import 'style/custom-antd.css'; */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Rubik+Mono+One&display=swap');
+
+/* @import '~antd/dist/antd.dark.css'; */
+.container {
+    
+    background-color: rgb(0,0,0,0.3);
+    height: 80%;
+    padding:5px;
+    margin-top: 10%;
+    width: 50%;
+    border-radius: 5%;
+    border-color: rgb(34, 75, 75);
+    
+    }
+.PicandName {
+    background-color: rgb(0,0,0,0.1);
+    height: 90%;
+    width: 100%;
+    border-radius: 85px;
+}  
+.avtar{
+    margin-top: 2.5%;
+    margin-bottom: 1%;
+    margin-left: 1.5%;
+    margin-right: 25%;
+} 
+.name{
+    margin-top: 8%;
+    margin-bottom: 1%;
+    margin-left: 1.5%;
+    margin-right: 55%;
+}
+.textUserName{
+    margin-top : 8%;
+    margin-left : 5%
+}
+.textBirthDay{
+    margin-top : 8%;
+    margin-left : 5%
+}
+.textInterests{
+    margin-top : 8%;
+    margin-left : 5%
+}
