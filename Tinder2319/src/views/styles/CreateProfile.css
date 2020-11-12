@@ -1,0 +1,147 @@
+textarea.ant-input {
+    resize: none;
+    font-size: 16px;
+}
+
+.avatar-radio-img .ant-radio-button-wrapper {
+    background: transparent;
+    border: none;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    margin: 2px;
+}
+
+.avatar-container {
+    width: fit-content;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.radio {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.radio img {
+    cursor: pointer;
+    width: 110px;
+    margin: -5px 0 0 -5px;
+    /* box-shadow: 1px 1px 0px 3px rgb(189, 189, 189); */
+    height: auto;
+    transition: all 1s ease;
+    background-color: rgb(189, 189, 189);
+    border: 1px rgb(189, 189, 189) solid;
+}
+
+.radio img:hover {
+    cursor: pointer;
+    background-color: rgb(141, 141, 141);
+    /* box-shadow: 1px 1px 0px 3px rgb(141, 141, 141); */
+    /* filter: drop-shadow(2px 2px 32px rgb(0, 0, 0)); */
+}
+
+.radio input[type="radio"]:checked~img {
+    border: 1px#9a5064 solid;
+    background-color: #9a5064;
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+}
+
+.avatar-radio-img .ant-radio-button-wrapper img {
+    width: 100px;
+    filter: drop-shadow(5px 5px 5px #000);
+    height: auto;
+}
+
+.profile-form {
+    margin: 0 5px;
+}
+
+.container .slick-track {
+    display: flex;
+    align-items: stretch;
+}
+
+.container .slick-track .slick-slide {
+    height: auto;
+}
+
+.container .slick-track .slick-slide div {
+    height: 100%;
+}
+
+.next-form-button,
+.prev-form-button,
+.done-form-button {
+    padding: 4px 15px;
+    bottom: 0px;
+    font-size: 16px;
+    width: 30%;
+}
+
+.next-form-button {
+    float: right;
+}
+
+.prev-form-button {
+    float: left;
+}
+
+.done-form-button {
+    float: right;
+}
+
+.interest-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 5px;
+    height: 100%;
+}
+
+.interest-component .interest-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px !important;
+}
+
+.interest-component .interest-container {
+    background-color: #e6e6e6;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.interest-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    background-color: #F5F5F5;
+}
+
+.interest-container::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.interest-container::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+    background-color: #9a5064;
+}
+
+.profile-container .ant-carousel .slick-dots {
+    bottom: auto;
+}
