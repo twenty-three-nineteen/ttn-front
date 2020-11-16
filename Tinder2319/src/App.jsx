@@ -4,14 +4,20 @@ import history from "./core/modules/history";
 
 import "antd/dist/antd.css";
 import Profile from "./views/pages/Profile/Profile";
-import LoginSignUp from "./views/pages/LoginSignUp";
+
+import CreateProfile from "./views/pages/CreateProfile/CreateProfile";
+import EmailConfirmation from "./views/pages/EmailConfirmation/EmailConfirmation";
+import LoginSignUp from "./views/pages/LoginSignUp/LoginSignUp";
 import Explore from "./views/pages/Explore";
+
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/LoginSignUp" exact component={LoginSignUp} />
+      <Route path="/activate/*" exact component={EmailConfirmation} />
+      <Route path="/loginsignup" exact component={LoginSignUp} />
+        <Route path="/CreateProfile/*" exact component={CreateProfile} />
         <Route path="/Profile" exact component={Profile} />
         <Route path="/Explore" exact component={Explore} />
       </Switch>

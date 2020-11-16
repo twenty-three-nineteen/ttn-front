@@ -1,6 +1,11 @@
 /* @import '~antd/dist/antd.css'; */
 
-@import '../../../node_modules/antd/dist/antd.css';
+
+/* @import '../../../node_modules/antd/dist/antd.css'; */
+
+
+/* @import './css/antd.css' */
+
 
 /* @import 'style/custom-antd.css'; */
 
@@ -10,6 +15,7 @@
 
 /* @import '~antd/dist/antd.less'; */
 
+@import url('./css/antd.css');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Rubik+Mono+One&display=swap');
@@ -113,8 +119,8 @@ body {
     border-bottom: 1px solid #dfdfdf;
 }
 
-#form-container button,
-#email-confirmation-container button {
+#form-container.submit button,
+#email-confirmation-container.submit button {
     /* width: 100%; */
     background-color: #9a5064;
     border: #9a5064;
@@ -128,7 +134,7 @@ body {
     background: rgba(244, 244, 244);
     /* box-shadow: 0px 0px 0px 1px #ebebeb, 0px 0px 0px 10px #fdfdfd, 0px 0px 0px 11px #dfdfdf, 0px 0px 10px 10px rgba(0, 0, 0, 0.48); */
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3), 0px 0px 100vw 0px #793e4e;
-    padding: 20px;
+    padding: 20px 22px;
     /* background-color: white; */
     width: 400px;
     border-radius: 10px;
