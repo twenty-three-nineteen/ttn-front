@@ -4,18 +4,25 @@ import { UserOutlined} from '@ant-design/icons';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import AvatarModalWindow from './AvatarModalWindow';
-const CreateProfileForm = (props) => 
+
+
+import {connect} from 'react-redux';
+import * as create_profile_actions from '../../../../core/create-profile/action/createProfileActions';
+
+
+const CreateProfileForm = ({slider, setProfileInfo,setModal}) => 
 {
-  const [selectedAvatar, setselectedAvatar] = useState("1");
   const [avatarModal, setavatarModal] = useState(false);
   const onFinish = (values) => {
-    console.log(values);
-    console.log(selectedAvatar);
-      
+    setProfileInfo(values);
+    console.log(profileInfo);
   };
+
+  
 
   const handleAvatarModalToggle = () =>
   {
+    setModal(true);
     setavatarModal(true);
   }
   
@@ -24,8 +31,6 @@ const CreateProfileForm = (props) =>
     <AvatarModalWindow
     visible={avatarModal}
     setvisible={setavatarModal}
-    selectedAvatar={selectedAvatar}
-    setselectedAvatar={setselectedAvatar}
     />
 
   
@@ -34,7 +39,6 @@ const CreateProfileForm = (props) =>
       className="profile-form"
       preserve='false'
       onFinish={onFinish}
-      
       size="large"
     >
     <Form.Item
@@ -58,7 +62,10 @@ const CreateProfileForm = (props) =>
       style={{width:"45%",display:"inline-block",margin:"0 0 0 10px"}}
       >
       <DatePicker 
-      placeholder="Birth Date" />
+      placeholder="Birth Date" 
+     
+     
+      />
         
       </Form.Item>
 
@@ -84,9 +91,7 @@ const CreateProfileForm = (props) =>
 
 
         <Form.Item
-        name="avatar-radio"
-        
-        
+        name="avatar-radio"  
         >
         <Button type="primary" className="avatar-form-button" onClick={handleAvatarModalToggle}>
         Choose Your Avatar
@@ -102,19 +107,29 @@ const CreateProfileForm = (props) =>
         htmlType="submit"
         className="next-form-button"
 
-        onClick={()=>{props.slider.current.next()}}
+        onClick={()=>{slider.current.next()}}
         >
         Next
         </Button>
       </Form.Item>
-      </Form>
-    
-    
-
-      
+      </Form>   
       </div>
 
   );
 };
+const mapStateToProps = (state) =>{
+  
+  return{
+    slider : state.create_profile.slider,
+    profileInfo: state.create_profile.profile_info,
+  }
+} 
+const mapDispatchToProps = (dispatch) => {
+  return{
+    setInterests : (ints) => dispatch(create_profile_actions.setInterests(ints)),
+    setProfileInfo : (values) => dispatch(create_profile_actions.setProfileInfo(values)),
+    setModal: (v) => dispatch(create_profile_actions.setModal(v)),
+  }
+}
 
-export default CreateProfileForm;
+export default connect(mapStateToProps,mapDispatchToProps)(CreateProfileForm);

@@ -23,6 +23,13 @@
 /* @import '~antd/dist/antd.dark.css'; */
 
 
+#app {
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+
 /* .avatar-form-button.ant-btn {
     height: auto;
     white-space: normal;
@@ -31,6 +38,8 @@
 body {
     background-color: #AE6378;
     display: flex;
+    height: 100%;
+    margin: 0;
     align-items: center;
     justify-content: center;
     /* transition: all 1s ease; */

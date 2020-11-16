@@ -1,101 +1,39 @@
 import React from 'react';
-// import '../../../styles/App.css';
-import axios from 'axios';
-import avPath from '../../../../assessts/images/avatars/boy.png';
-const Avatar = (props) => 
-{
+import av1 from '../../../../assessts/images/avatars/av (1).png';
+import av2 from '../../../../assessts/images/avatars/av (2).png';
+import av3 from '../../../../assessts/images/avatars/av (3).png';
+import av4 from '../../../../assessts/images/avatars/av (4).png';
+import av5 from '../../../../assessts/images/avatars/av (5).png';
 
-   const onValueChange = (event) => {
-        props.setselectedAvatar(event.target.value);
-      }
-  return (
-    <div className="modal-container">
-    <div
-    className="avatar-container">
-    <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="1"
-              checked={props.selectedAvatar === "1"}
-              onChange={onValueChange}
-            />
-            <img alt="av" src={avPath} />
-          </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="2"
-              checked={props.selectedAvatar === "2"}
-              onChange={onValueChange}
-            />
-            <img alt="av" src={avPath} />
-          </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              value="3"
-              checked={props.selectedAvatar === "3"}
-              onChange={onValueChange}
-            />
-            <img alt="av" src={avPath} />
-          </label>
-        </div> 
+import av6 from '../../../../assessts/images/avatars/av (6).png';
+import av7 from '../../../../assessts/images/avatars/av (7).png';
+import av8 from '../../../../assessts/images/avatars/av (8).png';
+import av9 from '../../../../assessts/images/avatars/av (9).png';
+import av10 from '../../../../assessts/images/avatars/av (10).png';
 
-        <div className="radio">
-        <label>
-          <input
-            type="radio"
-            value="1"
-            checked={props.selectedAvatar === "1"}
-            onChange={onValueChange}
-          />
-          <img alt="av" src={avPath} />
-        </label>
-      </div>
+import av11 from '../../../../assessts/images/avatars/av (11).png';
+import av12 from '../../../../assessts/images/avatars/av (12).png';
+import av13 from '../../../../assessts/images/avatars/av (13).png';
+import av14 from '../../../../assessts/images/avatars/av (14).png';
+import av15 from '../../../../assessts/images/avatars/av (15).png';
 
-      <div className="radio">
-      <label>
-        <input
-          type="radio"
-          value="1"
-          checked={props.selectedAvatar === "1"}
-          onChange={onValueChange}
-        />
-        <img alt="av" src={avPath} />
-      </label>
-    </div>
+import av16 from '../../../../assessts/images/avatars/av (16).png';
+export default [
+  av1,
+  av2,
+  av3,
+  av4,
+  av5,
+  av6,
+  av7,
+  av8,
+  av9,
+  av10,
+  av11,
+  av12,
+  av13,
+  av14,
+  av15,
+  av16,
+]
 
-    <div className="radio">
-    <label>
-      <input
-        type="radio"
-        value="1"
-        checked={props.selectedAvatar === "1"}
-        onChange={onValueChange}
-      />
-      <img alt="av" src={avPath} />
-    </label>
-  </div>
-
-  <div className="radio">
-  <label>
-    <input
-      type="radio"
-      value="1"
-      checked={props.selectedAvatar === "1"}
-      onChange={onValueChange}
-    />
-    <img alt="av" src={avPath} />
-  </label>
-</div>
-      </div>
-      </div>
-  );
-};
-
-export default Avatar;
