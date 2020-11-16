@@ -9,44 +9,167 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Rubik+Mono+One&display=swap');
 
 /* @import '~antd/dist/antd.dark.css'; */
+
+.img{
+  
+    animation-name: slide;
+    animation-duration: 2.5s;
+    
+}
+
+ @keyframes slide {
+    
+    0% {
+       opacity: 0;
+       transform: translateX(210px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+     }
+
+ }
+ @keyframes fadein1 {
+    0% {
+       opacity: 0;
+       transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+     }
+
+ }
+ @keyframes fadein2 {
+    0% {
+       opacity: 0;
+       transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+     }
+
+ }
+ @keyframes fadein3 {
+    0% {
+       opacity: 0;
+       transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+     }
+
+ }
+ @keyframes fadein4 {
+    0% {
+       opacity: 0;
+       transform: translateY(80px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+     }
+
+ }
+
 .container {
     
     background-color: rgb(0,0,0,0.3);
-    height: 80%;
+    height: 90%;
     padding:5px;
-    margin-top: 10%;
+    margin-top: 6%;
+    margin-bottom: 5%;
     width: 50%;
     border-radius: 5%;
     border-color: rgb(34, 75, 75);
     
-    }
+    } 
 .PicandName {
     background-color: rgb(0,0,0,0.1);
     height: 90%;
     width: 100%;
     border-radius: 85px;
 }  
-.avtar{
-    margin-top: 2.5%;
-    margin-bottom: 1%;
-    margin-left: 1.5%;
-    margin-right: 25%;
-} 
+
 .name{
     margin-top: 8%;
     margin-bottom: 1%;
     margin-left: 1.5%;
     margin-right: 55%;
 }
+
+.userNameDiv{
+
+    border-radius: 85px;
+    background-color: rgb(0,0,0,0.1);
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.birthDayDiv{
+
+    border-radius: 85px;
+    background-color: rgb(0,0,0,0.1);
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.interestsDiv{
+
+    border-radius: 85px;
+    background-color: rgb(0,0,0,0.1);
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.bioDiv{
+
+    border-radius: 85px;
+    background-color: rgb(0,0,0,0.1);
+    margin-left: 1%;
+    margin-right: 2%;
+}
+
 .textUserName{
+    
     margin-top : 8%;
-    margin-left : 5%
+    margin-left : 3%;
+    animation-name: fadein1;
+    animation-duration: 3s;
+    
+    
+}
+.textBio{
+
+    margin-top : 8%;
+    margin-left : 3%;
+    animation-name: fadein2;
+    animation-duration: 3s;
+    
+  
 }
 .textBirthDay{
+
     margin-top : 8%;
-    margin-left : 5%
+    margin-left : 3%;
+    animation-name: fadein3;
+    animation-duration: 3s;
+    
+   
 }
+
 .textInterests{
+   
     margin-top : 8%;
-    margin-left : 5%
+    margin-left : 3%;
+    animation-name: fadein4;
+    animation-duration: 3s;
+    touch-action: ;
+   
+}
+.viewProB{
+    background-color: rgb(0,0,0,0.1);
+    width: 519px;
+    margin-top: 5.5%;
+    margin-left: 1.5%;
+    border-radius: 85px;
 }
