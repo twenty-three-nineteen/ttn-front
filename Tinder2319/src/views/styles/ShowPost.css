@@ -1,0 +1,15 @@
+.showPostStyle{
+   
+    margin-top: 25%;
+    margin-bottom: 25%;
+    background-color: rgb(0,0,0,0.36);
+    width: 400px;
+    height: 400px;
+    border-radius: 60px;
+    text-justify: center;
+    justify-items: center;
+    justify-self: center;
+    justify-content: center;
+    
+}
+ 
