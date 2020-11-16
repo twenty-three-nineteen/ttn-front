@@ -13,6 +13,7 @@
 #app {
     min-height: 100%;
     height: 100%;
+    width: 100%;
 }
 
 html {
@@ -24,8 +25,6 @@ body {
     background-color: #88B1AF;
     display: flex;
     align-items: start;
-    justify-content: center;
-    transition: all 1s ease;
     height: 100%;
     margin: 0;
 }
