@@ -1,34 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import CreateProfileForm from './components/CreateProfileForm';
 import Interests from './components/Interests'
 import { Tabs,Menu,Popover, Button,Carousel } from 'antd';
 import { useState,useEffect,useRef } from 'react';
 import '../../styles/App.css';
 import '../../styles/CreateProfile.css';
-
+import {connect} from 'react-redux';
+import * as create_profile_actions from '../../../core/create-profile/action/createProfileActions';
 
   
 
- const CreateProfile = () => {
+ const CreateProfile = ({setSlider}) => {
+  
   useEffect(() => {
     console.log(slider);
-    // const element = document.getElementsByClassName('.steps-content');
-    // const style = window.getComputedStyle(element);
-    // setheight(style.height);
-    // console.log(style.height);
-  });
+    setSlider(slider);
+  },[]);
 
   const [height, setheight] = useState(0);
-  const [current, setCurrent] = useState(0);
 
-  const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const prev = () => {
-    setCurrent(current - 1);
-  };
   const slider = useRef();
     return (
       <div className="login-signup-container profile-container">
@@ -44,7 +34,6 @@ import '../../styles/CreateProfile.css';
 
   <Carousel dotPosition="top"
   infinite={false}
-  // adaptiveHeight={true}
   style={{
     paddingTop:"30px",
   }}
@@ -55,15 +44,26 @@ import '../../styles/CreateProfile.css';
   
   >
   
-   <CreateProfileForm slider={slider}/>
+   <CreateProfileForm/>
 
 
-    <Interests slider={slider}/>
+    <Interests/>
 
 </Carousel>
 
   </div></div>
     );
   }
-
-  export default CreateProfile;
+  const mapStateToProps = (state) =>{
+    
+    return{
+      
+    }
+  } 
+  const mapDispatchToProps = (dispatch) => {
+    return{
+      setSlider : (s) => dispatch(create_profile_actions.setSlider(s))
+    }
+  }
+  
+  export default connect(mapStateToProps,mapDispatchToProps)(CreateProfile);
