@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginForm from '../components/LoginForm';
-import SignUpForm from '../components/SignUpForm';
+// import LoginForm from '../../components/LoginForm';
+// import SignUpForm from '../../components/SignUpForm';
 import { Tabs,Menu,Popover, Button } from 'antd';
 import '../styles/App.css';
 
