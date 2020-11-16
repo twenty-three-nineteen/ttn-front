@@ -1,0 +1,7 @@
+export const ActionTypes = {
+    SET_INTERESTS: "SET_INTERESTS",
+    SET_SLIDER: "SET_SLIDER",
+    SET_PROFILE_INFO: "SET_PROFILE_INFO",
+    SET_AVATAR: "SET_AVATAR",
+    SET_MODAL: "SET_MODAL",
+  };
