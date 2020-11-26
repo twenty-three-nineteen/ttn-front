@@ -1,0 +1,79 @@
+@import "./css/antd.css";
+@import "./scss/variables.scss";
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+    from {
+        transform: rotate(360deg);
+    }
+}
+
+#app {
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: $primary-color;
+    display: flex;
+    height: 100%;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.box {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    transform: rotate(80deg);
+    left: 0;
+    &:after {
+        content: '';
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.wave {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    background: $color-0;
+    width: 300vw;
+    height: 300vw;
+    margin-left: -2vw;
+    margin-top: -80vw;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 9000ms infinite linear;
+}
+
+.wave.-three {
+    animation: drift 9500ms infinite linear;
+    position: fixed;
+    background-color: $color-2;
+}
+
+.wave.-two {
+    animation: drift 8000ms infinite linear;
+    opacity: .1;
+    background: black;
+    position: fixed;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 80%;
+    }
+}
