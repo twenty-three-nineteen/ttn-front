@@ -7,7 +7,8 @@ const initialstate = {
     birth: undefined,
     bio: undefined,
   },
-  avatar: null,
+  
+  avatar: 1,
   visible: false,
 }
 export default (state = initialstate, { type, payload }) => {
@@ -31,8 +32,10 @@ export default (state = initialstate, { type, payload }) => {
           profile_info : {
             name: payload.values.nickname,
             bio : payload.values.bio,
-            birth : ((payload.values.birth)? payload.values.birth.add(1, 'months').toArray().slice(0,3): 
-            undefined),
+            birth : payload.values.birth.format('YYYY-MM-DD'),
+            //month+1
+            //YYYY-MM-DD HERE
+            
           }
       };
 
@@ -47,6 +50,8 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           visible: payload.visible,
       };
+
+      
         
     default : return state;
 

@@ -1,3 +1,4 @@
+
 /* @import '~antd/dist/antd.css'; */
 
 
@@ -35,7 +36,7 @@
 } */
 
 body {
-    background-color: #af6479;
+    
     display: flex;
     height: 100%;
     margin: 0;
@@ -172,3 +173,4 @@ body {
         max-width: 80%;
     }
 }
+

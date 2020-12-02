@@ -1,30 +1,31 @@
 import React from 'react';
 import LoginSignUpForm from './components/LoginSignUpForm';
-import '../../styles/App.css';
-import '../../styles/LoginSignUp.css';
+import '../../styles/App.scss'
+import '../../styles/LoginSignUp.scss';
+// import '../../styles/scss/styles.scss';
 
-import { Tooltip  } from 'antd';
+import { useEffect } from 'react';
+import { Tooltip,Spin  } from 'antd';
 
 import {connect} from 'react-redux';
 import * as login_signup_actions from '../../../core/login-signup/action/loginSignupActions';
 
-function callback(key) {
-  console.log(key);
-}
 
-const appName = "app name";
-
-const LoginSignUp = ({formState, setFormState}) =>  {
+const LoginSignUp = ({formState, setFormState, loading}) =>  {
+  useEffect(() => {
+    setFormState(1);
+  }, []);
 
     return (
-      <div className="login-signup-container">
+      <div className="bg-container">
   <div className='box'>
   <div className='wave -one'></div>
   <div className='wave -two'></div>
   <div className='wave -three'></div>
   </div>
   
-  <div id="form-container">
+  <div className="login-form-container">
+  <Spin spinning={loading}>
   <h1 id="state-row">
   <Tooltip title="Forgot your password?">
   <button
@@ -49,15 +50,19 @@ const LoginSignUp = ({formState, setFormState}) =>  {
   </Tooltip>
 
   </h1>
+  
   <LoginSignUpForm/>
+  </Spin>
 </div>
     </div>
     );
   }
 
   const mapStateToProps = (state) =>{
+    // console.log("state : ",state);
     return{
       formState: state.login_signup.formState,
+      loading: state.login_signup.loading,
     }
   } 
   const mapDispatchToProps = (dispatch) => {

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Result, Button  } from 'antd';
 
+import history from "../../../../core/modules/history";
+
 const EmailConfirmationSuccess = () => 
 {
-const goToCreateProfile = ()=>{
-  
-}
+  const goToCreateProfile = ()=>{
+    // history.push('/create_profile');
+    history.push('/login_signup');
+  }
   return (
     
     <Result

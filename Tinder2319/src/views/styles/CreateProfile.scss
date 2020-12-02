@@ -1,0 +1,101 @@
+@import './scss/variables.scss';
+@import './scss/styles.scss';
+textarea.ant-input {
+    resize: none;
+    font-size: 16px;
+}
+
+.avatar-container {
+    height: 330px;
+    overflow-y: auto;
+    width: fit-content;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.radio {
+    @extend .avatar;
+    input[type="radio"] {
+        &:checked~img {
+            border: 1px $color-2 solid;
+            background-color: $color-2;
+        }
+        display: none;
+    }
+}
+
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+}
+
+.next-form-button {
+    padding: 4px 15px;
+    bottom: 0px;
+    font-size: 16px;
+    width: 30%;
+    float: right;
+}
+
+.prev-form-button {
+    padding: 4px 15px;
+    bottom: 0px;
+    font-size: 16px;
+    width: 30%;
+    float: left;
+}
+
+.done-form-button {
+    padding: 4px 15px;
+    bottom: 0px;
+    font-size: 16px;
+    width: 30%;
+    float: right;
+}
+
+.interest-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 5px;
+    height: 100%;
+    .interest-checkbox-group {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px !important;
+    }
+    .interest-container {
+        @extend .scrollbar;
+        background-color: #e6e6e6;
+        padding: 10px;
+        overflow-y: auto;
+    }
+}
+
+.create-profile-container {
+    @extend .container;
+    width: 400px;
+    .slick-track {
+        display: flex;
+        align-items: stretch;
+        .slick-slide {
+            height: auto;
+            div {
+                height: 100%;
+            }
+        }
+    }
+    .ant-carousel {
+        .slick-dots {
+            bottom: auto;
+            li {
+                button {
+                    background-color: $color-2;
+                }
+            }
+        }
+    }
+}

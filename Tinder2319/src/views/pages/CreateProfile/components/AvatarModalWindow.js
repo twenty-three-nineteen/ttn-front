@@ -16,30 +16,24 @@ const ModalWindow = ({setAvatar, avatar, visible,setModal}) =>
 {
   const onValueChange = (event) => {
     // props.setselectedAvatar(event.target.value);
-    setAvatar(event.target.value);
+    setAvatar(parseInt(event.target.value));
   }
     const handleOk = (e) => {
       // console.log(e);
       setModal(false);
     };
 
-    const findKey=(value)=>
-    {
-      // console.log(value.split('.')[0]);
-      return value.split('.')[0];
-    }
-
     const AvatarsImages = avatarArray.map(
 
-      (av) =>
+      (av,i) =>
       {
         return(
           <div className="radio">
           <label>
             <input
               type="radio"
-              value={findKey(av)}
-              checked={avatar === findKey(av)}
+              value={(i+1)}
+              checked={avatar === (i+1)}
               onChange={onValueChange}
             />
             <img src={av} />
@@ -63,7 +57,7 @@ const ModalWindow = ({setAvatar, avatar, visible,setModal}) =>
     ]}>
     <div className="modal-container">
     <div
-    className="avatar-container">
+    className="avatar-container scrollbar">
 
     {AvatarsImages}
 
