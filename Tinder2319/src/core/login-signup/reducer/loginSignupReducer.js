@@ -1,4 +1,6 @@
 import {ActionTypes} from "../action/loginSignupActionTypes";
+import axios from 'axios';
+
 const initialstate = { 
   formState: 1,
   username: undefined,
@@ -11,11 +13,8 @@ const initialstate = {
   f_visible:false,
   signup_success:false,
   forgot_pass_success:false,
-  login_success:false,
-
-
- 
-  
+  logged_in:false,
+  all_interests:[],
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
@@ -31,7 +30,6 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           username : payload.username,
       };
-
 
       case ActionTypes.SET_PASSWORD:
         return{
@@ -79,7 +77,7 @@ export default (state = initialstate, { type, payload }) => {
       case ActionTypes.SET_LOGIN_STATE:
         return{
           ...state, 
-          login_success : payload.success,
+          logged_in : payload.success,
       };
 
       case ActionTypes.SET_FORGOT_PASS_STATE:
@@ -87,6 +85,21 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           forgot_pass_success : payload.success,
       };
+
+      case ActionTypes.LOG_IN:
+        return{
+          ...state, 
+          logged_in : payload.logged_in,
+          username: payload.username,
+          token: payload.token,
+      };
+
+      case ActionTypes.SET_ALL_INTERESTS:
+        return{
+          ...state, 
+          all_interests: payload.list,
+      };
+        
       
       
     default : return state;

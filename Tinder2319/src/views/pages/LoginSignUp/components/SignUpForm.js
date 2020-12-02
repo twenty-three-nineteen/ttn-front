@@ -2,9 +2,28 @@ import React from 'react';
 import { Form, Input  } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import { useState,useEffect } from 'react';
 import {connect} from 'react-redux';
 const SignUpForm = ({formState}) => {
+  const [req, setReq] = useState(false);
   
+  useEffect(() => {
+    if(formState>1)
+      {
+        const timer = setTimeout(() => 
+        {
+          setReq(true);
+
+        }
+        , 10);
+        return () => clearTimeout(timer);
+      }
+    else{
+      setReq(false);
+    }
+    
+  }, [formState]);
+
     return (
         <div 
         id="signUp-container"
@@ -16,7 +35,7 @@ const SignUpForm = ({formState}) => {
         hasFeedback
         rules={[
           {
-            required: (formState>1),
+            required: req,
             message: 'Please confirm your password!',
           },
           ({ getFieldValue }) => ({
@@ -39,7 +58,7 @@ const SignUpForm = ({formState}) => {
           name="username"
           rules={[
             {
-              required: (formState>1),
+              required: req,
               message: 'Please input your Username!',
               whitespace: true,
             },

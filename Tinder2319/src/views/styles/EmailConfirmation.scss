@@ -1,0 +1,10 @@
+@import './scss/styles.scss';
+.email-confirmation-container {
+    @extend .container;
+    // width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: auto;
+}

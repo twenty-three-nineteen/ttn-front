@@ -4,4 +4,5 @@ export const ActionTypes = {
     SET_PROFILE_INFO: "SET_PROFILE_INFO",
     SET_AVATAR: "SET_AVATAR",
     SET_MODAL: "SET_MODAL",
+    SET_ALL_INTERESTS:"SET_ALL_INTERESTS",
   };

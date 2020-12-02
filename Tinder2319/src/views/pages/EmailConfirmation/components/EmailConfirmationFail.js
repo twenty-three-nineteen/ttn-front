@@ -1,17 +1,26 @@
 import React from 'react';
 import { Result, Button  } from 'antd';
-const resendEmail=()=>{
-  console.log("resend");
-}
-const EmailConfirmationFail = () => 
+
+import {connect} from 'react-redux';
+import * as email_confirmation_actions from '../../../../core/email-confirmation/action/emailConfirmationActions';
+import ResendEmailModal from './ResendEmailModal';
+  
+    
+
+const EmailConfirmationFail = ({msg,setResendEmailModal}) => 
 {
+  const resendEmail=()=>
+{
+  setResendEmailModal(true);
+}
 
   return (
-    
+    <div>
+    <ResendEmailModal/>
     <Result
     status="error"
     title="Verification Failed."
-    subTitle="Maybe your link is expired."
+    subTitle={msg}
     extra={[
       <Button onClick={resendEmail} type="primary" key="console">   
         Resend Verification Email
@@ -21,9 +30,22 @@ const EmailConfirmationFail = () =>
     ]}
   >
   </Result>
-      
+  </div>
 
   );
 };
 
-export default EmailConfirmationFail;
+const mapStateToProps = (state) =>{
+  
+  return{
+    msg: state.email_confirmation.errorMsg,
+  }
+} 
+const mapDispatchToProps = (dispatch) => {
+  return{
+    setResendEmailModal : (v) => dispatch(email_confirmation_actions.setResendEmailModal(v)),
+    
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EmailConfirmationFail);

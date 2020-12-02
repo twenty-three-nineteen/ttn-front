@@ -9,69 +9,194 @@ import SignUpModal from './SignUpModalWindow';
 import ForgotPasswordModal from './ForgotPasswordModalWindow';
 import {connect} from 'react-redux';
 import * as login_signup_actions from '../../../../core/login-signup/action/loginSignupActions';
+import history from "../../../../core/modules/history";
 
-
-const LoginForm = ({formState, username, email, password, loading,
-   setEmail,setPassword,setUsername,setLoading, setForgotPasswordModal, setSignUpModal,setToken
+const LoginForm = ({formState,logged_in,
+  //  username, email, password, loading,setPassword,
+  setUsername,setEmail,setLoading, setForgotPasswordModal, setSignUpModal,setToken,setLoginState,setAllInterests
   }) => 
 {
-  const [passReq, setpassReq] = useState(false)
-  
+  const [passReq, setpassReq] = useState(false);
   useEffect(() => {
-    // setLoading(true)
-    const timer = setTimeout(() => setpassReq(true), 10);
+    // setToken(undefined);
+    // setLoginState(false)
+    // setUsername(undefined);
+    setForgotPasswordModal(false)
+    setSignUpModal(false);
+    if(logged_in)
+      {
+        message.success({
+          content: 'You\'re logged in!',
+        });
+        history.push('/explore');
+      }
+    setEmail(undefined);
+    const timer = setTimeout(() => 
+    {
+      setpassReq(true);
+
+    }
+    , 10);
     return () => clearTimeout(timer);
   }, []);
+
+  const checkInterests = (username,token) =>
+  {
+    axios.get('http://localhost:8000/api/account/userprofile/'+username, 
+    {
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type':'application/json',
+      }
+   })
+
+
+    .then(function (response) {
+      console.log(!!!response.data.interests.length);
+      if(response.data.interests.length)//response.data.interests.length
+      {
+        history.push('/explore');
+      }
+      else
+      {
+        history.push('/create_profile');
+      }
+    })
+    .catch(error =>
+    {
+        console.log(error);
+        // if (error.response) {
+        //   const msgArray = Object.keys(error.response.data).map((d)=>
+        //   {
+        //     console.log(error.response.data[d]);
+        //     return (error.response.data[d]).join();
+        //   })
+        //   Modal.error({
+        //     content: msgArray.join(' '),
+        //   });
+        //   console.log(msgArray);
+        // } else {
+        //   Modal.error({
+        //     content: error.message,
+        //   });
+        // } 
+      
+      })
+  }
+  const getUser = (token) =>
+  {
+    
+    axios.get('http://localhost:8000/api/account/auth/users/me/',
+    {
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type':'application/json',
+      }
+   })
+
+
+    .then(function (response) {
+      console.log(response);
+      setUsername(response.data.username);
+      checkInterests(response.data.username,token);
+      
+      // return response.data.username;
+      
+    })
+    .catch(error =>
+      {
+        console.log(error);
+        if (error.response) {
+          console.log('res');
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else {
+          console.log(error.message);
+        } })
+  }
+
+  const setInterestsList = (token) =>
+  {
+    axios.get('http://localhost:8000/api/account/interests',
+    {
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type':'application/json',
+      }
+   })
+
+
+    .then(function (response) {
+      const interestsList=response.data.map(
+        (op)=>
+        {
+          
+          return{
+            label: op.subject,
+            value: op.id,
+          }
+        }
+      ); 
+      setAllInterests(interestsList);
+      console.log(interestsList);
+    })
+    .catch(error =>
+    {
+        console.log(error);
+    })
+  }
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    setEmail(values.email);
+    
     setLoading(true);
     
     if(formState === 0)
     {
+      setEmail(values.email);
       // forgot-password
-      // axios.post('http://localhost:8000/api/account/auth/users/reset_password/', {
-      //   "email": values.email,
-      // },
-      // {'Content-Type':'application/json'}
-      // )
-      // .then(res => {
-      //   setLoading(false);
-      //   // setForgotPasswordModal(true);
-      //   console.log(res);
-      //   console.log(res.data);
-      // })
-      // .catch(error =>
-      // {
-      //   setLoading(false);
-      //   console.log(error);
-      //   if (error.response) {
-      //     const msgArray = Object.keys(error.response.data).map((d)=>
-      //     {
-      //       console.log(error.response.data[d]);
-      //       return (error.response.data[d]).join();
-      //     })
-      //     Modal.error({
-      //       content: msgArray.join(' '),
-      //     });
-      //     console.log(msgArray);
-      //   } else {
-      //     Modal.error({
-      //       content: error.message,
-      //     });
-      //   } 
-      // })
+      axios.post('http://localhost:8000/api/account/auth/users/reset_password/', {
+        "email": values.email,
+      }
+      )
+      .then(res => {
+        setLoading(false);
+        setForgotPasswordModal(true);
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch(error =>
+      {
+        setLoading(false);
+        console.log(error);
+        if (error.response) {
+          const msgArray = Object.keys(error.response.data).map((d)=>
+          {
+            console.log(error.response.data[d]);
+            return (error.response.data[d]).join();
+          })
+          Modal.error({
+            content: msgArray.join(' '),
+          });
+          console.log(msgArray);
+        } else {
+          Modal.error({
+            content: error.message,
+          });
+        } 
+      })
 
     }
     else if(formState === 1)
     {
       //login
+      // setEmail(undefined);
+      // setPassword(values.password);
       
-      setPassword(values.password);
       axios.post('http://localhost:8000/api/account/auth/token/login/', {
         "password": values.password,
         "email": values.email,
@@ -79,20 +204,34 @@ const LoginForm = ({formState, username, email, password, loading,
       {'Content-Type':'application/json'}
       )
       .then(res => {
-        setLoading(false);
+
+        
+        setToken(res.data.auth_token);
         message.success({
           content: 'Welcome!',
         });
+        getUser(res.data.auth_token);
+        setInterestsList(res.data.auth_token);
+        // console.log(usrname);
+        // checkInterests(usrname, res.data.auth_token);
+        setLoginState(true);
+        setLoading(false);
+        // if(prf)
+        // {
+        //   history.push('/create_profile');
+        // }
+        // else{
+        //   history.push('/explore');
+        // }
+        
         console.log(res);
         console.log(res.data);
-        setToken(res.data.auth_token);
+        
       })
       .catch(error =>
       {
         setLoading(false);
-       
         console.log(error);
-       
         if (error.response) {
           const msgArray = Object.keys(error.response.data).map((d)=>
           {
@@ -112,9 +251,10 @@ const LoginForm = ({formState, username, email, password, loading,
     }
     else if(formState === 2)
     {
-      setPassword(values.password);
-      setUsername(values.username);
-      
+      setEmail(values.email);
+      // setPassword(values.password);
+      // setUsername(values.username);
+      // setEmail(undefined);
     axios.post('http://localhost:8000/api/account/auth/users/', {
       "email": values.email,
       "password": values.password,
@@ -195,7 +335,7 @@ const LoginForm = ({formState, username, email, password, loading,
     <div>
     <SignUpModal/>
     <ForgotPasswordModal/>
-    <Spin spinning={loading}>
+    
     <Form
     form={form}
       name="form"
@@ -211,11 +351,11 @@ const LoginForm = ({formState, username, email, password, loading,
         name="email"
         rules={[
           {type: 'email',
-            message:'Please enter a valid E-mail',
+            message:'Please enter a valid email!',
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
+            message: 'Please input your email!',
           },
         ]}
       >
@@ -252,7 +392,7 @@ const LoginForm = ({formState, username, email, password, loading,
         </Button>
       </Form.Item>
       </Form>
-      </Spin>
+     
     
       </div>
 
@@ -270,6 +410,7 @@ const mapStateToProps = (state) =>{
     loading: state.login_signup.loading,
     sVisible:state.login_signup.s_visible,
     fVisible:state.login_signup.f_visible,
+    logged_in: state.login_signup.logged_in,
   }
 } 
 const mapDispatchToProps = (dispatch) => {
@@ -282,8 +423,9 @@ const mapDispatchToProps = (dispatch) => {
     setSignUpModal: (s) => dispatch(login_signup_actions.setSignUpModal(s)),
     setForgotPasswordModal: (f) => dispatch(login_signup_actions.setForgotPasswordModal(f)),
     setSignUpSuccess:(f) => dispatch(login_signup_actions.setSignUpState(f)),
-    setLoginSuccess:(f) => dispatch(login_signup_actions.setLoginState(f)),
+    setLoginState:(f) => dispatch(login_signup_actions.setLoginState(f)),
     setForgotPassSuccess:(f) => dispatch(login_signup_actions.setForgotPassState(f)),
+    setAllInterests:(f) => dispatch(login_signup_actions.setAllInterests(f)),
 
   }
 }
