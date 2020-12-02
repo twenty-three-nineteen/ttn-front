@@ -10,16 +10,19 @@ import {connect} from 'react-redux';
 import * as create_profile_actions from '../../../../core/create-profile/action/createProfileActions';
 
 
-const CreateProfileForm = ({slider, setProfileInfo,setModal}) => 
+const CreateProfileForm = ({username,slider, setProfileInfo,setModal}) => 
 {
   const [avatarModal, setavatarModal] = useState(false);
   const onFinish = (values) => {
     setProfileInfo(values);
-    console.log(profileInfo);
+    // console.log(profileInfo);
   };
 
   
-
+  const test = (e)=>{
+    console.log(e)
+    console.log(e.format('YYYY/MM/DD'));
+  }
   const handleAvatarModalToggle = () =>
   {
     setModal(true);
@@ -44,6 +47,7 @@ const CreateProfileForm = ({slider, setProfileInfo,setModal}) =>
     <Form.Item
     style={{margin:"0 0 10px 0"}}>
     <Form.Item
+    initialValue={username}
           name="nickname"
           rules={[
             {
@@ -63,7 +67,7 @@ const CreateProfileForm = ({slider, setProfileInfo,setModal}) =>
       >
       <DatePicker 
       placeholder="Birth Date" 
-     
+          onChange={test}
      
       />
         
@@ -120,6 +124,7 @@ const CreateProfileForm = ({slider, setProfileInfo,setModal}) =>
 const mapStateToProps = (state) =>{
   
   return{
+    username: state.login_signup.username,
     slider : state.create_profile.slider,
     profileInfo: state.create_profile.profile_info,
   }

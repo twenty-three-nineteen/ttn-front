@@ -35,3 +35,5 @@ export function setModal(visible){
         payload: { visible },
     }
 }
+
+
