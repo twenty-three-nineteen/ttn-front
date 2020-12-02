@@ -78,3 +78,10 @@ export function setSignUpModal(visible){
         payload: { visible },
     };
 }
+
+export function setAllInterests(list){
+    return{
+        type: ActionTypes.SET_ALL_INTERESTS,
+        payload: { list },
+    }
+}

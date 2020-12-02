@@ -24,3 +24,37 @@ export function setVerifiedState(verified)
     }
 }
 
+export function setResendEmailModal(visible)
+{
+    
+    return{
+        type: ActionTypes.SET_RESEND_EMAIL_MODAL,
+        payload: {visible},
+    }
+}
+
+export function setEmail(email)
+{
+    
+    return{
+        type: ActionTypes.SET_EMAIL,
+        payload: {email},
+    }
+}
+
+
+export function setLoading(loading)
+{   
+    return{
+        type: ActionTypes.SET_LOADING,
+        payload: {loading},
+    }
+}
+
+export function setErrorMassege(msg)
+{   
+    return{
+        type: ActionTypes.SET_ERROR_MSG,
+        payload: {msg},
+    }
+}

@@ -6,10 +6,7 @@ import * as login_signup_actions from '../../../../core/login-signup/action/logi
 
 import axios from 'axios';
 import {connect} from 'react-redux';
-const resendEmail=()=>{
-  console.log("resend");
-}
-const ModalWindow = ({visible, signUpSuccess, setSignUpModal}) => 
+const ModalWindow = ({visible, signUpSuccess, setSignUpModal,email}) => 
 {
     
 
@@ -26,12 +23,35 @@ const ModalWindow = ({visible, signUpSuccess, setSignUpModal}) =>
         console.log(res.data);
         
       })
-      .catch(err =>
+      .catch(error =>
       {
-        console.log(err);
-        message.error({
-          content: err.message,
-        });}
+        if (error.response) {
+          
+          console.log(error.response);
+          if(typeof error.response.data === 'object')
+          {
+            const msgArray = Object.keys(error.response.data).map((d)=>
+            {
+              return (error.response.data[d]).join(' ');
+            })
+            Modal.error({
+              content: msgArray.join(' '),
+            });
+            console.log(msgArray);
+          }
+          else{
+            Modal.error({
+              content: error.response.statusText,
+            });
+          }
+          }
+           else {
+          Modal.error({
+            content: error.message,
+          });
+        } 
+      
+      }
       )
       
       }

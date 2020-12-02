@@ -1,10 +1,11 @@
 import React from 'react';
 import CreateProfileForm from './components/CreateProfileForm';
-import Interests from './components/Interests'
-import { Tabs,Menu,Popover, Button,Carousel } from 'antd';
-import { useState,useEffect,useRef } from 'react';
-import '../../styles/App.css';
-import '../../styles/CreateProfile.css';
+import Interests from './components/InterestsForm'
+import { Carousel } from 'antd';
+import { useEffect,useRef } from 'react';
+import '../../styles/App.scss';
+import '../../styles/scss/styles.scss';
+import '../../styles/CreateProfile.scss';
 import {connect} from 'react-redux';
 import * as create_profile_actions from '../../../core/create-profile/action/createProfileActions';
 
@@ -17,18 +18,16 @@ import * as create_profile_actions from '../../../core/create-profile/action/cre
     setSlider(slider);
   },[]);
 
-  const [height, setheight] = useState(0);
-
   const slider = useRef();
     return (
-      <div className="login-signup-container profile-container">
+      <div className="bg-container">
   <div className='box'>
   <div className='wave -one'></div>
   <div className='wave -two'></div>
   <div className='wave -three'></div>
   </div>
   
-  <div id="form-container" className="container"><h1>
+  <div className="create-profile-container"><h1>
   Create Your Profile</h1>
 
 
@@ -43,11 +42,8 @@ import * as create_profile_actions from '../../../core/create-profile/action/cre
   }}
   
   >
-  
-   <CreateProfileForm/>
-
-
-    <Interests/>
+  <CreateProfileForm/>
+  <Interests/>
 
 </Carousel>
 
