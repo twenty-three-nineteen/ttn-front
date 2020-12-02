@@ -58,7 +58,7 @@ const EmailConfirmation = ({loading, uid, token, verified,setLoading,
     
     })
     .then(res => {
-      setLoginState(true);
+      // setLoginState(true);
       // setToken();
       // getUser(res.data.auth_token);
       setInfo(undefined,undefined);
