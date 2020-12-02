@@ -24,7 +24,8 @@ const Profile = ({token,allIn,edit,setEdit,editavatar,editinterests,setEditAvata
     console.log(event.target.value);
   }
   const InChange = (event) => {
-    setInInput(event.target.value);
+    console.log(event);
+    setInInput(event);
   }
   const AvatarsImages = avatarArray.map(
 
@@ -45,36 +46,36 @@ const Profile = ({token,allIn,edit,setEdit,editavatar,editinterests,setEditAvata
       )
     }
   )
-  const Ins = inte.map(
+//   const Ins = inte.map(
 
-    (av,i) =>
-    {
-      return(
-        <div className="radio">
-        <label>
-          <input
-            type="radio"
-            value={(i+1)}
-            checked={inInput === (i+1)}
-            onChange={InChange}
-          />
-          <h2 src={av} />
-        </label>
-      </div>
-      )
-    }
-  )
-  const plainOptions = ['Apple', 'Pear', 'Orange','Melon','Lemon','Grape','Berry','Banana','Mango'];
+//     (av,i) =>
+//     {
+//       return(
+//         <div className="radio">
+//         <label>
+//           <input
+//             type="radio"
+//             value={(i+1)}
+//             checked={inInput === (i+1)}
+//             onChange={InChange}
+//           />
+//           <h2 src={av} />
+//         </label>
+//       </div>
+//       )
+//     }
+//   )
+//   const plainOptions = ['Apple', 'Pear', 'Orange','Melon','Lemon','Grape','Berry','Banana','Mango'];
 
-  const optionsJson= plainOptions.map(
- (op,i)=>
- {
- return{
- label: op,
- value:i+1,
- }
- }
- )
+//   const optionsJson= plainOptions.map(
+//  (op,i)=>
+//  {
+//  return{
+//  label: op,
+//  value:i+1,
+//  }
+//  }
+//  )
   const [inInput, setInInput] =useState(interests);
   const [avInput, setAvInput] = useState(avatar);
   const [birthdayInput, setBirthState] = useState(age);
@@ -187,20 +188,22 @@ const setBirthInput = (e) =>
     
         .then(function (response) {
           console.log(response);
+          ProPage();
         })
         .catch(error =>
           {
             console.log(error);
+            ProPage();
           })
-          ProPage();
+          
 
   }
     
     if (edit == undefined) {
       console.log(interests);
       return(
-        <div className="maindiv" wrap={true} justify="center" >   
-        <Card  className= "container2" bordered={true} style={{ width: "580px" }}>
+        <div className="maindiv " wrap={true} justify="center" >   
+        <Card  className= "container2 " bordered={true} style={{ width: "580px" }}>
         <div className= "PicandName" style ={{
             display: "flex",
             justifyContent: " space-between",
@@ -219,7 +222,14 @@ const setBirthInput = (e) =>
             <div className="bioDiv"><h2 className="textBio"> Bio : {bio}</h2></div>
             <div className="birthDayDiv"><h2 className="textBirthDay"> Birthday  :  {age} </h2></div>
             
-            <div className="interestsDiv"><h2 className="textInterests"> Interests :  {interests}</h2></div>
+            <div className="interestsDiv"><h2 className="textInterests"> Interests :  {
+              interests.map(
+                (id)=>
+                {
+                  return allIn[id-1].label+' ';
+                }
+              )
+            }</h2></div>
           
         </div>
         <Row style={{align:"middle"}}>

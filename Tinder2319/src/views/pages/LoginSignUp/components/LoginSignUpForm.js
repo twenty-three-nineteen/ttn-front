@@ -256,10 +256,11 @@ const LoginForm = ({formState,logged_in,
       // setUsername(values.username);
       // setEmail(undefined);
     axios.post('http://localhost:8000/api/account/auth/users/', {
+      "username": values.username,
+      "name": values.username,
       "email": values.email,
       "password": values.password,
       "re_password": values.password,
-      "username": values.username,
     },
     {'Content-Type':'application/json'}
     )
