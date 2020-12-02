@@ -11,9 +11,9 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import * as posts_actions from '../../../core/profile/action/postsAction';
 
-const Posts = ({text,setText,select,setSelect,posts,setPosts}) => {
+const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
     const urlneeded = "http://localhost:8000/api/account/opening_messages/"
-    const token2 ="f800bf07cc61a77aacdff38ae08bcfc7116256a3"
+    // const token2 ="f800bf07cc61a77aacdff38ae08bcfc7116256a3"
     
     useEffect(() => {
        
@@ -22,7 +22,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts}) => {
             mode: 'cors',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Token ${token2}` 
+              'Authorization': `Token ${token}` 
             },
             
           })
@@ -42,7 +42,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts}) => {
             
             {
               headers: {
-                'Authorization': `Token ${token2}`,
+                'Authorization': `Token ${token}`,
                 'Content-Type':'application/json',
               }
            })
@@ -129,7 +129,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts}) => {
            
        </div></Col>
        <Col>
-       <Button  onClick={()=>{DelPostSelected(select.id)}} className="Bif">Delete Post</Button>
+       <Button  onClick={()=>DelPostSelected(select.id)} className="Bif">Delete Post</Button>
        </Col>
         </Row>
      
@@ -144,6 +144,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts}) => {
           text: state.posts.text,
           select: state.posts.select,
           posts: state.posts.posts,
+          token: state.login_signup.token,
         }
     } 
       const mapDispatchToProps = (dispatch) => {

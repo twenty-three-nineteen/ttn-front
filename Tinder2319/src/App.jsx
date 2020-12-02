@@ -20,8 +20,6 @@ const App = ({logged_in}) => {
       <Switch>
 
         <Route path="/login_signup" exact component={LoginSignUp} />
-        <Route path="/profile" exact component={Profile} />
-        <Route path="/posts" exact component={Posts} />
 
 
       <Route path="/activate/*" exact component={EmailConfirmation} />
@@ -29,7 +27,8 @@ const App = ({logged_in}) => {
 
        <ProtectedRoute exact path='/profile' auth={logged_in} unauthLocation="/login_signup" component={Profile} />
        <ProtectedRoute exact path='/posts' auth={logged_in} unauthLocation="/login_signup" component={Posts} />
-       <ProtectedRoute exact path='/show_post' auth={logged_in} unauthLocation="/login_signup" component={ShowPost} />
+       
+       
 
         <ProtectedRoute exact path='/create_profile' auth={logged_in} unauthLocation="/login_signup" component={CreateProfile} />
         <ProtectedRoute exact path='/Explore' auth={logged_in} unauthLocation="/login_signup" component={Explore} />

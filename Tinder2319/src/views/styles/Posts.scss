@@ -1,35 +1,36 @@
 @import "../../views/styles/css/antd.css";
 @import "./scss/styles.scss";
-
 #app {
-	display: flex;
-	justify-content: center;
-	>div {
-		>p {
-			display: flex;
-			justify-content: center;
-			padding: 7%;
-		}
-	}
+    display: flex;
+    justify-content: center;
+    >div {
+        >p {
+            display: flex;
+            justify-content: center;
+            padding: 7%;
+        }
+    }
 }
+
 .Postsdiv {
     @extend .container;
-	width: 800px;
-	background-color: rgba(0,0,0,0);
-	border-radius: 2px;
+    width: 800px;
+    // background-color: rgba(0,0,0,0);
+    border-radius: 2px;
 }
+
 .textStyle {
-	text-align: center;
-	text-justify: center;
-	padding: 10px;
-	overflow-wrap: break-word;
-	&:hover {
-		cursor: pointer;
-	}
+    text-align: center;
+    text-justify: center;
+    padding: 10px;
+    overflow-wrap: break-word;
+    &:hover {
+        cursor: pointer;
+    }
 }
+
 // #app > div > p{
 //     overflow-wrap: break-word !important;
-
 // }
 // .textStyleOnePost {
 // 	text-align: center;
@@ -40,27 +41,30 @@
 // 	overflow-wrap: break-word;
 // }
 .Bif {
-	background-color: rgba(255,255,255,0.2);
-	border-radius: 2px;
-	width: calc(100%);
-	height: calc(100%);
-	// margin-left: -46px;
-	// margin-right: 0;
-	// margin-top: calc(100%);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    width: calc(100%);
+    height: calc(100%);
+    // margin-left: -46px;
+    // margin-right: 0;
+    // margin-top: calc(100%);
 }
+
 .Belse1 {
-	background-color: rgba(255,255,255,0.2);
-	width: 160px;
-	// margin-top: 5.5%;
-	border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 160px;
+    // margin-top: 5.5%;
+    border-radius: 2px;
 }
+
 .Belse2 {
-	background-color: rgba(255,255,255,0.2);
-	width: 160px;
-	// margin-top: 5.5%;
-	// margin-left: 20%;
-	border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 160px;
+    // margin-top: 5.5%;
+    // margin-left: 20%;
+    border-radius: 2px;
 }
+
 // .showPostStyle {
 // 	background-color: rgba(225, 225, 225, 0.35);
 // 	width: 400px;

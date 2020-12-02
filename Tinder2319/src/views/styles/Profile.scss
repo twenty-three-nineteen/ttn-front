@@ -1,243 +1,272 @@
 /* @import '~antd/dist/antd.css'; */
+
 @import "../../views/styles/css/antd.css";
 @import "./scss/styles.scss";
+
 /* @import '~antd/dist/antd.dark.css'; */
+
 @keyframes slide {
-	0% {
-		opacity: 0;
-		transform: translateX(210px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
+    0% {
+        opacity: 0;
+        transform: translateX(210px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
+
 @keyframes fadein1 {
-	0% {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0px);
-	}
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
+
 @keyframes fadein2 {
-	0% {
-		opacity: 0;
-		transform: translateY(40px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0px);
-	}
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
+
 @keyframes fadein3 {
-	0% {
-		opacity: 0;
-		transform: translateY(60px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0px);
-	}
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
+
 @keyframes fadein4 {
-	0% {
-		opacity: 0;
-		transform: translateY(80px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0px);
-	}
+    0% {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
+
 .img {
-	animation-name: slide;
-	animation-duration: 2.5s;
-	width: 100px;
-	height: auto;
-	transition: all 1s ease;
-	background-color: rgb(189, 189, 189);
-	border: 1px rgb(189, 189, 189) solid;
+    animation-name: slide;
+    animation-duration: 2.5s;
+    width: 100px;
+    height: auto;
+    transition: all 1s ease;
+    background-color: rgb(189, 189, 189);
+    border: 1px rgb(189, 189, 189) solid;
 }
+
 .maindiv {
-	flex: true;
-	justify-content: center;
-	justify-self: center;
+    flex: true;
+    justify-content: center;
+    justify-self: center;
 }
+
 #app {
-	>div {
-		>div {
-			border-radius: 2px !important;
-			background-color: rgba(255, 255, 255,0.9);
-			justify-self: center;
-			justify-content: center;
-			height: fit-content;
-			padding-bottom: 0;
-			>div {
-				>div.PicandName {
-					>div.name {
-						>h1 {
-							justify-self: center;
-							justify-content: center;
-						}
-						justify-self: center;
-						justify-content: center;
-					}
-				}
-				>div {
-					&:nth-child(2) {
-						>div.ant-row {
-							align-content: center;
-							margin-top: 11.4%;
-							margin-left: -4.7%;
-							margin-right: -9%;
-						}
-						>div.userNameDiv {
-							>h2 {
-								>input {
-									width: 70% !important;
-									margin: 2.5%;
-									margin-left: 45px;
-								}
-							}
-						}
-						>div.bioDiv {
-							>h2 {
-								>input {
-									width: 70% !important;
-									margin: 2.5%;
-									margin-left: 82px;
-								}
-							}
-						}
-						>div.birthDayDiv {
-							>h2 {
-								>input {
-									width: 70% !important;
-									margin:  2.5%;
-									margin-left: 10px;
-								}
-							}
-						}
-						// >div.interestsDiv {
-						// 	>h2 {
-						// 		>input {
-						// 			width: 70% !important;
-						// 			margin:  2.5%;
-						// 			margin-left: 100px;
-						// 		}
-						// 	}
-						// }
-					}
-				}
-				padding-bottom: 0;
-			}
-		}
-		display: flex;
-		justify-self: center;
-		justify-content: center;
-	}
+    >div.maindiv {
+        >div {
+            border-radius: 2px !important;
+            background-color: rgba(255, 255, 255, 0.9);
+            justify-self: center;
+            justify-content: center;
+            height: fit-content;
+            padding-bottom: 0;
+            >div {
+                >div.PicandName {
+                    >div.name {
+                        >h1 {
+                            justify-self: center;
+                            justify-content: center;
+                        }
+                        justify-self: center;
+                        justify-content: center;
+                    }
+                }
+                >div {
+                    &:nth-child(2) {
+                        >div.ant-row {
+                            align-content: center;
+                            margin-top: 11.4%;
+                            margin-left: -4.7%;
+                            margin-right: -9%;
+                        }
+                        >div.userNameDiv {
+                            >h2 {
+                                >input {
+                                    width: 70% !important;
+                                    margin: 2.5%;
+                                    margin-left: 45px;
+                                }
+                            }
+                        }
+                        >div.bioDiv {
+                            >h2 {
+                                >input {
+                                    width: 70% !important;
+                                    margin: 2.5%;
+                                    margin-left: 82px;
+                                }
+                            }
+                        }
+                        >div.birthDayDiv {
+                            >h2 {
+                                >input {
+                                    width: 70% !important;
+                                    margin: 2.5%;
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                        // >div.interestsDiv {
+                        // 	>h2 {
+                        // 		>input {
+                        // 			width: 70% !important;
+                        // 			margin:  2.5%;
+                        // 			margin-left: 100px;
+                        // 		}
+                        // 	}
+                        // }
+                    }
+                }
+                padding-bottom: 0;
+            }
+        }
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+    }
 }
+
 .container2 {
-	@extend .container;
-	padding:1px;
-	background-color: rgba(0,0,0,0.3);
-	width: 50%;
-	// border-radius: 2px;
-	border-color: rgb(34, 75, 75);
+    @extend .container;
+    padding: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 50%;
+    // border-radius: 2px;
+    border-color: rgb(34, 75, 75);
 }
+
 .PicandName {
-	background-color: rgba(0,0,0,0.1);
-	height: 90%;
-	width: 98%;
-	border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 90%;
+    width: 98%;
+    border-radius: 2px;
 }
+
 .name {
-	padding-top: 5%;
-	padding-right: 95%;
-	padding-left: 2%;
-	justify-self: center;
-	justify-content: center;
+    padding-top: 5%;
+    padding-right: 95%;
+    padding-left: 2%;
+    justify-self: center;
+    justify-content: center;
 }
-.ChangeAvatarB{
-	// margin-top: -100px;
-	// margin-left: -240px;
+
+.ChangeAvatarB {
+    // margin-top: -100px;
+    // margin-left: -240px;
 }
-.userName{
-	margin-top: 8px;
+
+.userName {
+    margin-top: 8px;
     margin-bottom: 1px;
 }
-.NameandB{
-	margin-left: -270px;
+
+.NameandB {
+    margin-left: -270px;
 }
+
 .userNameDiv {
-	border-radius: 2px;
-	background-color: rgba(0,0,0,0.1);
-	margin-left: 1%;
-	margin-right: 2%;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+    margin-right: 2%;
 }
+
 .birthDayDiv {
-	border-radius: 2px;
-	background-color: rgba(0,0,0,0.1);
-	margin-left: 1%;
-	margin-right: 2%;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+    margin-right: 2%;
 }
+
 .interestsDiv {
-	border-radius: 2px;
-	background-color: rgba(0,0,0,0.1);
-	margin-left: 1%;
-	margin-right: 2%;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+    margin-right: 2%;
 }
+
 .bioDiv {
-	border-radius: 2px;
-	background-color: rgba(0,0,0,0.1);
-	margin-left: 1%;
-	margin-right: 2%;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+    margin-right: 2%;
 }
+
 .textUserName {
-	margin-top: 7%;
-	margin-left: 1%;
-	animation-name: fadein1;
-	animation-duration: 3s;
+    margin-top: 7%;
+    margin-left: 1%;
+    animation-name: fadein1;
+    animation-duration: 3s;
 }
+
 .textBio {
-	margin-top: 7%;
-	margin-left: 1%;
-	animation-name: fadein2;
-	animation-duration: 3s;
-	overflow-wrap: break-word;
+    margin-top: 7%;
+    margin-left: 1%;
+    animation-name: fadein2;
+    animation-duration: 3s;
+    overflow-wrap: break-word;
 }
+
 .textBirthDay {
-	margin-top: 7%;
-	margin-left: 1%;
-	animation-name: fadein3;
-	animation-duration: 3s;
+    margin-top: 7%;
+    margin-left: 1%;
+    animation-name: fadein3;
+    animation-duration: 3s;
 }
+
 .textInterests {
-	margin-top: 7%;
-	margin-left: 1%;
-	animation-name: fadein4;
-	animation-duration: 3s;
+    margin-top: 7%;
+    margin-left: 1%;
+    animation-name: fadein4;
+    animation-duration: 3s;
 }
+
 .viewProB {
-	width: calc(50% + 50px);
-	margin: 10px -25px -1px -25px;
+    width: calc(50% + 50px);
+    margin: 10px -25px -1px -25px;
 }
+
 .editProB {
-	width: calc(50% + 50px);
-	margin: 10px -25px -1px -25px;
+    width: calc(50% + 50px);
+    margin: 10px -25px -1px -25px;
 }
+
 .doneB {
-	width: calc(100% + 50px);
-	margin: 10px -25px -1px -25px;
+    width: calc(100% + 50px);
+    margin: 10px -25px -1px -25px;
 }
+
 .userin {
-	margin-top: 0.2%;
-	margin-left: 0.5%;
+    margin-top: 0.2%;
+    margin-left: 0.5%;
 }
-.EditInB{
-   margin:  2.5%;
-   margin-left: 7px;
+
+.EditInB {
+    margin: 2.5%;
+    margin-left: 7px;
 }
