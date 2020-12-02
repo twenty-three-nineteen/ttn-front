@@ -10,5 +10,5 @@ export default combineReducers({
     create_profile,
     email_confirmation,
     login_signup,
-  posts,
+    posts,
 });

@@ -2,6 +2,7 @@ import {ActionTypes} from "../action/actionTypes"
 const initialstate = {
      text : undefined,
      select:undefined,
+     posts:[],
 
 }
 export default (state = initialstate, { type, payload }) => {
@@ -16,7 +17,12 @@ export default (state = initialstate, { type, payload }) => {
         return{
           ...state, 
           text : payload.text,
-      };       
+      };  
+      case ActionTypes.SET_POSTS:
+        return{
+          ...state, 
+          posts : payload.posts,
+      };     
     default : return state;
 
     }
