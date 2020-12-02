@@ -11,3 +11,9 @@ export function setSelect(select){
     payload: { select },
     }
 }
+export function setPosts(posts){
+    return{
+    type: ActionTypes.SET_POSTS,
+    payload: { posts },
+    }
+}

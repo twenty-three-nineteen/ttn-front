@@ -5,7 +5,12 @@ age:undefined,
 name:undefined,
 username:undefined,
 bio:undefined,
-interests:undefined,
+interests:[],
+edit:undefined,
+editinterests:false,
+editavatar:false,
+inte:[],
+
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
@@ -45,7 +50,28 @@ export default (state = initialstate, { type, payload }) => {
         return{
           ...state, 
           interests : payload.interests,
-      };        
+      }; 
+      case ActionTypes.SET_EDIT:
+        return{
+          ...state, 
+          edit : payload.edit,
+      };   
+      case ActionTypes.SET_EDITAVATAR:
+        return{
+          ...state, 
+          editavatar : payload.editavatar,
+      };
+      case ActionTypes.SET_EDITINTERESTS:
+        return{
+          ...state, 
+          editinterests : payload.editinterests,
+      };  
+      case ActionTypes.SET_INTE:
+        return{
+          ...state, 
+          inte : payload.inte,
+      };  
+           
     default : return state;
 
     }

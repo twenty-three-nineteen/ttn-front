@@ -41,4 +41,35 @@ export function setName(name){
     payload: { name },
     }
 }
+export function setEdit(edit){
+    return{
+    type: ActionTypes.SET_EDIT,
+    payload: { edit },
+    }
+}
+export function setEditAvatar(editavatar){
+    return{
+    type: ActionTypes.SET_EDITAVATAR,
+    payload: { editavatar },
+    }
+}
+export function setEditInterests(editinterests){
+    return{
+    type: ActionTypes.SET_EDITINTERESTS,
+    payload: { editinterests },
+    }
+}
+export function getUser(){
+    return{
+        type: ActionTypes.GET_USER
+    }
+    
+    
+}
+export function setInte(inte){
+    return{
+    type: ActionTypes.SET_INTE,
+    payload: { inte },
+    }
+}
     
