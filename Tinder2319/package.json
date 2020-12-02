@@ -24,7 +24,8 @@
   "dependencies": {
     "antd": "^4.7.3",
     "axios": "^0.21.0",
-    "react": ">=16.8.0",
+    "node-sass": "^5.0.0",
+    "react": ">=15",
     "react-animation": "^1.2.2",
     "react-bootstrap": "^1.4.0",
     "react-dom": ">=16.8.0",
