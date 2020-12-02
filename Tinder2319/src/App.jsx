@@ -22,11 +22,8 @@ const App = () => {
         <Route path="/profile" exact component={Profile} />
         <Route path="/posts" exact component={Posts} />
         <Route path="/show_post" exact component={ShowPost} />
-
-      <Route path="/activate/*" exact component={EmailConfirmation} />
-     
+        <Route path="/activate/*" exact component={EmailConfirmation} />
         <Route path="/CreateProfile/*" exact component={CreateProfile} />
-       
         <Route path="/Explore" exact component={Explore} />
       </Switch>
     </Router>

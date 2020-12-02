@@ -22,7 +22,6 @@
 
 /* @import '~antd/dist/antd.dark.css'; */
 
-
 #app {
     min-height: 100%;
     height: 100%;
@@ -36,14 +35,14 @@
 } */
 
 body {
-    background-color: #AE6378;
+    background-color: #af6479;
     display: flex;
     height: 100%;
     margin: 0;
     align-items: center;
     justify-content: center;
     /* transition: all 1s ease; */
-    padding: 50px;
+    padding: 5%;
 }
 
 .box {
