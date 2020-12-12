@@ -1,0 +1,18 @@
+@import "../../views/styles/css/antd.css";
+@import "./scss/styles.scss";
+.mainDivOfChat{
+    @extend .container;
+    margin-top: -25px;
+    width: 620px;
+    height: 610px;
+}
+.PicAndName{
+    // width: 600px;
+    // margin-left: -12px;
+    // margin-top: -5px;
+    // height: 100px;
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 90%;
+    width: 98%;
+    border-radius: 2px;
+}
