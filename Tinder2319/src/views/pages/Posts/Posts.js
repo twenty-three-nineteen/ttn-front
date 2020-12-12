@@ -11,7 +11,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import * as posts_actions from '../../../core/profile/action/postsAction';
 
-const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
+const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel}) => {
     const urlneeded = "http://localhost:8000/api/account/opening_messages/"
     // const token2 ="f800bf07cc61a77aacdff38ae08bcfc7116256a3"
     
@@ -69,6 +69,9 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
     const setmySelect= (e)=>{
         setSelect(e);
     }
+    const setmyDel= (e)=>{
+      setDel(e);
+  }
     if (select == undefined) {
         console.log("first" + {select});
         console.log(posts);
@@ -129,11 +132,32 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
            
        </div></Col>
        <Col>
-       <Button  onClick={()=>DelPostSelected(select.id)} className="Bif">Delete Post</Button>
+       <Button  onClick={()=>setmyDel(true)} className="Bif">Delete Post</Button>
        </Col>
         </Row>
-     
+        <div style ={{
+            display: "flex",
+            justifyContent: "space-around",
+            
+             }}>
+                <Modal
+                  visible={del}
+                  
+                  closable={false}
+                  footer={[
+                      
+                      <Button onClick={()=>DelPostSelected(select.id)}>
+                      Delete
+                      </Button>,
+                      <Button onClick={()=>setmyDel(false)}>
+                      Cancel
+                      </Button>,
+                  ]}>
+                 <h2>Are you sure?</h2>
+                </Modal>
+            </div>
        </div>
+
         )
         
     }
@@ -145,6 +169,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
           select: state.posts.select,
           posts: state.posts.posts,
           token: state.login_signup.token,
+          del: state.posts.del,
         }
     } 
       const mapDispatchToProps = (dispatch) => {
@@ -152,6 +177,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token}) => {
           setText : (av) => dispatch(posts_actions.setText(av)),
           setSelect : (av) => dispatch(posts_actions.setSelect(av)),
           setPosts : (av) => dispatch(posts_actions.setPosts(av)),
+          setDel : (av) => dispatch(posts_actions.setDel(av)),
           
         }
 }

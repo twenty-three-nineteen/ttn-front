@@ -17,3 +17,10 @@ export function setPosts(posts){
     payload: { posts },
     }
 }
+ 
+export function setDel(del){
+    return{
+    type: ActionTypes.SET_DEL,
+    payload: { del },
+    }
+}

@@ -10,6 +10,7 @@ import EmailConfirmation from "./views/pages/EmailConfirmation/EmailConfirmation
 import LoginSignUp from "./views/pages/LoginSignUp/LoginSignUp";
 import Explore from "./views/pages/Explore";
 import ForgotPassword from "./views/pages/ForgotPassword/ForgotPassword";
+import Chatroom from "./views/pages/ChatRoom/Chatroom";
 
 import ProtectedRoute from './core/ProtectedRoute';
 
@@ -21,7 +22,7 @@ const App = ({logged_in}) => {
 
         <Route path="/login_signup" exact component={LoginSignUp} />
 
-
+        <Route path="/chatroom" exact component={Chatroom} />
       <Route path="/activate/*" exact component={EmailConfirmation} />
       <Route path="/password/reset/confirm/*" exact component={ForgotPassword} />
 

@@ -3,6 +3,7 @@ const initialstate = {
      text : undefined,
      select:undefined,
      posts:[],
+     del:false,
 
 }
 export default (state = initialstate, { type, payload }) => {
@@ -22,7 +23,12 @@ export default (state = initialstate, { type, payload }) => {
         return{
           ...state, 
           posts : payload.posts,
-      };     
+      };  
+      case ActionTypes.SET_DEL:
+        return{
+          ...state, 
+          del : payload.del,
+      };   
     default : return state;
 
     }
