@@ -1,0 +1,18 @@
+.toolbar {
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    margin-top: -35px;
+    -webkit-transition: opacity 0.01s ease-in-out;
+    transition: opacity 0.01s ease-in-out;
+}
+
+.logoutToolbar {
+    float: right;
+}
+
+@media screen and (max-width: 780px) {
+    .toolbar {
+        visibility: hidden;
+    }
+}

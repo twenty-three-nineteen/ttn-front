@@ -1,0 +1,16 @@
+.sidemenu {
+    visibility: hidden;
+}
+
+@media screen and (max-width: 780px) {
+    .sidemenu {
+        visibility: visible;
+        width: 256;
+        border-radius: 60px;
+        border: 3px solid white;
+        opacity: 1;
+        -webkit-transition: opacity 0.01s ease-in-out;
+        transition: opacity 0.01s ease-in-out;
+        margin-left: 5%;
+    }
+}

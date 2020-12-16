@@ -46,36 +46,6 @@ const Profile = ({token,allIn,edit,setEdit,editavatar,editinterests,setEditAvata
       )
     }
   )
-//   const Ins = inte.map(
-
-//     (av,i) =>
-//     {
-//       return(
-//         <div className="radio">
-//         <label>
-//           <input
-//             type="radio"
-//             value={(i+1)}
-//             checked={inInput === (i+1)}
-//             onChange={InChange}
-//           />
-//           <h2 src={av} />
-//         </label>
-//       </div>
-//       )
-//     }
-//   )
-//   const plainOptions = ['Apple', 'Pear', 'Orange','Melon','Lemon','Grape','Berry','Banana','Mango'];
-
-//   const optionsJson= plainOptions.map(
-//  (op,i)=>
-//  {
-//  return{
-//  label: op,
-//  value:i+1,
-//  }
-//  }
-//  )
   const [inInput, setInInput] =useState(interests);
   const [avInput, setAvInput] = useState(avatar);
   const [birthdayInput, setBirthState] = useState(age);

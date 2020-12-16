@@ -1,0 +1,18 @@
+<Menu className="toolbar" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+        <Menu.Item key="home" icon={<HomeOutlined />}>
+          Home
+        </Menu.Item>
+        <Menu.Item key="chat" icon={<WechatOutlined />}>
+          Chat
+        </Menu.Item>
+        
+        
+        <Menu.Item className="logoutToolbar" key="logout" icon={ <LogoutOutlined />}>
+            Log Out
+        </Menu.Item>
+        <Menu.Item  style={{float: 'right'}} key="profile" icon={<UserOutlined />}>
+          <a href="http://localhost:8080/profile" rel="noopener noreferrer">
+            Profile
+          </a>
+        </Menu.Item>
+      </Menu>

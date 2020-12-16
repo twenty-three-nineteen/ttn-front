@@ -1,0 +1,23 @@
+#Chatbox {
+    background-color: #D87F81;
+    width: 380px;
+    height: 10%;
+    border-radius: 10px;
+    border: 3px solid white;
+    margin: 5px;
+    -webkit-transition: opacity 0.01s ease-in-out;
+    transition: opacity 0.01s ease-in-out;
+}
+
+.avatarChat {
+    height: 10%;
+    weight: 10px;
+    text-justify: center;
+    justify-items: center;
+    justify-self: center;
+    justify-content: center;
+    position: absolute;
+    z-index: +10;
+    margin: 5px;
+    padding: 5px;
+}

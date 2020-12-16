@@ -3,11 +3,14 @@ import axios from 'axios';
 import '../styles/Explore.css';
 import Draggable from 'react-draggable'; 
 import OpeningMessage from "../components/OpeningMessage.js";
+import Toolbar from "../components/Menu.js";
+import SideMenu from "../components/SideMenu.js";
 import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
-import { message  } from 'antd';
-
+import { message,Menu, Button } from 'antd';
+import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
+import SlideMenu from 'react-slide-menu';
 
 class Explore extends React.Component {
   constructor(props){
@@ -20,10 +23,7 @@ class Explore extends React.Component {
     this.cancelButton=this.cancelButton.bind(this);
     this.Rejected=this.Rejected.bind(this);
     this.Accepted=this.Accepted.bind(this);
-
-
-    
-    var sh=-(250/2)
+    this.toggleCollapsed=this.toggleCollapsed.bind(this);
 
     this.state={
       count:0,
@@ -33,12 +33,14 @@ class Explore extends React.Component {
       fader:0,
       xxx: 0,
       degneg: "",
-      showModal: false
+      showModal: false,
+      collapsed: false
     };
   }
+
   componentDidMount() {
       const config = {
-          headers: { 'Authorization': `Token 6c9d2e38cfe7029adb17e892ebe905de0d2df254` }
+          headers: { 'Authorization': `Token 9b079953bc0672b0704ba492a9fdb283a76a268a` }
       };
 
       axios.get(
@@ -58,6 +60,8 @@ class Explore extends React.Component {
           console.log(error);
         });
 
+
+       
         
   }
   cancelButton(){
@@ -68,7 +72,7 @@ class Explore extends React.Component {
       });
   }
   handleOk(){
-      // var message=document.getElementById('messagedimo');
+      var messagedimo=document.getElementById('messagedimo').value;
 
       var message_id = this.state.count-1;
       if(message_id==-1){
@@ -78,10 +82,9 @@ class Explore extends React.Component {
         message_id=message_id+1;
       }
 
-      alert(message_id);
       const config = {
         headers: { 
-          'Authorization': 'Token 6c9d2e38cfe7029adb17e892ebe905de0d2df254' ,
+          'Authorization': 'Token 9b079953bc0672b0704ba492a9fdb283a76a268a' ,
           'Content-Type': 'application/json'
         }
       };
@@ -90,7 +93,8 @@ class Explore extends React.Component {
       {
         "source": 1,
         "target": 1,
-        "opening_message": message_id
+        "opening_message": message_id,
+        "message": messagedimo
       }
       , config)
       .then(res => {
@@ -338,9 +342,31 @@ class Explore extends React.Component {
   myMove() {
     var elem = document.getElementById("myAnimation"); 
     console.log(elem);  
-    
   }
+  openning(inp){
+    if(this.state.clicked==false){
+      return false;
+    }
+    var x = event.clientX-this.state.mouseX;   
+    if(inp=="envelop") {
+      return (x>0);
+    }
+    else{
+      return (x<0);
+
+    }
+  }
+  toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  };
   render() {
+    var nav = [
+      {id: 'home', label: 'Home', path: '/'},
+      {id: 'about', label: 'About', path: '/about'},
+      {id: 'discover', label: 'Discover', path: '/discover'},
+    ];
       return (
 
           <div id="container">
@@ -348,18 +374,22 @@ class Explore extends React.Component {
             <div id="smallCon" className="smallCon">
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
-                <img onClick={this.Rejected} className="zarb" src={require('../../assessts/images/zarb.png')}></img>
-                <img onClick={this.Accepted} className="tik" src={require('../../assessts/images/tik.png')}></img>
+                <CheckCircleFilled className="MyCheck"></CheckCircleFilled>
+                
+                <CloseCircleFilled className="MyZarb"></CloseCircleFilled>
               </div>
             </div>
 
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
+            <Toolbar></Toolbar>
+            
 
             <div className="TotalExplore">
-                {this.state.clicked ? 
-                    <img className="envelop_open" src={require('../../assessts/images/trash_open.jpg')}></img>
+
+                {this.openning("trash") ? 
+                    <img className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
                   : 
-                    <img className="envelop_close" src={require('../../assessts/images/trash_close.jpg')} ></img>}
+                    <img className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
 
                 
                 <Draggable
@@ -382,7 +412,7 @@ class Explore extends React.Component {
                 </Draggable>
                 
                 
-                {this.state.clicked ? 
+                {this.openning("envelop") ? 
                   <img className="envelop_open" src={require('../../assessts/images/envelop_open.png')}></img>
                 : 
                   <img className="envelop_close" src={require('../../assessts/images/envelop_close.png')} ></img>}

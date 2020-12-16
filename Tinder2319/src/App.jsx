@@ -9,6 +9,7 @@ import CreateProfile from "./views/pages/CreateProfile/CreateProfile";
 import EmailConfirmation from "./views/pages/EmailConfirmation/EmailConfirmation";
 import LoginSignUp from "./views/pages/LoginSignUp/LoginSignUp";
 import Explore from "./views/pages/Explore";
+import ChatList from "./views/pages/ChatList/ChatList.js";
 import ForgotPassword from "./views/pages/ForgotPassword/ForgotPassword";
 
 import ProtectedRoute from './core/ProtectedRoute';
@@ -32,7 +33,7 @@ const App = ({logged_in}) => {
 
         <ProtectedRoute exact path='/create_profile' auth={logged_in} unauthLocation="/login_signup" component={CreateProfile} />
         <ProtectedRoute exact path='/Explore' auth={logged_in} unauthLocation="/login_signup" component={Explore} />
-
+        <ProtectedRoute exact path='/ChatList' auth={logged_in} unauthLocation="/login_signup" component={ChatList} />
       </Switch>
     </Router>
   );
