@@ -1,0 +1,25 @@
+.chat-box {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100px;
+    .avatar-box {
+        // align-self: flex-start;
+        float: left;
+        height: 50px;
+        img.user-avatar {
+            height: 100%;
+            width: auto;
+            margin-right: -20px;
+        }
+    }
+    .name-box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        h2.user-name {
+            margin: 0 5px;
+        }
+    }
+}
