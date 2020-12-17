@@ -10,7 +10,8 @@ edit:undefined,
 editinterests:false,
 editavatar:false,
 inte:[],
-
+delac:false,
+okb:false,
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
@@ -71,6 +72,16 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           inte : payload.inte,
       };  
+      case ActionTypes.SET_DELAC:
+        return{
+          ...state, 
+          delac : payload.delac,
+      }; 
+      case ActionTypes.SET_OKB:
+        return{
+          ...state, 
+          okb : payload.okb,
+      }; 
            
     default : return state;
 

@@ -7,6 +7,7 @@ import login_signup from "../login-signup/reducer/loginSignupReducer";
 import forgot_password from "../forgot-password/reducer/forgotPasswordReducer";
 import chat from "../chat/reducer/chatReducer";
 
+
 export default combineReducers({
     profile,
     create_profile,
@@ -14,6 +15,7 @@ export default combineReducers({
     login_signup,
     posts,
     chat,
+
 
     forgot_password,
 

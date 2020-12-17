@@ -72,4 +72,15 @@ export function setInte(inte){
     payload: { inte },
     }
 }
-    
+export function setDelAc(delac){
+    return{
+    type: ActionTypes.SET_DELAC,
+    payload: { delac },
+    }
+}
+export function setOkB(okb){
+    return{
+    type: ActionTypes.SET_OKB,
+    payload: { okb },
+    }
+}

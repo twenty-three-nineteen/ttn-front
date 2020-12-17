@@ -10,8 +10,10 @@ import EmailConfirmation from "./views/pages/EmailConfirmation/EmailConfirmation
 import LoginSignUp from "./views/pages/LoginSignUp/LoginSignUp";
 import Explore from "./views/pages/Explore";
 import ForgotPassword from "./views/pages/ForgotPassword/ForgotPassword";
+
 import ChatList from "./views/pages/ChatList/ChatList";
 import Chat from './views/pages/ChatRoom/Chatroom';
+
 import ProtectedRoute from './core/ProtectedRoute';
 
 import {connect} from 'react-redux';
@@ -21,6 +23,8 @@ const App = ({logged_in}) => {
       <Switch>
 
       <Route path="/login_signup" exact component={LoginSignUp} />
+        <Route path="/login_signup" exact component={LoginSignUp} />
+
       <Route path="/activate/*" exact component={EmailConfirmation} />
       <Route path="/password/reset/confirm/*" exact component={ForgotPassword} />
       <ProtectedRoute exact path='/profile' auth={logged_in} unauthLocation="/login_signup" component={Profile} />
