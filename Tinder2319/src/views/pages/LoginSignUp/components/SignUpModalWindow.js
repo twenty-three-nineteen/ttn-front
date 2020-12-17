@@ -1,18 +1,17 @@
 
 import React from 'react';
 import { Result, Button, Typography,Modal,message  } from 'antd';
-
+import {HOST_URL} from '../../../../core/servers';
 import * as login_signup_actions from '../../../../core/login-signup/action/loginSignupActions';
 
 import axios from 'axios';
 import {connect} from 'react-redux';
 const ModalWindow = ({visible, signUpSuccess, setSignUpModal,email}) => 
 {
-    
 
     const resendEmail=()=>
     {
-      axios.post('http://localhost:8000/api/account/auth/users/resend_activation/', {
+      axios.post(`${HOST_URL}/api/account/auth/users/resend_activation/`, {
         "email": email,
       })
       .then(res => {
@@ -57,8 +56,6 @@ const ModalWindow = ({visible, signUpSuccess, setSignUpModal,email}) =>
       }
   
     const handleOk = (e) => {
-      console.log(e);
-      // props.setvisible(false);
       setSignUpModal(false);
     };
 

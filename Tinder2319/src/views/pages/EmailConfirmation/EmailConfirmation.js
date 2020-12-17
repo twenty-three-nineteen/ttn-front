@@ -7,6 +7,7 @@ import '../../styles/App.scss';
 import '../../styles/scss/styles.scss';
 import '../../styles/EmailConfirmation.scss';
 import axios from 'axios';
+import {HOST_URL} from '../../../core/servers';
 
 
 import {connect} from 'react-redux';
@@ -19,7 +20,7 @@ const EmailConfirmation = ({loading, uid, token, verified,setLoading,
   setInfo,setVerified,setErrorMassege,setLoginState,setToken,setUsername}) => {
     const getUser = (token) =>
     {
-      axios.get('http://localhost:8000/api/account/auth/users/me/',
+      axios.get(`${HOST_URL}/api/account/auth/users/me/`,
       {
         headers: {
           'Authorization': `Token ${token}`,
@@ -52,7 +53,7 @@ const EmailConfirmation = ({loading, uid, token, verified,setLoading,
     // setInfo(addressArray[1],addressArray[0]);
     const timer = setTimeout(() => 
     {
-      axios.post('http://localhost:8000/api/account/auth/users/activation/', {
+      axios.post(`${HOST_URL}/api/account/auth/users/activation/`, {
       "uid": addressArray[1],
       "token": addressArray[0]
     

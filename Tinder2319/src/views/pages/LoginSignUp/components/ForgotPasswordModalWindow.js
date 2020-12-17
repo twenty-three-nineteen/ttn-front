@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Result, Button, Typography,Modal, message  } from 'antd';
-
+import {HOST_URL} from '../../../../core/servers';
 import {connect} from 'react-redux';
 import * as login_signup_actions from '../../../../core/login-signup/action/loginSignupActions';
 
@@ -11,7 +11,7 @@ const ForgotPasswordModalWindow = ({fVisible, setForgotPasswordModal,email}) =>
     
     const handleForgotPassword = () =>
     {
-      axios.post('http://localhost:8000/api/account/auth/users/reset_password/', {
+      axios.post(`${HOST_URL}/api/account/auth/users/reset_password/1`, {
         "email": email,
       }
       )
