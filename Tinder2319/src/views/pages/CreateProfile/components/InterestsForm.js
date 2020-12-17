@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button,Checkbox,Modal,message   } from 'antd';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-
+import {HOST_URL} from '../../../../core/servers';
 import {connect} from 'react-redux';
 import * as create_profile_actions from '../../../../core/create-profile/action/createProfileActions';
 import history from "../../../../core/modules/history";
@@ -10,59 +10,20 @@ import history from "../../../../core/modules/history";
 
 const Interests = ({slider, interests, setInterests,profileInfo,avatar,username,token,allInterests}) => 
 {
-  let interestsList=[{label:"I",value:"1"}];
-  useEffect(() => {
-    // setToken(undefined);
-    // setLoginState(false)
-    // setUsername(undefined);
-    
-  }, []);
-
-
-  const plainOptions = ['Apple', 'Pear', 'Orange','Melon','Lemon','Grape','Berry','Banana','Mango'];
-
-  // const optionsJson= interestsList.map(
-  //   (op)=>
-  //   {
-  //     console.log(op);
-  //     return{
-  //       label: op.subject,
-  //       value: op.id,
-  //     }
-  //   }
-  // )
-  
   const [height, setheight] = useState(0)
     const onFinishFailed = ({values, errorFields})=>
     {
-      // console.log(errorFields[0].errors);
-
       message.error(
-           'You should pick at least one!'
+        'You should pick at least one!'
       )
     }
   const onFinish = (values) => {
     console.log(values);
       setInterests(values);
-    // const birthday = (profileInfo.birth)? profileInfo.birth.join('-'): undefined;
-
-  //  axios.delete('http://localhost:8000/api/account/auth/users/8',
-   
-  //  {
-  //    headers: {
-  //       'Authorization': `Token ${token}`,
-  //       'Content-Type':'application/json',
-  //     },
-   
-  //  data:{
-  //   "current_password":"n1ae32p8",
-  //   }},
-    
-  //  )
-    axios.put('http://localhost:8000/api/account/userprofile/'+username, 
+    axios.put(`${HOST_URL}/api/account/userprofile/${username}`, 
     {
       "name":profileInfo.name,"bio": profileInfo.bio,"birthday":profileInfo.birth,"interests":values.interests,"avatar":avatar
-    },//values.interests
+    },
     {
       headers: {
         'Authorization': `Token ${token}`,
@@ -173,7 +134,6 @@ options={allInterests}/>
 
 const mapStateToProps = (state) =>{
   return{
-    // token: state.login_signup.token,
     interests : state.create_profile.interests,
     avatar : state.create_profile.avatar,
     slider : state.create_profile.slider,

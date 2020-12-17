@@ -87,6 +87,7 @@ const Profile = ({
           <img src={av} />
         </label>
       </div>
+
     );
   });
   //   const Ins = inte.map(
@@ -120,6 +121,7 @@ const Profile = ({
   //  }
   //  )
   const [inInput, setInInput] = useState(interests);
+
   const [avInput, setAvInput] = useState(avatar);
   const [birthdayInput, setBirthState] = useState(age);
   const [bioInput, setBioState] = useState(bio);

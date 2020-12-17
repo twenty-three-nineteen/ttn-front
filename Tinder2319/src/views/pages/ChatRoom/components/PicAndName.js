@@ -4,7 +4,8 @@ import { Form, Input, Button,Space,notification,message, Card,Modal,Row,Col,Chec
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import avatarArray from '../../CreateProfile/components/Avatar';
-import "../../../styles/chatroom"
+// import "../../../styles/chatroom"
+
 
 
 import {connect} from 'react-redux';

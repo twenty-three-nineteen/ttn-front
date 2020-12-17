@@ -1,5 +1,6 @@
 import React from "react";
 import {form, Result, Button, Typography,Modal  } from 'antd';
+import "../styles/Req.css";
 
 export class ReqOpeningMessageModal extends React.Component {
   constructor(props) {
@@ -23,8 +24,7 @@ export class ReqOpeningMessageModal extends React.Component {
           ]}>
           <div>
             <form>
-                <label for="messagedimo">Message:</label>
-                <input type="text" id="messagedimo" name="messagedimo"></input><br></br>
+                <textarea className="messagedimo" type="text" id="messagedimo" name="messagedimo" rows="10"></textarea>
             </form> 
           </div>
           </Modal>

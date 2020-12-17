@@ -8,7 +8,7 @@ export class SmallScreen extends React.Component {
     render(){
         return (
             <div className="SmallTotalExplore" id="SmallTotalExplore">
-                <p>{this.props.text}</p>
+                <p className="textOpenningMessage">{this.props.text}</p>
             </div>
         );
     }

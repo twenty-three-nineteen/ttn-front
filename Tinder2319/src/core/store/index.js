@@ -2,6 +2,7 @@ import { applyMiddleware, createStore, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import reducer from "../reducers/index";
 import { loadState, saveState } from '../localStorage'
+import chatSaga from "../chat/saga/index";
 const sagaMiddleware = createSagaMiddleware();
 
 const middleware = [sagaMiddleware];
@@ -30,6 +31,7 @@ const configStore = (initialState = {}) => {
       login_signup: store.getState().login_signup,
     })
   })
+  sagaMiddleware.run(chatSaga);
   return store;
 };
 
