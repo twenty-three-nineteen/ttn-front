@@ -24,3 +24,15 @@ export function setDel(del){
     payload: { del },
     }
 }
+export function setPage(page){
+    return{
+    type: ActionTypes.SET_PAGE,
+    payload: { page },
+    }
+}
+export function addPage(){
+    return{
+    type: ActionTypes.ADD_PAGE,
+    payload: {},
+    }
+}
