@@ -17,9 +17,9 @@ const LoginForm = ({formState,logged_in,
 {
   const [passReq, setpassReq] = useState(false);
   useEffect(() => {
-    setToken(undefined);
-    setLoginState(false)
-    setUsername(undefined);
+    // setToken(undefined);
+    // setLoginState(false)
+    // setUsername(undefined);
     setForgotPasswordModal(false)
     setSignUpModal(false);
     if(logged_in)
@@ -95,7 +95,7 @@ const LoginForm = ({formState,logged_in,
 
 
     .then(function (response) {
-      console.log(response);
+      console.log('user',response);
       setUsername(response.data.username);
       checkInterests(response.data.username,token);
       

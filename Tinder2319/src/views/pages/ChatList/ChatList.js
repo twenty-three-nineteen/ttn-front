@@ -5,6 +5,7 @@ import { useState,useEffect} from 'react';
 import history from '../../../core/modules/history';
 import "../../styles/ChatList/ChatList.css";
 import "../../styles/ChatList/ChatList.scss";
+import {HOST_URL} from'../../../core/servers';
 import avatarArray from '../CreateProfile/components/Avatar';
 const ChatList = ({token,username})=>
 {
@@ -15,11 +16,12 @@ const ChatList = ({token,username})=>
   };
 
   axios.get(
-    `http://localhost:8000/api/chat`,
+    `${HOST_URL}/api/chat`,
     config
   )
   .then(res => {
     console.log(res);
+    console.log(res.data);
     setchats(res.data);
   })
   .catch(error =>

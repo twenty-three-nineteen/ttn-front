@@ -11,7 +11,7 @@ import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
 import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
 import SlideMenu from 'react-slide-menu';
-
+import {HOST_URL} from '../../core/servers';
 class Explore extends React.Component {
   constructor(props){
     super(props);
@@ -44,7 +44,7 @@ class Explore extends React.Component {
       };
 
       axios.get(
-        `http://localhost:8000/api/account/opening_messages`,
+        `${HOST_URL}/api/account/opening_messages`,
         config
       )
       .then(res => {
@@ -89,7 +89,7 @@ class Explore extends React.Component {
         }
       };
 
-      axios.post('http://localhost:8000/api/account/send_chat_request/', 
+      axios.post('${HOST_URL}/api/account/send_chat_request/', 
       {
         "source": 1,
         "target": 1,

@@ -7,7 +7,7 @@ import { MailOutlined } from '@ant-design/icons';
 import {connect} from 'react-redux';
 import * as email_confirmation_actions from '../../../../core/email-confirmation/action/emailConfirmationActions';
 import axios from 'axios';
-
+import {HOST_URL} from '../../../../core/servers';
 const ResendEmailModal = ({setResendEmailModal,visible,email,setEmail}) => 
 {
   const [form] = Form.useForm();
@@ -20,7 +20,7 @@ const ResendEmailModal = ({setResendEmailModal,visible,email,setEmail}) =>
       form.validateFields()
       .then(values=>
         {
-          axios.post('http://localhost:8000/api/account/auth/users/resend_activation/', {
+          axios.post(`${HOST_URL}/api/account/auth/users/resend_activation/`, {
             "email": values.email,
             })
             .then(res => {
