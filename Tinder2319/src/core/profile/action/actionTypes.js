@@ -17,4 +17,6 @@ export const ActionTypes = {
     SET_DELAC:"SET_DELAC",
     SET_OKB: " SET_OKB",
     SET_DEL: "SET_DEL",
+    SET_PAGE: "SET_PAGE",
+    ADD_PAGE: "ADD_PAGE",
   };

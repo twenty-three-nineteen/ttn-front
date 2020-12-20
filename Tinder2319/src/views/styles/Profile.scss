@@ -154,12 +154,187 @@
 .container2 {
     @extend .container;
     padding: 1px;
+    margin-top: 20px;
     background-color: rgba(0, 0, 0, 0.3);
     width: 50%;
+    height: auto;
     // border-radius: 2px;
     border-color: rgb(34, 75, 75);
 }
-
+.container3 {
+    @extend .container;
+    padding: 1px;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 50%;
+    height: auto;
+    // border-radius: 2px;
+    border-color: rgb(34, 75, 75);
+}
+@media only screen and (max-width: 600px) {
+    .container2 {
+        margin-top: 110px;
+        width: 350px !important;
+        height: 300px !important;
+    }
+    .container3 {
+        margin-top: 50px;
+        width: 350px !important;
+        height: 400px !important;
+    }
+    .img{
+        width: 60px;
+        height: auto;
+    }
+    .PicandName {
+        height: 60px !important; 
+    }
+    .textUserName{
+        font-size: small;
+    }
+    .nameT{
+        margin-top: 8px;
+        font-size: small !important;
+    }
+    .userName{
+        
+        font-size: small !important;
+        margin-left: 150px !important;
+    }
+    .ChangeAvatarB{
+        width: calc(40%) !important;
+        font-size: 10px !important;
+        text-align: center !important;
+        margin-left: 150px !important;
+    }
+    .textBio{
+        font-size: small;
+    }
+    .textBirthDay{
+        font-size: small;
+    }
+    .textInterests{
+        font-size: small;
+    }
+    .viewProB{
+        width: calc(30% + 27px) !important;
+        font-size: 10px !important;
+        text-align: center !important;
+        margin-top: 22px !important;
+        margin-left: -25.5px !important;
+    }
+    .delProB{
+        width: calc(30% + 27px) !important;
+        font-size: 10px !important;
+        text-align: center !important;
+        margin-top: 22px !important;
+        margin-right: -40px !important;
+    }
+    .editProB{
+        width: calc(30% + 26.5px) !important;
+        font-size: 10px !important;
+        text-align: center !important;
+        margin-top: 22px !important;
+    }
+    .ant-btn{
+        height: 25px !important;
+    }
+    .doneB{
+        margin-top: 25px !important;
+    }
+    .ant-modal{
+        width: 270px !important;
+    }
+    .userIn{
+        margin-left: 25px !important;
+    }.bioIn{
+        margin-left: 40px !important;
+    }.birthIn{
+        margin-left: 8px !important;
+    }
+}
+// @media only screen and (max-width: 768px) {
+//     .container2 {
+//         margin-top: 60px;
+//         width: 550px !important;
+//         height: 500px !important;
+//     }
+//     .container3 {
+//         margin-top: 50px;
+//         width: 550px !important;
+//         height: 600px !important;
+//     }
+//     .img{
+//         width: 80px;
+//         height: auto;
+//     }
+//     .PicandName {
+//         height: 80px !important; 
+//     }
+//     .textUserName{
+//         font-size: medium;
+//     }
+//     .nameT{
+//         margin-top: 12px;
+//         font-size: medium !important;
+//     }
+//     .userName{
+        
+//         font-size: medium !important;
+//         margin-left: 180px !important;
+//     }
+//     .ChangeAvatarB{
+//         width: calc(50%) !important;
+//         font-size: 20px !important;
+//         text-align: center !important;
+//         margin-left: 180px !important;
+//     }
+//     .textBio{
+//         font-size: medium;
+//     }
+//     .textBirthDay{
+//         font-size: medium;
+//     }
+//     .textInterests{
+//         font-size: medium;
+//     }
+//     .viewProB{
+//         width: calc(30% + 30px) !important;
+//         font-size: 20px !important;
+//         text-align: center !important;
+//         margin-top: 27px !important;
+//         margin-left: -25.5px !important;
+//     }
+//     .delProB{
+//         width: calc(30% + 30px) !important;
+//         font-size: 20px !important;
+//         text-align: center !important;
+//         margin-top: 27px !important;
+//         margin-right: -40px !important;
+//     }
+//     .editProB{
+//         width: calc(30% + 29.5px) !important;
+//         font-size: 20px !important;
+//         text-align: center !important;
+//         margin-top: 27px !important;
+//     }
+//     .ant-btn{
+//         height: 30px !important;
+//     }
+//     .doneB{
+//         margin-top: 30px !important;
+//     }
+//     .ant-modal{
+//         width: 300px !important;
+//     }
+//     .userIn{
+//         margin-left: 30px !important;
+//     }.bioIn{
+//         margin-left: 45px !important;
+//     }.birthIn{
+//         margin-left: 13px !important;
+//     }
+// }
 .PicandName {
     background-color: rgba(0, 0, 0, 0.1);
     height: 90%;
@@ -272,10 +447,7 @@
     margin: 10px -25px -1px -25px;
 }
 
-.userin {
-    margin-top: 0.2%;
-    margin-left: 0.5%;
-}
+
 
 .EditInB {
     margin: 2.5%;

@@ -28,6 +28,7 @@ import Explore from "../Explore";
 import { EditAvatarModal } from "./components/Profile";
 
 import avatarArray from "../CreateProfile/components/Avatar";
+import {HOST_URL} from "../../../core/servers";
 
 const Profile = ({
   token,
@@ -90,36 +91,6 @@ const Profile = ({
 
     );
   });
-  //   const Ins = inte.map(
-
-  //     (av,i) =>
-  //     {
-  //       return(
-  //         <div className="radio">
-  //         <label>
-  //           <input
-  //             type="radio"
-  //             value={(i+1)}
-  //             checked={inInput === (i+1)}
-  //             onChange={InChange}
-  //           />
-  //           <h2 src={av} />
-  //         </label>
-  //       </div>
-  //       )
-  //     }
-  //   )
-  //   const plainOptions = ['Apple', 'Pear', 'Orange','Melon','Lemon','Grape','Berry','Banana','Mango'];
-
-  //   const optionsJson= plainOptions.map(
-  //  (op,i)=>
-  //  {
-  //  return{
-  //  label: op,
-  //  value:i+1,
-  //  }
-  //  }
-  //  )
   const [inInput, setInInput] = useState(interests);
 
   const [avInput, setAvInput] = useState(avatar);
@@ -142,20 +113,9 @@ const Profile = ({
   const setBirthInput = (e) => {
     setBirthState(e.target.value);
   };
-  // username="hastik";
-  const urlneeded = "http://localhost:8000/api/account/userprofile/" + username;
-  // token = "f800bf07cc61a77aacdff38ae08bcfc7116256a3"
   useEffect(() => {
-    // fetch(urlneeded, {
-    //     method: 'GET',
-    //     mode: 'cors',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Token ${token}`
-    //     },
-
-    //   })
-    fetch("http://localhost:8000/api/account/interests/", {
+ 
+    fetch("${HOST_URL}/api/account/interests/", {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       mode: "cors",
       headers: {
@@ -170,7 +130,7 @@ const Profile = ({
       });
     axios
       .get(
-        "http://localhost:8000/api/account/userprofile/" + username,
+        "${HOST_URL}/api/account/userprofile/" + username,
 
         {
           headers: {
@@ -179,7 +139,7 @@ const Profile = ({
           },
         }
       )
-      // .then(response => response.json())
+      
       .then((res) => {
         console.log(res);
         setName(res.data.name);
@@ -194,7 +154,7 @@ const Profile = ({
   const DelAccount = async (e) => {
     try {
       const response = await axios.delete(
-        "http://localhost:8000/api/account/auth/users/me/",
+        "${HOST_URL}/api/account/auth/users/me/",
 
         {
           headers: {
@@ -229,8 +189,7 @@ const Profile = ({
   const closeModalInter = (e) => {
     setEditInterests(false);
   };
-  const ProPage = (e) => {
-    // window.open("http://localhost:8080/profile","_self");
+  const ProPage = (e) => {\
     console.log("test");
 
     window.location.reload();
@@ -238,7 +197,6 @@ const Profile = ({
 
   const PostsPage = (e) => {
     history.push("/posts");
-    // window.open("http://localhost:8080/Posts","_self");
   };
   const LoginPage = (e) => {
     
@@ -246,14 +204,13 @@ const Profile = ({
     setLoginState(false);
     setUsername(undefined);
     history.push("/login_signup");
-    // window.open("http://localhost:8080/Posts","_self");
   };
   const CloseEdit = (e) => {
     console.log(bioInput);
     console.log(nameInput);
     axios
       .put(
-        "http://localhost:8000/api/account/userprofile/" + username,
+        "${HOST_URL}/api/account/userprofile/" + username,
         {
           bio: bioInput,
           avatar: avInput,
@@ -280,7 +237,6 @@ const Profile = ({
   };
 
   if (edit == undefined) {
-    // console.log(interests);
     return (
       <div className="maindiv " wrap={true} justify="center">
         <Card
@@ -299,7 +255,7 @@ const Profile = ({
               <img className=" img" src={avatarArray[avatar - 1]} />
             </div>
             <div className="name">
-              <h1>{username}</h1>
+              <h1 className="nameT">{username}</h1>
             </div>
           </div>
           <div>
@@ -341,7 +297,7 @@ const Profile = ({
             justifyContent: "space-around",
           }}
         >
-          <Modal
+          <Modal className="DelModal"
             visible={delac}
             closable={false}
             footer={[
@@ -369,7 +325,7 @@ const Profile = ({
   } else {
     return (
       <div className="maindiv" wrap={true} justify="center">
-        <Card className="container2" bordered={true} style={{ width: "580px" }}>
+        <Card className="container3" bordered={true} style={{ width: "580px" }}>
           <div
             className="PicandName"
             style={{
@@ -418,7 +374,7 @@ const Profile = ({
                 {" "}
                 Name:
                 <Input
-                  className="userin"
+                  className="userIn"
                   placeholder={name}
                   onChange={setNameInput}
                 ></Input>
@@ -429,7 +385,7 @@ const Profile = ({
                 {" "}
                 Bio:
                 <Input
-                  className="userin"
+                  className="bioIn"
                   placeholder={bio}
                   onChange={setBioInput}
                 ></Input>{" "}
@@ -440,7 +396,7 @@ const Profile = ({
                 {" "}
                 Birthday:
                 <Input
-                  className="userin"
+                  className="birthIn"
                   placeholder={age}
                   onChange={setBirthInput}
                 ></Input>{" "}
@@ -488,7 +444,6 @@ const mapStateToProps = (state) => {
     avatar: state.profile.avatar,
     age: state.profile.age,
     bio: state.profile.bio,
-    // username: state.login_signup.username,
     name: state.profile.name,
     interests: state.profile.interests,
     edit: state.profile.edit,
@@ -500,7 +455,6 @@ const mapStateToProps = (state) => {
     delac: state.profile.delac,
     okb: state.profile.okb,
     username: state.login_signup.username,
-    // logged_in: state.login_signup.logged_in,
   };
 };
 const mapDispatchToProps = (dispatch) => {
