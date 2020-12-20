@@ -19,7 +19,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
     {
       axios
       .get(
-        "${HOST_URL}/api/account/opening_messages/" + p,
+        `${HOST_URL}/api/account/opening_messages/` + p,
 
         {
           headers: {
@@ -70,7 +70,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
 
         const DelPostSelected = (e)=> {
             console.log(e);
-            axios.delete('http://localhost:8000/api/account/opening_messages/'+e, 
+            axios.delete(`${HOST_URL}/api/account/opening_messages/`+e, 
             
             {
               headers: {

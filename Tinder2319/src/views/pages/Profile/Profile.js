@@ -115,7 +115,7 @@ const Profile = ({
   };
   useEffect(() => {
  
-    fetch("${HOST_URL}/api/account/interests/", {
+    fetch(`${HOST_URL}/api/account/interests/`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       mode: "cors",
       headers: {
@@ -130,7 +130,7 @@ const Profile = ({
       });
     axios
       .get(
-        "${HOST_URL}/api/account/userprofile/" + username,
+        `${HOST_URL}/api/account/userprofile/` + username,
 
         {
           headers: {
@@ -154,7 +154,7 @@ const Profile = ({
   const DelAccount = async (e) => {
     try {
       const response = await axios.delete(
-        "${HOST_URL}/api/account/auth/users/me/",
+        `${HOST_URL}/api/account/auth/users/me/`,
 
         {
           headers: {
@@ -189,7 +189,7 @@ const Profile = ({
   const closeModalInter = (e) => {
     setEditInterests(false);
   };
-  const ProPage = (e) => {\
+  const ProPage = (e) => {
     console.log("test");
 
     window.location.reload();
@@ -210,7 +210,7 @@ const Profile = ({
     console.log(nameInput);
     axios
       .put(
-        "${HOST_URL}/api/account/userprofile/" + username,
+        `${HOST_URL}/api/account/userprofile/` + username,
         {
           bio: bioInput,
           avatar: avInput,

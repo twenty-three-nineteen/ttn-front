@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import "../styles/Toolbar.css";
 import axios from 'axios';
 import ViewRequest from "./ViewRequest.js";
-
+import {HOST_URL} from '../../core/servers';
 
 
 class Toolbar extends React.Component {
@@ -29,7 +29,7 @@ class Toolbar extends React.Component {
     };
 
     axios.get(
-      'http://localhost:8000/api/account/myRequests/',
+      `${HOST_URL}/api/account/myRequests/`,
       config
     )
     .then(res => {
