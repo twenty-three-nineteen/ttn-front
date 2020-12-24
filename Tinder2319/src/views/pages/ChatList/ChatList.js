@@ -6,9 +6,6 @@ import history from '../../../core/modules/history';
 import "../../styles/ChatList/ChatList.css";
 import "../../styles/ChatList/ChatList.scss";
 
-import {connect} from 'react-redux';
-import { useState,useEffect} from 'react';
-import history from '../../../core/modules/history';
 import {HOST_URL} from'../../../core/servers';
 import avatarArray from '../CreateProfile/components/Avatar';
 import Toolbar from "../../components/Menu.js";
@@ -20,7 +17,6 @@ const ChatList = ({token,username})=>
     const config = {
 
       headers: { 'Authorization': `Token ${token}` }
-
   };
 
   axios.get(

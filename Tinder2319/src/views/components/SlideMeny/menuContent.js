@@ -3,6 +3,7 @@ import { Menu, Dropdown } from 'antd';
 import {CloseOutlined, HomeOutlined, UserOutlined, LogoutOutlined ,WechatOutlined,DownOutlined,FireOutlined} from '@ant-design/icons';
 import './menuContent.css';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 class MenuContent extends Component {
   constructor(props) {
@@ -116,4 +117,12 @@ class MenuContent extends Component {
   }
 }
 
-export default MenuContent;
+
+const mapStateToProps = (state) =>{
+  return{
+    token: state.login_signup.token,
+    username: state.login_signup.username,
+  }
+} 
+
+export default connect(mapStateToProps)(MenuContent)
