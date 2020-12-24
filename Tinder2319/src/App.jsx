@@ -19,10 +19,7 @@ const App = ({logged_in}) => {
   return (
     <Router history={history}>
       <Switch>
-
         <Route path="/login_signup" exact component={LoginSignUp} />
-
-
       <Route path="/activate/*" exact component={EmailConfirmation} />
       <Route path="/password/reset/confirm/*" exact component={ForgotPassword} />
 

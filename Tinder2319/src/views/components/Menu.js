@@ -1,6 +1,6 @@
 import React from "react";
 import {CloseOutlined, HomeOutlined, UserOutlined, LogoutOutlined ,WechatOutlined,DownOutlined,FireOutlined} from '@ant-design/icons';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown,message } from 'antd';
 import "../styles/Toolbar.css";
 import axios from 'axios';
 import ViewRequest from "./ViewRequest.js";
@@ -13,6 +13,7 @@ class Toolbar extends React.Component {
     this.handleClick=this.handleClick.bind(this);
     this.handleMenu=this.handleMenu.bind(this);
     this.cancelButton=this.cancelButton.bind(this);
+    this.handleOk=this.handleOk.bind(this);
     
     this.state = {
       current: 'home',
@@ -25,7 +26,7 @@ class Toolbar extends React.Component {
   }
   componentDidMount() {
     const config = {
-      headers: { 'Authorization': `Token 9b079953bc0672b0704ba492a9fdb283a76a268a` }
+      headers: { 'Authorization': `Token c1a66f15f120c36731c5f19424bfa6938f99074d` }
     };
 
     axios.get(
@@ -36,7 +37,7 @@ class Toolbar extends React.Component {
       console.log(res);
       this.setState(()=>{
         return {
-            reqs: res.data.map(d=>d.message)
+            reqs: res.data.map(d=>d)
         };
       });
     })
@@ -55,15 +56,18 @@ class Toolbar extends React.Component {
   handleMenu = e => {
     var count=e.key;
     var res = parseInt(count.substring(5, count.length));
-    this.setState({ showModal: true, message:this.state.reqs[res] });
+    this.setState({ showModal: true, message:this.state.reqs[res].message});
+    this.state.reqs.splice(res, 1);
   }
 
   cancelButton(){
+    message.error('Rejected successfully!');
     this.setState({ showModal: false});
   }
 
   handleOk(){
-    this.cancelButton();
+    message.success('Accepted successfully!');
+    this.setState({ showModal: false});
   }
 
   render() {
@@ -71,7 +75,7 @@ class Toolbar extends React.Component {
       <Menu onClick={this.handleMenu}>
         {this.state.reqs.map(d=>
           <Menu.Item>
-              {d}
+              {d.message}
           </Menu.Item>
           )}
         <Menu.Item danger>Remove all</Menu.Item>
@@ -99,7 +103,9 @@ class Toolbar extends React.Component {
           </Menu.Item>
           
           <Menu.Item className="logoutToolbar" key="logout" icon={ <LogoutOutlined />}>
+            <a href="http://localhost:8080/login_signup" rel="noopener noreferrer">
               Log Out
+            </a>
           </Menu.Item>
           <Menu.Item  style={{float: 'right'}} key="profile" icon={<UserOutlined />}>
             <a href="http://localhost:8080/profile" rel="noopener noreferrer">

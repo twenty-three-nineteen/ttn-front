@@ -1,16 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/Explore.css';
+import {connect} from 'react-redux';
+import { useState,useEffect} from 'react';
 import Draggable from 'react-draggable'; 
 import OpeningMessage from "../components/OpeningMessage.js";
 import Toolbar from "../components/Menu.js";
-import SideMenu from "../components/SideMenu.js";
+import SideMenu from "../components/SlideMeny/SideMenu.js";
 import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
 import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
-import SlideMenu from 'react-slide-menu';
+import {HOST_URL} from'../../core/servers';
+import * as login_signup_actions from '../../core/login-signup/action/loginSignupActions';
 
 class Explore extends React.Component {
   constructor(props){
@@ -40,11 +43,11 @@ class Explore extends React.Component {
 
   componentDidMount() {
       const config = {
-          headers: { 'Authorization': `Token 9b079953bc0672b0704ba492a9fdb283a76a268a` }
+          headers: { 'Authorization': `Token c1a66f15f120c36731c5f19424bfa6938f99074d` }
       };
 
       axios.get(
-        `http://localhost:8000/api/account/opening_messages`,
+        `http://localhost:8000/api/account/opening_messages/page/1`,
         config
       )
       .then(res => {
@@ -59,9 +62,6 @@ class Explore extends React.Component {
         {
           console.log(error);
         });
-
-
-       
         
   }
   cancelButton(){
@@ -84,7 +84,7 @@ class Explore extends React.Component {
 
       const config = {
         headers: { 
-          'Authorization': 'Token 9b079953bc0672b0704ba492a9fdb283a76a268a' ,
+          'Authorization': 'Token c1a66f15f120c36731c5f19424bfa6938f99074d' ,
           'Content-Type': 'application/json'
         }
       };
@@ -92,8 +92,8 @@ class Explore extends React.Component {
       axios.post('http://localhost:8000/api/account/send_chat_request/', 
       {
         "source": 1,
-        "target": 1,
-        "opening_message": message_id,
+        "target": 3,
+        "opening_message": 3,
         "message": messagedimo
       }
       , config)
@@ -362,27 +362,21 @@ class Explore extends React.Component {
     });
   };
   render() {
-    var nav = [
-      {id: 'home', label: 'Home', path: '/'},
-      {id: 'about', label: 'About', path: '/about'},
-      {id: 'discover', label: 'Discover', path: '/discover'},
-    ];
       return (
 
           <div id="container">
-
             <div id="smallCon" className="smallCon">
+              <SideMenu></SideMenu>
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
-                <CheckCircleFilled className="MyCheck"></CheckCircleFilled>
+                <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
                 
-                <CloseCircleFilled className="MyZarb"></CloseCircleFilled>
+                <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
               </div>
             </div>
 
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
             <Toolbar></Toolbar>
-            
 
             <div className="TotalExplore">
 
