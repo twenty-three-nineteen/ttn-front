@@ -5,6 +5,7 @@ import "../styles/Toolbar.css";
 import axios from 'axios';
 import ViewRequest from "./ViewRequest.js";
 import {HOST_URL} from '../../core/servers';
+import {connect} from 'react-redux';
 
 
 class Toolbar extends React.Component {
@@ -119,4 +120,11 @@ class Toolbar extends React.Component {
   }
 }
 
-export default Toolbar;
+const mapStateToProps = (state) =>{
+  return{
+    token: state.login_signup.token,
+    username: state.login_signup.username,
+  }
+} 
+
+export default connect(mapStateToProps)(Toolbar)

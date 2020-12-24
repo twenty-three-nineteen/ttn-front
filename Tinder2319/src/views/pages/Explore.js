@@ -44,7 +44,7 @@ class Explore extends React.Component {
 
   componentDidMount() {
       const config = {
-          headers: { 'Authorization': `Token c1a66f15f120c36731c5f19424bfa6938f99074d` }
+          headers: { 'Authorization': `Token ${this.props.token}` }
       };
 
       axios.get(
@@ -419,4 +419,11 @@ class Explore extends React.Component {
       );
   }
 }
-export default Explore;
+const mapStateToProps = (state) =>{
+  return{
+    token: state.login_signup.token,
+    username: state.login_signup.username,
+  }
+} 
+
+export default connect(mapStateToProps)(Explore)
