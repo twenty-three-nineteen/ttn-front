@@ -5,42 +5,20 @@ import "../styles/Req.css";
 export class ReqOpeningMessageModal extends React.Component {
   constructor(props) {
     super(props);
-    this.handleOk=this.handleOk.bind(this);
-    this.cancelButton=this.cancelButton.bind(this);
-    
-
-    this.state={
-      showModal: this.props.showORnot,
-    };
-  }
-
-  handleOk(){
-    console.log("handleOK");
-    this.cancelButton();
-  }
-
-  cancelButton()
-  {
-    this.setState(()=>{
-      return {
-          showModal: false
-      };
-    });
-    // console.log(id);
   }
 
   render() {
     return (
         <div className="App">
           <Modal
-          visible={this.state.showModal}
+          visible={this.props.showORnot}
           title="Type your message"
           closable={false}
           footer={[
-            <Button key="cancel" type="secondary" onClick={this.cancelButton}>
+            <Button key="cancel" type="secondary" onClick={this.props.cancelButton}>
               Cancel
             </Button>,
-            <Button key="ok" type="primary" onClick={this.handleOk}>
+            <Button key="ok" type="primary" onClick={this.props.okbtn}>
               Ok
             </Button>
           ]}>
