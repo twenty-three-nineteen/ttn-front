@@ -2,7 +2,6 @@ import React from 'react';
 import LoginSignUpForm from './components/LoginSignUpForm';
 import '../../styles/App.scss'
 import '../../styles/LoginSignUp.scss';
-// import '../../styles/scss/styles.scss';
 
 import { useEffect } from 'react';
 import { Tooltip,Spin  } from 'antd';
@@ -59,7 +58,6 @@ const LoginSignUp = ({formState, setFormState, loading}) =>  {
   }
 
   const mapStateToProps = (state) =>{
-    // console.log("state : ",state);
     return{
       formState: state.login_signup.formState,
       loading: state.login_signup.loading,

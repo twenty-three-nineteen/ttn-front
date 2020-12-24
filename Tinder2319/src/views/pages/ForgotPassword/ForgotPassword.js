@@ -6,7 +6,7 @@ import '../../styles/LoginSignUp.scss';
 import {connect} from 'react-redux';
 import * as forgot_password_actions from '../../../core/forgot-password/action/forgotPasswordAction';
 import ResetPasswordSuccess from "./components/ResetPasswordSuccess";
-  
+import {HOST_URL} from '../../../core/servers';
 import axios from 'axios';
 
 import {LockOutlined} from '@ant-design/icons';
@@ -24,7 +24,7 @@ import {LockOutlined} from '@ant-design/icons';
   {
     console.log(values);
     setLoading(true);
-    axios.post('http://localhost:8000/api/account/auth/users/reset_password_confirm/', {
+    axios.post(`${HOST_URL}/api/account/auth/users/reset_password_confirm/`, {
         "uid": uid,
         "token": token,
         "new_password":values.password,

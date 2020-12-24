@@ -32,7 +32,7 @@ export default (state = initialstate, { type, payload }) => {
           profile_info : {
             name: payload.values.nickname,
             bio : payload.values.bio,
-            birth : payload.values.birth.format('YYYY-MM-DD'),
+            birth : (payload.values.birth)? payload.values.birth.format('YYYY-MM-DD'):undefined,
             //month+1
             //YYYY-MM-DD HERE
             

@@ -17,3 +17,22 @@ export function setPosts(posts){
     payload: { posts },
     }
 }
+ 
+export function setDel(del){
+    return{
+    type: ActionTypes.SET_DEL,
+    payload: { del },
+    }
+}
+export function setPage(page){
+    return{
+    type: ActionTypes.SET_PAGE,
+    payload: { page },
+    }
+}
+export function addPage(){
+    return{
+    type: ActionTypes.ADD_PAGE,
+    payload: {},
+    }
+}

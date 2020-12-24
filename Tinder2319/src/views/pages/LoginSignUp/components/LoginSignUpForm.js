@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin,Form, Input, Button,message,Modal  } from 'antd';
-import { LockOutlined,MailOutlined,ExclamationCircleFilled,InfoCircleOutlined,QuestionOutlined,InfoFilled} from '@ant-design/icons';
-
+import { LockOutlined,MailOutlined} from '@ant-design/icons';
+import {HOST_URL} from '../../../../core/servers';
 import { useState,useEffect } from 'react';
 import SignUpForm from './SignUpForm';
 import axios from 'axios';
@@ -12,7 +12,6 @@ import * as login_signup_actions from '../../../../core/login-signup/action/logi
 import history from "../../../../core/modules/history";
 
 const LoginForm = ({formState,logged_in,
-  //  username, email, password, loading,setPassword,
   setUsername,setEmail,setLoading, setForgotPasswordModal, setSignUpModal,setToken,setLoginState,setAllInterests
   }) => 
 {
@@ -42,7 +41,7 @@ const LoginForm = ({formState,logged_in,
 
   const checkInterests = (username,token) =>
   {
-    axios.get('http://localhost:8000/api/account/userprofile/'+username, 
+    axios.get(`${HOST_URL}/api/account/userprofile/${username}`, 
     {
       headers: {
         'Authorization': `Token ${token}`,
@@ -86,7 +85,7 @@ const LoginForm = ({formState,logged_in,
   const getUser = (token) =>
   {
     
-    axios.get('http://localhost:8000/api/account/auth/users/me/',
+    axios.get(`${HOST_URL}/api/account/auth/users/me/`,
     {
       headers: {
         'Authorization': `Token ${token}`,
@@ -96,7 +95,7 @@ const LoginForm = ({formState,logged_in,
 
 
     .then(function (response) {
-      console.log(response);
+      console.log('user',response);
       setUsername(response.data.username);
       checkInterests(response.data.username,token);
       
@@ -118,7 +117,7 @@ const LoginForm = ({formState,logged_in,
 
   const setInterestsList = (token) =>
   {
-    axios.get('http://localhost:8000/api/account/interests',
+    axios.get(`${HOST_URL}/api/account/interests`,
     {
       headers: {
         'Authorization': `Token ${token}`,
@@ -159,7 +158,7 @@ const LoginForm = ({formState,logged_in,
     {
       setEmail(values.email);
       // forgot-password
-      axios.post('http://localhost:8000/api/account/auth/users/reset_password/', {
+      axios.post(`${HOST_URL}/api/account/auth/users/reset_password/`, {
         "email": values.email,
       }
       )
@@ -197,7 +196,7 @@ const LoginForm = ({formState,logged_in,
       // setEmail(undefined);
       // setPassword(values.password);
       
-      axios.post('http://localhost:8000/api/account/auth/token/login/', {
+      axios.post(`${HOST_URL}/api/account/auth/token/login/`, {
         "password": values.password,
         "email": values.email,
       },
@@ -255,7 +254,7 @@ const LoginForm = ({formState,logged_in,
       // setPassword(values.password);
       // setUsername(values.username);
       // setEmail(undefined);
-    axios.post('http://localhost:8000/api/account/auth/users/', {
+    axios.post(`${HOST_URL}/api/account/auth/users/`, {
       "username": values.username,
       "name": values.username,
       "email": values.email,
