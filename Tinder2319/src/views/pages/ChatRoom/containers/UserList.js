@@ -25,8 +25,16 @@ const UserList = (props) => {
               props.users.map(
                   (user)=>
                   {
-                      if(user.username != props.username)
-                        return <div className="user-box">
+                      // if(user.username != props.username)
+                        return <div
+                        onClick={
+                          ()=>
+                          {
+                              window.open('http://localhost:8080/profile/'+user.username);
+                              // window.location.href = 'http://localhost:8080/profile/'+u.username; 
+                          }
+                      }
+                       className="user-box">
                         <img src={avatarArray[user.avatar - 1]} className="user-avatar"/>
                         <div className="user-names">
                             <h2 className="user-name">{user.name}</h2>

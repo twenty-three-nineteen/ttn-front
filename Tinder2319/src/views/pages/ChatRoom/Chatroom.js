@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import ChatContainer from './containers/ChatConatiner';
 import ConvListContainer from './containers/ConvListContainer';
 
-import { Drawer, Button } from 'antd';
 import { CaretRightOutlined} from '@ant-design/icons';
 import '../../styles/chat/chat.scss';
 import '../../styles/chat/chat-mobile.scss';

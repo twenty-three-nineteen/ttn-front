@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState,useEffect} from 'react';
+
+import { Tooltip  } from 'antd';
 import { InfoCircleFilled , UnorderedListOutlined, CloseCircleFilled,DoubleLeftOutlined } from '@ant-design/icons';
 import unknownAv from '../../../../assessts/images/avatars/unknown.png';
 import avatarArray from '../../CreateProfile/components/Avatar';
@@ -82,16 +84,25 @@ const ChatHeader = ({users,username, isMobile, userList, date,op,
             onClick={()=>handleUserList()}
             className="user-count">{users.length + " members"}</h2>
             :
-            <h2 className="user-name">{
+            
                 users.map(
                     (u)=>
                     {
                         if(u.username!=username)
-                        return u.name;
+                        return <Tooltip placement="bottom" title={'@'+u.username}>
+                        <h2 
+                        onClick={
+                            ()=>
+                            {
+                                window.open('http://localhost:8080/profile/'+u.username);
+                                // window.location.href = 'http://localhost:8080/profile/'+u.username; 
+                            }
+                        }
+                        className="user-name">{u.name}</h2></Tooltip>
 
                     }
                 )
-            }</h2>
+            
         }
 
          <InfoCircleFilled

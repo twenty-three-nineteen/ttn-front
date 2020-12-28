@@ -52,7 +52,7 @@ const goToChat= (id)=>
       return (
         <div className={listToggle?"chat-container conv-list":"chat-container conv-list closed"}>
         {
-          isMobile?
+          (isMobile && activeChat)?
           <ArrowRightOutlined
           className="conv-list-back"
           onClick={

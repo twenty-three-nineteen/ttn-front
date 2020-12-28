@@ -16,7 +16,7 @@ import UserList from './UserList';
 
 const ChatContainer = ({socket,username, messages,token, users,usersParsed, usersState, chatState,
   activeChat,isMobile,listToggle, date,op,
-    getChat,sendMessage,getChatInfo,handleConvListToggle,addMessage,sentToChat,
+    getChat,sendMessage,getChatInfo,handleConvListToggle,addMessage
    }) => {
      const [userList, setuserList] = useState(false);
     const [newMsgScroll, setnewMsgScroll] = useState(true);
@@ -56,7 +56,6 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
   {
    if(values.msg)
    {
-     sentToChat(activeChat);
     sendMessage(
         socket,values.msg,activeChat
       );
@@ -237,7 +236,6 @@ const mapStateToProps = (state) =>{
         socketConnected: (c) => dispatch(chat_actions.socketConnected(c)),
         getChatInfo:(id,token) => dispatch(chat_actions.getChatInfo(id,token)),
         addMessage: (m) => dispatch(chat_actions.addMessage(m)),
-        sentToChat: (id) => dispatch(chat_actions.sentToChat(id)),
     }
     }
     
