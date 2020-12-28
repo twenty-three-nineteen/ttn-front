@@ -44,12 +44,12 @@ class Explore extends React.Component {
 
   componentDidMount() {
       const config = {
-          headers: { 'Authorization': `Token c1a66f15f120c36731c5f19424bfa6938f99074d` }
+          headers: { 'Authorization': `Token ${this.props.token}` }
       };
 
       axios.get(
 
-        `${HOST_URL}/api/account/opening_messages`,
+        `${HOST_URL}/api/account/opening_messages/page/1`,
 
         config
       )
@@ -75,6 +75,7 @@ class Explore extends React.Component {
       });
   }
   handleOk(){
+
       var messagedimo=document.getElementById('messagedimo').value;
 
       var message_id = this.state.count-1;
@@ -87,7 +88,7 @@ class Explore extends React.Component {
 
       const config = {
         headers: { 
-          'Authorization': 'Token c1a66f15f120c36731c5f19424bfa6938f99074d' ,
+          'Authorization': `Token ${this.props.token}` ,
           'Content-Type': 'application/json'
         }
       };
@@ -122,6 +123,7 @@ class Explore extends React.Component {
     });
   }
   Accepted(){
+    
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length,
@@ -130,6 +132,7 @@ class Explore extends React.Component {
     });
   }
   Rejected(){
+    message.success('Rejected successfully!');
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length
@@ -137,12 +140,11 @@ class Explore extends React.Component {
     });
   }
   ClickedUp(){
-    var x = event.clientX-this.state.mouseX;    
+    var x = event.clientX-this.state.mouseX;   
     var width = screen.width;
     if(x>0){
       if(x>0.15*width){
         this.Accepted();
-        // alert("Accepted");
       }
     }
     else{
@@ -419,4 +421,11 @@ class Explore extends React.Component {
       );
   }
 }
-export default Explore;
+const mapStateToProps = (state) =>{
+  return{
+    token: state.login_signup.token,
+    username: state.login_signup.username,
+  }
+} 
+
+export default connect(mapStateToProps)(Explore)
