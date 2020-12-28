@@ -1,0 +1,75 @@
+@import "../scss/variables.scss";
+@import "../scss/styles.scss";
+// $grey-1:#505050;
+// $grey-2:#c3c3c3;
+// $grey-3:#dddddd;
+$spacing:10px;
+$button-size:22px;
+.chat-body {
+    .ant-drawer.ant-drawer-open .ant-drawer-mask {
+        border-radius: 10px;
+    }
+    .ant-drawer-content-wrapper {
+        @extend .scrollbar;
+        height: auto !important;
+        max-height: 190px !important;
+        .ant-drawer-body {
+            padding: 20px 20px;
+            overflow: hidden !important;
+        }
+    }
+}
+
+.user-list {
+    @extend .scrollbar;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto;
+    max-height: 150px;
+    padding: 0 5px;
+    .user-box {
+        background-color: $grey-3;
+        border-radius: 5px;
+        width: calc(50% - 5px);
+        margin: 5px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        img.user-avatar {
+            margin-left: 5px;
+            margin-right: 5px;
+            align-self: flex-end;
+            height: 60px;
+            margin-top: 5px;
+        }
+        .user-names {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            h2.user-name {
+                font-size: 16px;
+                margin: 0;
+                margin-right: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            h3.user-username {
+                font-size: 12px;
+                color: $grey-1;
+                margin: 0;
+                margin-right: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

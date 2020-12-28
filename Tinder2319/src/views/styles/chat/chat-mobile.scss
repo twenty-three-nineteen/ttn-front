@@ -1,0 +1,165 @@
+@import "../scss/styles.scss";
+@import "../scss/variables.scss";
+$spacing:10px;
+$button-size:22px;
+@media only screen and (max-width: 748px) {
+    $button-size: 16px;
+    .user-list {
+        // max-height: 150px;
+        // padding: 0 5px;
+        .user-box {
+            width: calc(100% - 5px);
+            img.user-avatar {}
+            .user-names {
+                h2.user-name {}
+                h3.user-username {}
+            }
+        }
+    }
+    .chat-page {
+        align-self: center;
+        overflow-y: visible;
+        overflow-x: hidden;
+        position: absolute;
+        width: 90%!important;
+        height: 100% !important; //calc(90% - 50px) for navbar
+        max-height: none!important;
+    }
+    .emojis-container {
+        width: 150px !important;
+        .emoji {
+            font-size: 20px !important;
+            width: auto;
+        }
+    }
+    .chat-container.conv-list {
+        .anticon.conv-list-back {
+            cursor: pointer;
+            color: $primary-color;
+            font-size: 20px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        position: absolute;
+        margin: 0 !important;
+        //left: 5%;
+        &.closed {
+            margin-right: 0 !important;
+            margin-left: -200% !important;
+        }
+        transition: all 1s ease;
+        overflow: hidden;
+        z-index: 1;
+        .conv-list-wrapper {
+            direction: ltr !important;
+            margin-top: 20px !important;
+            .conv-box {
+                .avatar-box {
+                    img.user-avatar {}
+                }
+                .name-box {
+                    h2.user-name {}
+                }
+                &.active {
+                    h2.user-name {}
+                }
+            }
+        }
+    }
+    .chat-container {
+        width: 100%!important;
+        height: 90% !important; //calc(90% - 50px) for navbar
+        .chat-header {
+            .user-name {
+                padding: 0 35% !important;
+            }
+            .avatar-box {
+                margin-left: 35px !important;
+                padding-right: 30px !important;
+                height: 100% !important;
+                .unknown {
+                    height: 100% !important;
+                    // width: 10px !important;
+                    .count {
+                        font-size: 16px !important;
+                        // bottom: 10px !important;
+                        // right: -20px !important;
+                    }
+                    img {
+                        height: 90% !important;
+                        margin: 0 !important;
+                        align-self: flex-end !important;
+                    }
+                    margin-right: -30px !important;
+                }
+                img.user-avatar {
+                    margin-right: -30px !important;
+                    align-self: flex-end;
+                    height: 90% !important;
+                }
+            }
+            .avatar-box.pv {
+                margin-left: 30px !important;
+            }
+            .show-conv-list {
+                cursor: pointer;
+                font-size: 25px;
+                align-self: center;
+                position: absolute;
+                left: 10px;
+                margin-top: auto;
+            }
+        }
+        .chat-body {
+            .send-message-wrapper {
+                height: 85px !important;
+                form {
+                    .send-message-textarea {
+                        textarea.ant-input {
+                            font-size: 16px !important;
+                        }
+                        width: calc(100% - 40px) !important;
+                    }
+                }
+                .send-message-col {
+                    width: 30px !important;
+                    .button {
+                        height: 30px !important;
+                        span.anticon {
+                            width: $button-size !important;
+                            height: $button-size !important;
+                            svg {
+                                font-size: $button-size !important;
+                                padding: 0;
+                            }
+                        }
+                    }
+                }
+            }
+            .message-wrapper {
+                height: calc(100% - 90px) !important;
+                .message {
+                    margin-left: $spacing !important;
+                    margin-right: $spacing !important;
+                    max-width: 80%;
+                    h3.date {
+                        margin: 0 !important;
+                        font-size: 12px;
+                    }
+                    h2.user {
+                        font-size: 12px;
+                    }
+                    .user-row {
+                        img.user-avatar {
+                            width: 0 !important;
+                        }
+                        p.content {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
