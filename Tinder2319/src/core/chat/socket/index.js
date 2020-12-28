@@ -10,23 +10,23 @@ export function setupSocket (handleCommand, token) {//
 	}
 	socket.onmessage = (event) => {
 		const data = JSON.parse(event.data);
-		// console.log(data,"klf;dsjk';fd'kfda");
+		console.log("data",data);
 		handleCommand(data);
 	}
 	return socket
 }
 
-export function waitForSocketConnection (socket,id,callback){
+export function waitForSocketConnection (socket,callback){
 	setTimeout(
 		function () {
 			if (socket.readyState === 1) {
 				console.log("Connection is made")
 				if (callback != null){
-					callback(socket,id);
+					callback(socket);
 				}
 			} else {
 				console.log("wait for connection...")
-				waitForSocketConnection(socket,id,callback);
+				waitForSocketConnection(socket,callback);
 			}
 
 		}, 500); // wait 500 milisecond for the connection...
