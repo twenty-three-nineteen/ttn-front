@@ -7,11 +7,16 @@ import Draggable from 'react-draggable';
 import OpeningMessage from "../components/OpeningMessage.js";
 import Toolbar from "../components/Menu.js";
 import SideMenu from "../components/SlideMeny/SideMenu.js";
+import SelectorInterest from "../components/Selector/SelectorInterest.js";
+import SelectorPerson from "../components/Selector/SelectorPerson.js";
+import SelectorInterestSmall from "../components/Selector/SelectorInterestSmall.js";
+import SelectorPersonSmall from "../components/Selector/SelectorPersonSmall.js";
 import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
-import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
+import { CloseCircleFilled,CheckCircleFilled,DownOutlined} from '@ant-design/icons';
+import Filter from "../components/FilterBar/Filter.js";
 
 import SlideMenu from 'react-slide-menu';
 import {HOST_URL} from '../../core/servers';
@@ -28,6 +33,7 @@ class Explore extends React.Component {
     this.Rejected=this.Rejected.bind(this);
     this.Accepted=this.Accepted.bind(this);
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
+    this.ClickedFliter=this.ClickedFliter.bind(this);
 
     this.state={
       count:0,
@@ -38,7 +44,8 @@ class Explore extends React.Component {
       xxx: 0,
       degneg: "",
       showModal: false,
-      collapsed: false
+      collapsed: false,
+      showfilter:false
     };
   }
 
@@ -54,6 +61,7 @@ class Explore extends React.Component {
         config
       )
       .then(res => {
+
         console.log(res);
         this.setState(()=>{
           return {
@@ -170,7 +178,6 @@ class Explore extends React.Component {
     });
     
   }
-
   Fader(){
     var f=(event.clientX-this.state.mouseX)/(screen.width);
     var degree="";
@@ -365,13 +372,41 @@ class Explore extends React.Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  };
+  }
+  ClickedFliter(){
+    this.setState({
+      showfilter: !this.state.showfilter,
+    });
+    var drg=document.getElementById('mybar');
+    drg.classList.toggle('rotate');
+    var filter=document.getElementById('filters');
+    filter.classList.toggle('move');
+    var total=document.getElementById('TotalExplore');
+    total.classList.toggle('rotate');
+    var TitlePerson=document.getElementById('TitlePerson');
+    TitlePerson.classList.toggle('show');
+  }
+  ClickedFliterSmall(){
+    var filter=document.getElementById('filtericonsmall');
+    filter.classList.toggle('rotate');
+    var smallCon=document.getElementById('smallCon');
+    smallCon.classList.toggle('move');
+    var something=document.getElementById('interestsmall');
+    something.classList.toggle('show');
+    var something1=document.getElementById('personsmall');
+    something1.classList.toggle('show');
+  }
   render() {
       return (
-
           <div id="container">
-            <div id="smallCon" className="smallCon">
+              <div className="TopBar">
+                <p className="TeamName">2319</p>
+              </div>
               <SideMenu></SideMenu>
+            <div id="smallCon" className="smallCon">
+              <SelectorPersonSmall></SelectorPersonSmall>
+              <SelectorInterestSmall></SelectorInterestSmall>
+              <DownOutlined onClick={this.ClickedFliterSmall} id="filtericonsmall" className="filtericonsmall"></DownOutlined>
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
                 <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
@@ -383,14 +418,11 @@ class Explore extends React.Component {
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
             <Toolbar></Toolbar>
 
-            <div className="TotalExplore">
-
+            <div id="TotalExplore" className="TotalExplore">
                 {this.openning("trash") ? 
                     <img className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
                   : 
                     <img className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
-
-                
                 <Draggable
                 className="handle"
                 axis="x"
@@ -409,14 +441,17 @@ class Explore extends React.Component {
                   </div>
                 </div>
                 </Draggable>
-                
-                
                 {this.openning("envelop") ? 
                   <img className="envelop_open" src={require('../../assessts/images/envelop_open.png')}></img>
                 : 
                   <img className="envelop_close" src={require('../../assessts/images/envelop_close.png')} ></img>}
             </div>
             <ReqOpeningMessageModal cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ReqOpeningMessageModal>
+            <Filter clicked={this.ClickedFliter} show={this.state.showfilter}></Filter>
+            <div id="filters" className="filters">
+            <SelectorPerson></SelectorPerson>
+            <SelectorInterest></SelectorInterest>
+            </div>
         </div>
       );
   }

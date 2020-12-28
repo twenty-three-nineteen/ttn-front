@@ -1,6 +1,6 @@
 import React from 'react';
 import "../styles/SmallScreen.css";
-
+    
 export class SmallScreen extends React.Component {
     constructor(props){
         super(props);
@@ -8,7 +8,7 @@ export class SmallScreen extends React.Component {
     render(){
         return (
             <div className="SmallTotalExplore" id="SmallTotalExplore">
-                <p className="textOpenningMessage">{this.props.text}</p>
+                <p className="textOpenningMessage">Hello</p>
             </div>
         );
     }

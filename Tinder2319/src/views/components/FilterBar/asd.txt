@@ -1,0 +1,26 @@
+{this.props.show ? 
+                <LeftCircleOutlined onClick={this.props.clicked} id="mybar" className="mybar"></LeftCircleOutlined>
+          : 
+                <RightCircleOutlined onClick={this.props.clicked} className="mybar"></RightCircleOutlined>}
+
+
+
+                <CheeseburgerMenu
+                right
+                topOffset={45}
+                isOpen={this.props.show}
+                closeCallback={this.props.clicked}
+                >
+                <SelectorPerson></SelectorPerson>
+                <SelectorInterest></SelectorInterest>
+                </CheeseburgerMenu>
+            
+            <HamburgerMenu
+                className="DimoMenu"
+                isOpen={this.props.show}
+                menuClicked={this.props.clicked}
+                strokeWidth={3}
+                color='black'
+                borderRadius={1}
+                animationDuration={0.5}
+            />

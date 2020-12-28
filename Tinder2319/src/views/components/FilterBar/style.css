@@ -1,0 +1,47 @@
+    .mybar {
+        top: 50%;
+        left: 0;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        align-items: center;
+        position: absolute;
+        width: 10%;
+        margin-left: 93%;
+        visibility: visible;
+        text-align: center;
+        font-size: 200%;
+        color: rgb(255, 255, 255);
+        margin-right: auto;
+        display: block;
+        transition: all 0.4s ease-in-out;
+    }
+    
+    .mybar.rotate {
+        top: 50%;
+        left: 0;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        align-items: center;
+        position: absolute;
+        width: 10%;
+        margin-left: 73%;
+        visibility: visible;
+        text-align: center;
+        font-size: 200%;
+        color: rgb(255, 255, 255);
+        margin-right: auto;
+        display: block;
+        margin-right: 350px;
+        text-align: center;
+        transform: rotate(180deg);
+    }
+    
+    @media screen and (max-width: 780px) {
+        .mybar {
+            visibility: hidden;
+        }
+    }
