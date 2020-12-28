@@ -65,6 +65,7 @@
 }
 
 .filters {
+    margin-top: calc(-320px);
     visibility: hidden;
     margin-left: 100%;
     font-family: 'Rubik', cursive;
@@ -89,6 +90,10 @@
     width: 20%;
 }
 
+.smallFil {
+    margin-top: -350px;
+}
+
 .filtersmall {
     visibility: hidden;
 }
@@ -102,6 +107,9 @@
 }
 
 @media screen and (max-width: 780px) {
+    .filters {
+        visibility: hidden;
+    }
     .TotalExplore {
         visibility: hidden;
     }

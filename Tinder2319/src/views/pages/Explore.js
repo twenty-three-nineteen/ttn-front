@@ -406,6 +406,7 @@ class Explore extends React.Component {
             <div id="smallCon" className="smallCon">
               <SelectorPersonSmall></SelectorPersonSmall>
               <SelectorInterestSmall></SelectorInterestSmall>
+              
               <DownOutlined onClick={this.ClickedFliterSmall} id="filtericonsmall" className="filtericonsmall"></DownOutlined>
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">

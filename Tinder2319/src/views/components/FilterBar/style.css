@@ -15,7 +15,7 @@
         color: rgb(255, 255, 255);
         margin-right: auto;
         display: block;
-        transition: all 0.4s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
     
     .mybar.rotate {

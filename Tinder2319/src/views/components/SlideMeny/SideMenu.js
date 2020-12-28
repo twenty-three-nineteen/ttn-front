@@ -32,9 +32,9 @@ class SideMenu extends React.Component {
       <CheeseburgerMenu
         topOffset={45}
         isOpen={this.state.menuOpen}
-        closeCallback={this.closeMenu}
+        closeCallback={this.openMenu}
         >
-        <MenuContent className="Cheese" closeCallback={this.closeMenu}/>
+        <MenuContent className="Cheese" closeCallback={this.openMenu}/>
       </CheeseburgerMenu>
       
       <HamburgerMenu
