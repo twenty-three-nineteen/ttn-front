@@ -1,246 +1,141 @@
 import React from 'react'
 import { useState,useEffect,useRef } from 'react';
-import { Form, Input, Button, Popover } from 'antd';
-import "../../styles/Chat.scss";
-import { SendOutlined,SmileOutlined} from '@ant-design/icons';
-import moment from 'moment';
-import avatarArray from '../CreateProfile/components/Avatar';
-import Message from './components/Message';
-import User from './components/User';
-import Emojis from './components/Emoji';
 import {connect} from 'react-redux';
+import ChatContainer from './containers/ChatConatiner';
+import ConvListContainer from './containers/ConvListContainer';
+
+import { Drawer, Button } from 'antd';
+import { CaretRightOutlined} from '@ant-design/icons';
+import '../../styles/chat/chat.scss';
+import '../../styles/chat/chat-mobile.scss';
+import '../../styles/chat/chat-mobile.scss';
+import '../../styles/chat/convlist.scss';
+import '../../styles/chat/misc.scss';
+import '../../styles/chat/userlist.scss';
+
 import * as chat_actions from '../../../core/chat/action/chatActions';
 import * as socket_actions from '../../../core/chat/socket/index';
 
-const Chatroom = ({socket,username,chatId, messages,token, users, usersState, chatState,
-    addMessage,getChat,chatRecieved,sendMessage,saveSocket,setChatId,socketConnected,getChatUsers
-   }) => {
-    const [newMsgScroll, setnewMsgScroll] = useState(true);
-    let messagesClasses = document.getElementsByClassName("message");
-    const loader = useRef(null);
-    const messageContainer = useRef(null);
-    const handleCommand = (data) =>
+import { useMediaQuery } from 'react-responsive'
+
+
+const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
+  socketConnected,chatRecieved, addMessage}) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 748px)' })
+  const [listToggle, setlistToggle] = useState(true);
+  const [activeChat, setactiveChat] = useState(0);
+  const [send, setsend] = useState(false)
+  const [msg, setmsg] = useState(undefined)
+  const chatRef = useRef(activeChat);
+  useEffect(() => {
+    //connect socket
+    const s = socket_actions.setupSocket(handleCommand,token);
+    socket_actions.waitForSocketConnection(s,handleSocketConnection);
+  }, [])
+
+  useEffect(() => {
+    if(send)
+    {
+      if(msg.chatId===activeChat)
+      {addMessage(msg);
+      console.log(activeChat)}
+    }
+    return () => {
+      setsend(false);
+    }
+  }, [send])
+  
+  const handleSocketConnection = (s) =>
+  {
+    saveSocket(s);
+    socketConnected(true)
+  }
+
+  useEffect(() => {
+    console.log(activeChat)
+    
+  }, [activeChat])
+
+
+  const handleCommand =(data,activeChat)=>
   {
     const command = data.command;
     if(command === "messages")
-	{
+	  {
       console.log(data);
       chatRecieved(data.messages);
-      updateScroll();
+      // updateScroll();
     }
     else if(command === "new_message")
     {
       console.log(data);
-      addMessage(data.message);
-      updateScroll();
+      setmsg(data.message);
+      
+      setsend(true);
+
+      // updateScroll();
     }
   }
-  function updateScroll(){
-    messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
-  }
-
-
-  const handleSocketConnection = (s,id) =>
-  {
-    socketConnected(true)
-    getChat(s,id);
-    getChatUsers(id,token);
-  }
-
-  useEffect(() => {
-    updateScroll();
-    const id=(window.location.pathname.split('/').reverse()[0]);
-    setChatId(id);
-    const s = socket_actions.setupSocket(handleCommand,token);
-    socket_actions.waitForSocketConnection(s,id,handleSocketConnection);
-    saveSocket(s);
-
-  //   var options = {
-  //     root: null,
-  //     rootMargin: "20px",
-  //     threshold: 1.0
-  //  };
-    // const observer = new IntersectionObserver(handleObserver, options);
-    // if (loader.current) {
-    //   observer.observe(loader.current)
-    // }
-    
-  }, []);
   
-  // const handleObserver = (entities) => {
-  //   const target = entities[0];
-  //   if (target.isIntersecting) { 
-  //     let before = messageContainer.current.scrollHeight;
-  //     // lastChatRecieved();
-  //     let after = messageContainer.current.scrollHeight;
-  //     messageContainer.current.scrollTop = after - before;
-  //   }
+  // function updateScroll(){
+  //   messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
   // }
 
-  const [form] = Form.useForm();
-
-  const sendChat = (values) =>
-  {
-   if(values.msg)
-   {
-    sendMessage(
-        socket,values.msg,chatId
-      );
-      form.resetFields(['msg']);
-   }
-  }
-  const addEmoji = (e)=>
-  {
-    console.log(e);
-    
-    let text = form.getFieldValue(['msg']);
-    if(text)
+    const handleConvListToggle= (e)=>
     {
-      form.setFieldsValue(
-        {
-          ['msg']:text+e,
-        }
-      )
+      setlistToggle(!listToggle);
+      //console.log(e.target)
     }
-    else
-    {
-      form.setFieldsValue(
-        {
-          ['msg']:e,
-        }
-      )
-    }
-    
-  }
-
-  const parseDate = (date)=>
-  {
-    var m = moment(date);
-    return m.format("MMM Do, HH:mm")
-  }
-  
-  let usersParsed = {};
-  useEffect(() => {
-    console.log(messagesClasses);
-    console.log(usersParsed);
-    updateScroll();
-  }, [usersParsed])
     return(
-       <div className="chat-container">
-       <div className="chat-header">
-       
-       {
-         users.map(
-           (user)=>
-           {  
-            usersParsed[user.username]=
-            {
-              username:user.username,
-              name: user.name,
-              avatar:user.avatar-1,
-            }
-             if(user.username != username)
-              {
-               
-                return <User username={user.username} name={user.name} avatar={avatarArray[user.avatar-1]}/>
-              }
-           }
-         )
-       }
+      <div className="chat-page">
+      
+      {isMobile? undefined
+        :
+        <CaretRightOutlined
+        onClick={handleConvListToggle}
+        className={listToggle? "list-toggle": "list-toggle rotate"}/>}
+
+     
+
+        <ConvListContainer
+        isMobile={isMobile}
+        chatRef={chatRef}
+        activeChat={activeChat}
+        listToggle={listToggle}
+        setListToggle={setlistToggle}
+        SetActiveChat={setactiveChat}
+        />
        
       
-       </div>
-       <div ref={messageContainer} className="message-wrapper">
-       <div ref={loader}></div>
-        {
-          messages.map(
-            (m) =>
-            {
-              
-              return (usersParsed[m.author])? <Message user={usersParsed[m.author]}
-              avatar={avatarArray[usersParsed[m.author].avatar]} 
-              content={m.content} 
-              date={parseDate(m.send_date)} 
-              self={username === m.author}/> 
-              : undefined;
-            }
-          )
-        }
-        </div>
-        <div className="send-message-wrapper">
-        <Form
-        form={form}
-        name="send-message-form"
-        className="send-message-form"
-        preserve='false'
-        onFinish={sendChat}
-        size="large"
-        >
-        <Form.Item
-        name="msg"
-        className="send-message-textarea"
-        >
-        <Input.TextArea
-        placeholder="Type your message here..."
-        className="textarea"
-        />
-        </Form.Item>
-        <div className="send-message-col">
-        <Popover placement="topRight" content={<Emojis addEmoji={addEmoji}/>} trigger="click">
-        <Button
-        type="primary"
-        shape="circle"
-        icon={<SmileOutlined />}
-        className="button"
-        size="large"
-        >
-        </Button>
-          </Popover>
-        <Button
-        shape="circle"
-        icon={<SendOutlined />}
-        type="primary"
-        htmlType="submit"
-        className="button send-button"
-        size="large"
-        >
-        
-        </Button>
-        </div>
-        
-        
-        </Form>
-        
-        </div>
-       </div>
+
+      <ChatContainer
+      
+      isMobile={isMobile}
+      chatRef={chatRef}
+      activeChat={activeChat}
+      listToggle={listToggle}
+      SetActiveChat={setactiveChat}
+      setListToggle={setlistToggle}
+      handleConvListToggle={handleConvListToggle}
+      />
+
+      </div>
       
     )}
 const mapStateToProps = (state) =>{
     return{
-        username: state.login_signup.username,
-        messages: state.chat.messages,
-        chat: state.chat.chat,
-        socket: state.chat.socket,
-        chatId: state.chat.id,
-        token: state.login_signup.token,
-        lastMsg: state.chat.lastMsg,
-        users: state.chat.users,
-        loading: state.chat.loading,
-        usersState:state.chat.users_recieved, 
-        chatState:state.chat.chat_recieved,
+      token: state.login_signup.token,
+      username: state.login_signup.username,
+      sent_to_chat:state.chat.sent_to_chat,
+      messages:state.chat.messages,
     }
     } 
     const mapDispatchToProps = (dispatch) => {
     return{
-        addMessage: (m) => dispatch(chat_actions.addMessage(m)),
-        getChat: (s,id) => dispatch(chat_actions.getChat(s,id)),
-        chatRecieved: (c) => dispatch(chat_actions.chatRecieved(c)),
-        saveSocket: (c) => dispatch(chat_actions.saveSocket(c)),
-        sendMessage: (socket,msg, id) => dispatch(chat_actions.sendMessage(socket,msg, id)),
-        setChatId: (c) => dispatch(chat_actions.setChatId(c)),
-        lastChatRecieved: (c) => dispatch(chat_actions.lastChatRecieved(c)),
-        socketConnected: (c) => dispatch(chat_actions.socketConnected(c)),
-        getChatUsers:(id,token) => dispatch(chat_actions.getChatUsers(id,token)),
+      saveSocket: (c) => dispatch(chat_actions.saveSocket(c)),
+      socketConnected: (c) => dispatch(chat_actions.socketConnected(c)),
+      chatRecieved: (c) => dispatch(chat_actions.chatRecieved(c)),
+      addMessage: (m) => dispatch(chat_actions.addMessage(m)),
     }
     }
     
