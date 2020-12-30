@@ -1,17 +1,22 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/Explore.css';
+import {connect} from 'react-redux';
+import { useState,useEffect} from 'react';
 import Draggable from 'react-draggable'; 
 import OpeningMessage from "../components/OpeningMessage.js";
 import Toolbar from "../components/Menu.js";
-import SideMenu from "../components/SideMenu.js";
+import SideMenu from "../components/SlideMeny/SideMenu.js";
 import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
 import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
-// import SlideMenu from 'react-slide-menu';
+
+
+import SlideMenu from 'react-slide-menu';
 import {HOST_URL} from '../../core/servers';
+
 class Explore extends React.Component {
   constructor(props){
     super(props);
@@ -40,11 +45,13 @@ class Explore extends React.Component {
 
   componentDidMount() {
       const config = {
-          headers: { 'Authorization': `Token 9b079953bc0672b0704ba492a9fdb283a76a268a` }
+          headers: { 'Authorization': `Token ${this.props.token}` }
       };
 
       axios.get(
-        `${HOST_URL}/api/account/opening_messages`,
+
+        `${HOST_URL}/api/account/opening_messages/page/1`,
+
         config
       )
       .then(res => {
@@ -59,9 +66,6 @@ class Explore extends React.Component {
         {
           console.log(error);
         });
-
-
-       
         
   }
   cancelButton(){
@@ -72,6 +76,7 @@ class Explore extends React.Component {
       });
   }
   handleOk(){
+
       var messagedimo=document.getElementById('messagedimo').value;
 
       var message_id = this.state.count-1;
@@ -84,7 +89,7 @@ class Explore extends React.Component {
 
       const config = {
         headers: { 
-          'Authorization': 'Token 9b079953bc0672b0704ba492a9fdb283a76a268a' ,
+          'Authorization': `Token ${this.props.token}` ,
           'Content-Type': 'application/json'
         }
       };
@@ -92,8 +97,8 @@ class Explore extends React.Component {
       axios.post('${HOST_URL}/api/account/send_chat_request/', 
       {
         "source": 1,
-        "target": 1,
-        "opening_message": message_id,
+        "target": 3,
+        "opening_message": 3,
         "message": messagedimo
       }
       , config)
@@ -119,6 +124,7 @@ class Explore extends React.Component {
     });
   }
   Accepted(){
+    
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length,
@@ -127,6 +133,7 @@ class Explore extends React.Component {
     });
   }
   Rejected(){
+    message.success('Rejected successfully!');
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length
@@ -134,12 +141,11 @@ class Explore extends React.Component {
     });
   }
   ClickedUp(){
-    var x = event.clientX-this.state.mouseX;    
+    var x = event.clientX-this.state.mouseX;   
     var width = screen.width;
     if(x>0){
       if(x>0.15*width){
         this.Accepted();
-        // alert("Accepted");
       }
     }
     else{
@@ -362,27 +368,21 @@ class Explore extends React.Component {
     });
   };
   render() {
-    var nav = [
-      {id: 'home', label: 'Home', path: '/'},
-      {id: 'about', label: 'About', path: '/about'},
-      {id: 'discover', label: 'Discover', path: '/discover'},
-    ];
       return (
 
           <div id="container">
-
             <div id="smallCon" className="smallCon">
+              <SideMenu></SideMenu>
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
-                <CheckCircleFilled className="MyCheck"></CheckCircleFilled>
+                <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
                 
-                <CloseCircleFilled className="MyZarb"></CloseCircleFilled>
+                <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
               </div>
             </div>
 
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
             <Toolbar></Toolbar>
-            
 
             <div className="TotalExplore">
 
@@ -422,4 +422,11 @@ class Explore extends React.Component {
       );
   }
 }
-export default Explore;
+const mapStateToProps = (state) =>{
+  return{
+    token: state.login_signup.token,
+    username: state.login_signup.username,
+  }
+} 
+
+export default connect(mapStateToProps)(Explore)

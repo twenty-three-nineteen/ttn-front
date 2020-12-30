@@ -15,11 +15,18 @@ export function usersRecieved(status,users){
 
 
 
-export function getChatUsers(id, token){
+export function getChatInfo(id, token){
     return {
-        type : ActionTypes.GET_CHAT_USERS,
+        type : ActionTypes.GET_CHAT_INFO,
         payload: { id,token },
     };
+}
+
+export function sentToChat(id){
+    return{
+        type: ActionTypes.SENT_TO_CHAT,
+        payload: { id },
+    }
 }
 
 export function addMessage(message){

@@ -231,8 +231,9 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           setDel : (av) => dispatch(posts_actions.setDel(av)),
           setPage : (av) => dispatch(posts_actions.setPage(av)),
           addPage : (av) => dispatch(posts_actions.addPage(av)),
+
           setUserCheck: (u) => dispatch(profile_actions.setUserCheck(u)),
-          
+
         }
 }
 

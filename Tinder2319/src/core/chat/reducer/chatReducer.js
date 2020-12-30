@@ -2,21 +2,34 @@ import {ActionTypes} from "../action/chatActionTypes"
 const initialstate = { 
   id : undefined,
   users : [],
+  usersParsed: {},
   messages:[],
   chat: {},
+  date: undefined,
+  op: undefined,
   socket: undefined,
   last_message: undefined,
   users_recieved:false,
   chat_recieved:false,
   socket_connected: false,
+  sent_to_chat:0,
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
-      case ActionTypes.USERS_RECIEVED:
+      case ActionTypes.SENT_TO_CHAT:
         return{
           ...state, 
+          sent_to_chat: payload.id,
+      };
+
+      case ActionTypes.INFO_RECIEVED:
+        return{
+          ...state, 
+          op:payload.op,
+          date:payload.date,
           users_recieved: payload.status,
           users: payload.users,
+          usersParsed:payload.usersParsed,
       };
 
       case ActionTypes.SOCKET_CONNECTED:
@@ -37,7 +50,7 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           messages: payload.messages,
           chat_recieved:true,
-          lastMessage: payload.messages[0].id,
+          
       };
 
       // case ActionTypes.GET_CHAT_USERS:
