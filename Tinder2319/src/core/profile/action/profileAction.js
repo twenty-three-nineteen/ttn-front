@@ -84,3 +84,9 @@ export function setOkB(okb){
     payload: { okb },
     }
 }
+export function setUserCheck(usercheck){
+    return{
+    type: ActionTypes.SET_USERCHECK,
+    payload: { usercheck },
+    }
+}

@@ -10,16 +10,19 @@ import axios from 'axios';
 
 import {connect} from 'react-redux';
 import * as posts_actions from '../../../core/profile/action/postsAction';
+import * as profile_actions from "../../../core/profile/action/profileAction";
 
 import {HOST_URL} from "../../../core/servers";
 
-const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,page,setPage,addPage}) => {
+const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,page,setPage,addPage,username,
+  usercheck,setUserCheck}) => {
     const loader = useRef(null);
     const getPosts = (p) =>
     {
+      console.log(usercheck);
       axios
       .get(
-        `${HOST_URL}/api/account/opening_messages/` + p,
+        `${HOST_URL}/api/account/opening_messages/` + usercheck + `/` + p,
 
         {
           headers: {
@@ -35,11 +38,10 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
         addPage();
       });
     
-
-
-  
     }
     useEffect(() => {
+      // setUserCheck({rehydrated: true});
+      // console.log(usercheck); x
          var options = {
       root: null,
       rootMargin: "20px",
@@ -49,9 +51,6 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
     if (loader.current) {
       observer.observe(loader.current)
     }
-
-      //getPosts();
-        
         },[]);
     const handleObserver = (entities) => {
     const target = entities[0];
@@ -70,7 +69,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
 
         const DelPostSelected = (e)=> {
             console.log(e);
-            axios.delete(`${HOST_URL}/api/account/opening_messages/`+e, 
+            axios.delete(`${HOST_URL}/api/account/opening_messages/` + e, 
             
             {
               headers: {
@@ -82,21 +81,24 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
         
             .then(function (response) {
               console.log(response);
+              PostsPage();
             })
-            .catch(error =>
-              {
-                console.log(error);
-              })
-            PostsPage();
+         
         }
         const PostsPage = (e)=> {
+          // console.log(usercheck);
             history.push('/posts');
+            // console.log(usercheck);
             window.location.reload();
+            // console.log(usercheck);
         }
         const ProPage = (e)=> {
-            history.push('/profile');
+            history.push('/profile/' + usercheck);
         }
+    
     const setmySelect= (e)=>{
+      // console.log(usercheck);
+      // setUserCheck({rehydrated: true});
         setSelect(e);
     }
     const setmyDel= (e)=>{
@@ -131,51 +133,80 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
         </div>
         )
     } else {
+       if (usercheck != username) {
+    
         return(
       
-        <div>
-                
-        <Row>
-        <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
-        <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
-     
-          <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
-            
-            <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
-            </p>
-             
-
-           </Row>
-           
-       </div></Col>
-       <Col>
-       <Button  onClick={()=>setmyDel(true)} className="Belse2">Delete Post</Button>
-       </Col>
-        </Row>
-        <div style ={{
-            display: "flex",
-            justifyContent: "space-around",
-            
-             }}>
-                <Modal
-                  visible={del}
+          <div>
                   
-                  closable={false}
-                  footer={[
-                      
-                      <Button onClick={()=>DelPostSelected(select.id)}>
-                      Delete
-                      </Button>,
-                      <Button onClick={()=>setmyDel(false)}>
-                      Cancel
-                      </Button>,
-                  ]}>
-                 <h2>Are you sure?</h2>
-                </Modal>
-            </div>
-       </div>
-
-        )
+          <Row>
+          <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
+          <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
+       
+            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
+              
+              <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
+              </p>
+               
+  
+             </Row>
+             
+         </div></Col>
+        
+          </Row>
+         
+         </div>
+  
+          )
+         
+       } else {
+        return(
+      
+          <div>
+                  
+          <Row>
+          <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
+          <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
+       
+            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
+              
+              <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
+              </p>
+               
+  
+             </Row>
+             
+         </div></Col>
+         <Col>
+         <Button  onClick={()=>setmyDel(true)} className="Belse2">Delete Post</Button>
+         </Col>
+          </Row>
+          <div style ={{
+              display: "flex",
+              justifyContent: "space-around",
+              
+               }}>
+                  <Modal
+                    visible={del}
+                    
+                    closable={false}
+                    footer={[
+                        
+                        <Button onClick={()=>DelPostSelected(select.id)}>
+                        Delete
+                        </Button>,
+                        <Button onClick={()=>setmyDel(false)}>
+                        Cancel
+                        </Button>,
+                    ]}>
+                   <h2>Are you sure?</h2>
+                  </Modal>
+              </div>
+         </div>
+  
+          )
+         
+       }
         
     }
     }
@@ -188,6 +219,8 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           token: state.login_signup.token,
           del: state.posts.del,
           page: state.posts.page,
+          usercheck: state.profile.usercheck,
+          username: state.login_signup.username,
         }
     } 
       const mapDispatchToProps = (dispatch) => {
@@ -198,6 +231,7 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           setDel : (av) => dispatch(posts_actions.setDel(av)),
           setPage : (av) => dispatch(posts_actions.setPage(av)),
           addPage : (av) => dispatch(posts_actions.addPage(av)),
+          setUserCheck: (u) => dispatch(profile_actions.setUserCheck(u)),
           
         }
 }

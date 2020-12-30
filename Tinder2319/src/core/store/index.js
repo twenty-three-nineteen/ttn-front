@@ -29,6 +29,7 @@ const configStore = (initialState = {}) => {
   store.subscribe(() => {
     saveState({
       login_signup: store.getState().login_signup,
+      profile: store.getState().profile,
     })
   })
   sagaMiddleware.run(chatSaga);

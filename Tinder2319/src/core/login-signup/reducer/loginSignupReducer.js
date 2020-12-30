@@ -99,7 +99,6 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           all_interests: payload.list,
       };
-        
       
       
     default : return state;
