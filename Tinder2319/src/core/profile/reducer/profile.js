@@ -12,6 +12,7 @@ editavatar:false,
 inte:[],
 delac:false,
 okb:false,
+usercheck: undefined,
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
@@ -82,6 +83,13 @@ export default (state = initialstate, { type, payload }) => {
           ...state, 
           okb : payload.okb,
       }; 
+        
+      case ActionTypes.SET_USERCHECK:
+        return{
+          ...state, 
+          usercheck : payload.usercheck,
+      };
+      
            
     default : return state;
 
