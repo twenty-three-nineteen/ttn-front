@@ -13,4 +13,5 @@ export const ActionTypes = {
   SET_LOGIN_STATE:"SET_LOGIN_STATE",
   SET_ALL_INTERESTS:"SET_ALL_INTERESTS",
   // LOG_IN:"LOG_IN",
+
   };

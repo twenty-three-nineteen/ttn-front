@@ -19,4 +19,5 @@ export const ActionTypes = {
     SET_DEL: "SET_DEL",
     SET_PAGE: "SET_PAGE",
     ADD_PAGE: "ADD_PAGE",
+    SET_USERCHECK: "SET_USERCHECK",
   };

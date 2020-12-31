@@ -4,6 +4,7 @@ import { put, takeLatest, all, takeEvery ,call} from 'redux-saga/effects';
 import {HOST_URL} from '../../servers';
 import axios from 'axios';
 function* fetchChat(params) {
+  console.log('fetch');
   const socket =params.payload.socket;
   		socket.send(JSON.stringify({
 			command: 'fetch_messages',
@@ -21,7 +22,7 @@ function* sendMessage(params) {
 		}))
 }
 
-function* fetchUsers(params) {
+function* fetchInfo(params) {
   const id = params.payload.id;
   const token = params.payload.token;
   try{
@@ -33,7 +34,25 @@ function* fetchUsers(params) {
         'Content-Type':'application/json',
       }
    }) )
-   yield put({ type: ActionTypes.USERS_RECIEVED, payload:{status: true,users:response.data.participants,} })
+   yield put({ type: ActionTypes.INFO_RECIEVED, payload:
+    {status: true,
+      date:response.data.created_date,
+      op: (response.data.opening_message)? response.data.opening_message:undefined,
+      users:response.data.participants,
+    usersParsed:response.data.participants.reduce(
+      (a,b)=> (a[b.username]=
+        {
+          username:b.username,
+          name:b.name,
+          avatar:b.avatar,
+        }
+        ,a)
+      ,
+      {}
+    )
+    ,} }
+    
+    )
   }
   catch(error){
     console.log(error);
@@ -44,7 +63,7 @@ function* fetchUsers(params) {
 function* actionWatcher() {
  
     yield takeLatest(ActionTypes.GET_CHAT, fetchChat)
-    yield takeLatest(ActionTypes.GET_CHAT_USERS, fetchUsers)
+    yield takeLatest(ActionTypes.GET_CHAT_INFO, fetchInfo)
     yield takeEvery(ActionTypes.SEND_MESSAGE, sendMessage)
 }
 export default function* rootSaga() {

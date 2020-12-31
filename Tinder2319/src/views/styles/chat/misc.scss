@@ -1,0 +1,49 @@
+    @import "../scss/styles.scss";
+    @import "../scss/variables.scss";
+    $spacing:10px;
+    $button-size:22px;
+    // $grey-1:#505050;
+    // $grey-2:#c3c3c3;
+    // $grey-3:#dddddd;
+    .emojis-container {
+        width: 180px;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .emoji {
+            display: flex;
+            flex: 1 0 11%;
+            // margin: 0 5px;
+            cursor: pointer;
+            font-size: 25px;
+            width: auto;
+        }
+    }
+    
+    .chat-page {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .list-toggle {
+            transition: all .5s ease;
+            color: #fff;
+            font-size: 30px;
+        }
+        .list-toggle.rotate {
+            transform: rotate(180deg)
+        }
+    }
+    
+    .chat-container {
+        transition: 1s ease;
+        position: relative;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @extend .container;
+        height: 80vh;
+    }
