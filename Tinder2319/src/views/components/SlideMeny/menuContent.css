@@ -39,9 +39,13 @@
 }
 
 @media screen and (max-width: 780px) {
+    .ContMenu {
+        margin-top: 45px;
+    }
     .DimoMenu {
+        position: fixed;
+        top: 0;
         margin-top: 5px;
-        margin-left: 5px;
         visibility: visible;
         color: black;
         -webkit-transition: opacity 0.01s ease-in-out;

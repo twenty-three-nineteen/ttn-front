@@ -51,7 +51,7 @@ class SelectorInterestSmall extends React.Component {
       }
     render(){
         return (
-          <div id="interestsmall" className="interestsmall">
+          <div className="interestcontainer">
             <Select
             mode="multiple"
             allowClear

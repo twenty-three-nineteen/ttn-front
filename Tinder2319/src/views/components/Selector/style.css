@@ -10,13 +10,13 @@
 }
 
 .interestsmall {
+    height: 0px;
     visibility: hidden;
 }
 
 .interestsmall.show {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 10px;
     visibility: visible;
     font-family: 'Rubik', cursive;
     background: rgb(244, 244, 244);
@@ -24,18 +24,18 @@
     border-radius: 10px;
     widows: 300px;
     font-size: 20px;
+    position: relative;
 }
 
 .personsmall {
+    height: 0px;
     visibility: hidden;
 }
 
 .personsmall.show {
     visibility: visible;
-    margin-top: 120px;
     margin-left: 10px;
     margin-right: 10px;
-    visibility: visible;
     font-family: 'Rubik', cursive;
     background: rgb(244, 244, 244);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);

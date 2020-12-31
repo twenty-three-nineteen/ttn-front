@@ -15,10 +15,9 @@ import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
-import { CloseCircleFilled,CheckCircleFilled,DownOutlined} from '@ant-design/icons';
+import { CloseCircleFilled,CheckCircleFilled,DownOutlined,SearchOutlined} from '@ant-design/icons';
 import Filter from "../components/FilterBar/Filter.js";
 
-import SlideMenu from 'react-slide-menu';
 import {HOST_URL} from '../../core/servers';
 
 class Explore extends React.Component {
@@ -146,6 +145,11 @@ class Explore extends React.Component {
           count: (prev.count+1)%this.state.persons.length
       };
     });
+    var drg=document.getElementById('envelop_open');
+    drg.classList.toggle('move');
+
+    var close=document.getElementById('envelop_close');
+    close.classList.toggle('move');
   }
   ClickedUp(){
     var x = event.clientX-this.state.mouseX;   
@@ -387,43 +391,40 @@ class Explore extends React.Component {
     TitlePerson.classList.toggle('show');
   }
   ClickedFliterSmall(){
-    var filter=document.getElementById('filtericonsmall');
-    filter.classList.toggle('rotate');
     var smallCon=document.getElementById('smallCon');
     smallCon.classList.toggle('move');
-    var something=document.getElementById('interestsmall');
-    something.classList.toggle('show');
-    var something1=document.getElementById('personsmall');
-    something1.classList.toggle('show');
+    var something=document.getElementById('smallDimo');
+    something.classList.toggle('move');
+    var buttons=document.getElementById('buttons');
+    buttons.classList.toggle('move');
   }
   render() {
       return (
-          <div id="container">
+          <div id="container" className="exploreContainer">
               <div className="TopBar">
                 <p className="TeamName">2319</p>
               </div>
               <SideMenu></SideMenu>
-            <div id="smallCon" className="smallCon">
+              <SearchOutlined className="SearchIcon" onClick={this.ClickedFliterSmall}></SearchOutlined>
+              <div id="smallDimo" className="smallDimo">
               <SelectorPersonSmall></SelectorPersonSmall>
               <SelectorInterestSmall></SelectorInterestSmall>
-              
-              <DownOutlined onClick={this.ClickedFliterSmall} id="filtericonsmall" className="filtericonsmall"></DownOutlined>
+              </div>
+            <div id="smallCon" className="smallCon">
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
                 <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
-                
                 <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
               </div>
             </div>
 
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
             <Toolbar></Toolbar>
-
             <div id="TotalExplore" className="TotalExplore">
                 {this.openning("trash") ? 
-                    <img className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
+                    <img id="envelop_open" className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
                   : 
-                    <img className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
+                    <img id="envelop_close" className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
                 <Draggable
                 className="handle"
                 axis="x"

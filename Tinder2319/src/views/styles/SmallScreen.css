@@ -34,6 +34,10 @@
     visibility: hidden;
 }
 
+.smallDimo {
+    visibility: hidden;
+}
+
 @media screen and (max-width: 780px) {
     html,
     body {
@@ -41,7 +45,8 @@
         overflow: hidden
     }
     .SmallTotalExplore {
-        margin-top: 5%;
+        top: 15px;
+        position: relative;
         text-align: center;
         word-wrap: break-word;
         visibility: visible;
@@ -70,7 +75,6 @@
         visibility: visible;
     }
     .smallCon {
-        margin-top: -100px;
         position: relative;
         margin-right: 20px;
         visibility: visible;
@@ -80,21 +84,25 @@
         transition: all 0.4s ease-in-out;
     }
     .smallCon.move {
-        margin-top: -100px;
+        margin-top: 200%;
         position: relative;
         margin-right: 20px;
         visibility: visible;
         flex-direction: column;
         width: 100%;
         height: 100%;
+        transition: all 0.4s ease-in-out;
     }
     .buttons {
-        margin-top: 5%;
+        margin-top: 25px;
+        margin-left: 5%;
+    }
+    .buttons.move {
+        margin-bottom: -1000px;
         margin-left: 5%;
         width: 100%;
-        height: 100%;
-        position: absolute;
-        transform: translate(0%, 0%);
+        bottom: 0;
+        position: fixed;
     }
     .textOpenningMessage {
         padding-top: 15px;
@@ -130,5 +138,28 @@
         visibility: visible;
         text-align: center;
         font-size: 30px;
+    }
+    .smallDimo {
+        visibility: hidden;
+        top: 50px;
+        position: absolute;
+        top: 0;
+        right: -20%;
+        font-family: 'Rubik', cursive;
+        padding: 20px 22px;
+        border-radius: 10px;
+        font-size: 20px;
+        width: 20%;
+        transition: all 0.2s ease-in-out;
+    }
+    .smallDimo.move {
+        top: 50px;
+        visibility: visible;
+        right: 0;
+        font-family: 'Rubik', cursive;
+        padding: 20px 22px;
+        border-radius: 10px;
+        font-size: 20px;
+        width: 100%;
     }
 }

@@ -19,7 +19,7 @@ class SelectorPersonSmall extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <div id="personsmall" className="personsmall">
+      <div className="interestcontainer">
         
         <Radio.Group onChange={this.onChange} value={value}>
         <p id="TitlePerson" className="TitlePerson">Chat Participants</p>

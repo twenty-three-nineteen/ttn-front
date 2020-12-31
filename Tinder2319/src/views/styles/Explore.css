@@ -9,12 +9,34 @@
     justify-content: flex-end;
     display: inline-block;
     text-align: right;
+    transition: all 0.2s ease-in-out;
+}
+
+.envelop_close.move {
+    float: right;
+    height: 180px;
+    width: 180px;
+    display: flex;
+    justify-content: flex-end;
+    display: inline-block;
+    text-align: right;
 }
 
 .envelop_open {
     float: right;
     height: 90px;
     width: 90px;
+    display: flex;
+    justify-content: flex-end;
+    display: inline-block;
+    text-align: right;
+    transition: all 0.2s ease-in-out;
+}
+
+.envelop_open.move {
+    float: right;
+    height: 180px;
+    width: 180px;
     display: flex;
     justify-content: flex-end;
     display: inline-block;
@@ -65,9 +87,11 @@
 }
 
 .filters {
-    margin-top: calc(-320px);
     visibility: hidden;
-    margin-left: 100%;
+    top: 50px;
+    position: absolute;
+    top: 0;
+    right: -20%;
     font-family: 'Rubik', cursive;
     background: rgb(244, 244, 244);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
@@ -79,8 +103,9 @@
 }
 
 .filters.move {
+    top: 50px;
     visibility: visible;
-    margin-left: 79%;
+    right: 0;
     font-family: 'Rubik', cursive;
     background: rgb(244, 244, 244);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
@@ -88,6 +113,15 @@
     border-radius: 10px;
     font-size: 20px;
     width: 20%;
+}
+
+.SearchIcon {
+    top: 5px;
+    width: 45px;
+    position: absolute;
+    height: 45px;
+    font-size: 30px;
+    right: 0;
 }
 
 .smallFil {
@@ -104,6 +138,11 @@
 
 .something {
     visibility: hidden;
+}
+
+.exploreContainer {
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 @media screen and (max-width: 780px) {

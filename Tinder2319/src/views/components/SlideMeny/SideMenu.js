@@ -16,25 +16,22 @@ class SideMenu extends React.Component {
   }
 
   openMenu() {
-    this.setState({ menuOpen: !this.state.menuOpen });
+    this.setState({ menuOpen: true });
   }
 
   closeMenu() {
     this.setState({ menuOpen: false });
   }
-  Hello(){
-    alert("Hey");
-  }
+
 
   render() {
     
     return <div>
       <CheeseburgerMenu
-        topOffset={45}
         isOpen={this.state.menuOpen}
-        closeCallback={this.openMenu}
+        closeCallback={this.closeMenu}
         >
-        <MenuContent className="Cheese" closeCallback={this.openMenu}/>
+        <MenuContent className="ContMenu" closeCallback={this.closeMenu}/>
       </CheeseburgerMenu>
       
       <HamburgerMenu
@@ -42,13 +39,11 @@ class SideMenu extends React.Component {
         isOpen={this.state.menuOpen}
         menuClicked={this.openMenu}
         strokeWidth={3}
-        onClick={this.Hello}
+        rotate={0}
         color='black'
         borderRadius={1}
         animationDuration={0.5}
       />
-      
-     
     </div>
   }
 }
