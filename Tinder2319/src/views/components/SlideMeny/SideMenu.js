@@ -29,8 +29,9 @@ class SideMenu extends React.Component {
     return <div>
       <CheeseburgerMenu
         isOpen={this.state.menuOpen}
-        closeCallback={this.closeMenu}>
-        <MenuContent className="Cheese" closeCallback={this.closeMenu}/>
+        closeCallback={this.closeMenu}
+        >
+        <MenuContent className="ContMenu" closeCallback={this.closeMenu}/>
       </CheeseburgerMenu>
       
       <HamburgerMenu
@@ -43,8 +44,6 @@ class SideMenu extends React.Component {
         borderRadius={1}
         animationDuration={0.5}
       />
-      
-     
     </div>
   }
 }

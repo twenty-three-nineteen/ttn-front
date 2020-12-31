@@ -26,6 +26,18 @@
     visibility: hidden;
 }
 
+.TopBar {
+    visibility: hidden;
+}
+
+.TeamName {
+    visibility: hidden;
+}
+
+.smallDimo {
+    visibility: hidden;
+}
+
 @media screen and (max-width: 780px) {
     html,
     body {
@@ -33,15 +45,16 @@
         overflow: hidden
     }
     .SmallTotalExplore {
+        top: 15px;
+        position: relative;
         text-align: center;
         word-wrap: break-word;
         visibility: visible;
-        background-color: rgb(0, 0, 0, 0.36);
+        background-color: rgb(156, 156, 156);
         width: 90%;
         align-content: center;
         height: 70%;
-        border-radius: 60px;
-        border: 3px solid white;
+        border: 25px solid whitesmoke;
         text-justify: center;
         justify-items: center;
         justify-self: center;
@@ -68,13 +81,28 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
+        transition: all 0.4s ease-in-out;
     }
-    .buttons {
-        margin-left: 5%;
+    .smallCon.move {
+        margin-top: 200%;
+        position: relative;
+        margin-right: 20px;
+        visibility: visible;
+        flex-direction: column;
         width: 100%;
         height: 100%;
-        position: absolute;
-        transform: translate(0%, 0%);
+        transition: all 0.4s ease-in-out;
+    }
+    .buttons {
+        margin-top: 25px;
+        margin-left: 5%;
+    }
+    .buttons.move {
+        margin-bottom: -1000px;
+        margin-left: 5%;
+        width: 100%;
+        bottom: 0;
+        position: fixed;
     }
     .textOpenningMessage {
         padding-top: 15px;
@@ -87,14 +115,51 @@
     }
     .MyCheck {
         width: 45%;
-        font-size: 50px;
-        color: rgb(77, 214, 77);
+        font-size: 400%;
+        color: rgb(199, 199, 199);
         visibility: visible;
     }
     .MyZarb {
         width: 45%;
-        color: rgb(204, 63, 63);
+        color: rgb(199, 199, 199);
         visibility: visible;
-        font-size: 50px;
+        font-size: 400%;
+    }
+    .TopBar {
+        visibility: visible;
+        position: fixed;
+        top: 0;
+        background-color: whitesmoke;
+        width: 100%;
+        height: 45px;
+        z-index: -10;
+    }
+    .TeamName {
+        visibility: visible;
+        text-align: center;
+        font-size: 30px;
+    }
+    .smallDimo {
+        visibility: hidden;
+        top: 50px;
+        position: absolute;
+        top: 0;
+        right: -20%;
+        font-family: 'Rubik', cursive;
+        padding: 20px 22px;
+        border-radius: 10px;
+        font-size: 20px;
+        width: 20%;
+        transition: all 0.2s ease-in-out;
+    }
+    .smallDimo.move {
+        top: 50px;
+        visibility: visible;
+        right: 0;
+        font-family: 'Rubik', cursive;
+        padding: 20px 22px;
+        border-radius: 10px;
+        font-size: 20px;
+        width: 100%;
     }
 }
