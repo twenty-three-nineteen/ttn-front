@@ -1,6 +1,7 @@
 .toolbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 100;
     -webkit-transition: opacity 0.01s ease-in-out;

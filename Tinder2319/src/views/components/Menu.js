@@ -28,7 +28,7 @@ class Toolbar extends React.Component {
   }
   componentDidMount() {
     const config = {
-      headers: { 'Authorization': `Token c1a66f15f120c36731c5f19424bfa6938f99074d` }
+      headers: { 'Authorization': `Token ${this.props.token}` }
     };
 
     axios.get(
@@ -89,10 +89,12 @@ class Toolbar extends React.Component {
         <ViewRequest message={this.state.message} cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ViewRequest>
         <Menu className="toolbar" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
           <Menu.Item key="home" icon={<HomeOutlined />}>
-            Home
+          <a href="http://localhost:8080/explore" rel="noopener noreferrer">
+          Home
+          </a>
           </Menu.Item>
           <Menu.Item key="chat" icon={<WechatOutlined />}>
-            <a href="http://localhost:8080/ChatList" rel="noopener noreferrer">
+            <a href="http://localhost:8080/Chat" rel="noopener noreferrer">
               Chat
             </a>
           </Menu.Item>
