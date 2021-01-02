@@ -24,6 +24,14 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
     const loader = useRef(null);
     const messageContainer = useRef(null);
 
+    const didMountRef = useRef(false);
+
+    useEffect(() => {
+      if (activeChat && messages) {
+        updateScroll()
+      } 
+    },)
+
     useEffect(() => {
         if(activeChat)
         {
@@ -35,7 +43,8 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
     }, [activeChat])
 
   function updateScroll(){
-    messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
+    // messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
+    messageContainer.current.scrollIntoView();
   }
 
   
@@ -132,7 +141,7 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
         :
         undefined
       }
-       <div ref={messageContainer} className="message-wrapper">
+       <div className="message-wrapper">
        
        
        <div ref={loader}></div>
@@ -150,6 +159,7 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
             }
           )
         }
+        <div ref={messageContainer}></div>
         </div>
         <div className="send-message-wrapper">
         <Form
