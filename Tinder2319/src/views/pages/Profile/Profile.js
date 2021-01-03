@@ -18,7 +18,7 @@ import "../../styles/Posts.scss";
 import Animation from "react-animation";
 import Posts from "../Posts/Posts";
 import history from "../../../core/modules/history";
-
+import Toolbar from "../../components/Menu.js";
 import axios from "axios";
 
 import { connect } from "react-redux";
@@ -44,7 +44,7 @@ const Profile = ({
   name,
   setName,
   username,
-  setUserName,
+  // setUserName,
   age,
   setAge,
   bio,
@@ -57,9 +57,11 @@ const Profile = ({
   setDelAc,
   okb,
   setOkB,
-  setUsername,
+  setLoginUsername,
   setToken,
   setLoginState,
+  setUserCheck,
+  usercheck,
 }) => {
   const onValueChange = (event) => {
     setAvInput(event.target.value);
@@ -75,6 +77,7 @@ const Profile = ({
   const setmyOkB = (e) => {
     setOkB(e);
   };
+  const [avInput, setAvInput] = useState(avatar);
   const AvatarsImages = avatarArray.map((av, i) => {
     return (
       <div className="radio">
@@ -93,7 +96,7 @@ const Profile = ({
   });
   const [inInput, setInInput] = useState(interests);
 
-  const [avInput, setAvInput] = useState(avatar);
+ 
   const [birthdayInput, setBirthState] = useState(age);
   const [bioInput, setBioState] = useState(bio);
   const [nameInput, setNameState] = useState(name);
@@ -114,21 +117,11 @@ const Profile = ({
     setBirthState(e.target.value);
   };
   useEffect(() => {
- 
-    fetch(`${HOST_URL}/api/account/interests/`, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setInte(data);
-      });
-    axios
+    const u = window.location.href.split("/").reverse()[0];
+    if(u.toUpperCase()==="PROFILE")
+    {
+      setUserCheck(username);
+      axios
       .get(
         `${HOST_URL}/api/account/userprofile/` + username,
 
@@ -142,13 +135,59 @@ const Profile = ({
       
       .then((res) => {
         console.log(res);
+        
         setName(res.data.name);
         setAvatar(res.data.avatar);
-        setUserName(res.data.username);
+        // setUserName(res.data.username);
         setBio(res.data.bio);
         setAge(res.data.birthday);
         setInterests(res.data.interests);
       });
+    }
+    else
+    {
+      setUserCheck(u);
+      axios
+      .get(
+        `${HOST_URL}/api/account/userprofile/` + u,
+
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      
+      .then((res) => {
+        console.log(res);
+        
+        setName(res.data.name);
+        setAvatar(res.data.avatar);
+        // setUserName(res.data.username);
+        setBio(res.data.bio);
+        setAge(res.data.birthday);
+        setInterests(res.data.interests);
+      });
+    }
+    console.log(usercheck);
+    console.log(username);
+    fetch(`${HOST_URL}/api/account/interests/`, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setInte(data);
+      });
+      
+   
+
   }, []);
 
   const DelAccount = async (e) => {
@@ -177,6 +216,7 @@ const Profile = ({
   const EditPro = (e) => {
     setEdit("true");
   };
+  
   const EditAva = (e) => {
     setEditAvatar(true);
   };
@@ -202,7 +242,7 @@ const Profile = ({
     
     setToken(undefined);
     setLoginState(false);
-    setUsername(undefined);
+    setLoginUsername(undefined);
     history.push("/login_signup");
   };
   const CloseEdit = (e) => {
@@ -228,6 +268,7 @@ const Profile = ({
 
       .then(function (response) {
         console.log(response);
+        setEdit(undefined);
         ProPage();
       })
       .catch((error) => {
@@ -236,95 +277,162 @@ const Profile = ({
       });
   };
 
+
+
+
+
+
+
+
+
+
+
   if (edit == undefined) {
-    return (
-      <div className="maindiv " wrap={true} justify="center">
-        <Card
-          className="container2 "
-          bordered={true}
-          style={{ width: "580px" }}
-        >
+    if (usercheck != username) {
+      // setOthers(usercheck);
+      return (
+        <div className="maindiv " wrap={true} justify="center">
+        <Toolbar></Toolbar>
+          <Card
+            className="container2 "
+            bordered={true}
+            style={{ width: "580px" }}
+          >
+            <div
+              className="PicandName"
+              style={{
+                display: "flex",
+                justifyContent: " space-between",
+              }}
+            >
+              <div>
+                <img className=" img" src={avatarArray[avatar - 1]} />
+              </div>
+              <div className="name">
+                <h1 className="nameT">{usercheck}</h1>
+              </div>
+            </div>
+            <div>
+              <div className="userNameDiv">
+                <h2 className="textUserName"> Name : {name} </h2>
+              </div>
+              <div className="bioDiv">
+                <h2 className="textBio"> Bio : {bio}</h2>
+              </div>
+              <div className="birthDayDiv">
+                <h2 className="textBirthDay"> Birthday : {age} </h2>
+              </div>
+  
+              <div className="interestsDiv">
+                <h2 className="textInterests">
+                  {" "}
+                  Interests :{" "}
+                  {interests.map((id) => {
+                    return allIn[id - 1].label + " ";
+                  })}
+                </h2>
+              </div>
+            </div>
+            <Button onClick={PostsPage} className="viewPostB2">
+                View Posts
+              </Button>
+          </Card>
+          
+        </div>
+      );
+    } else {
+      return (
+        <div className="maindiv " wrap={true} justify="center">
+        <Toolbar></Toolbar>
+          <Card
+            className="container2 "
+            bordered={true}
+            style={{ width: "580px" }}
+          >
+            <div
+              className="PicandName"
+              style={{
+                display: "flex",
+                justifyContent: " space-between",
+              }}
+            >
+              <div>
+                <img className=" img" src={avatarArray[avatar - 1]} />
+              </div>
+              <div className="name">
+                <h1 className="nameT">{username}</h1>
+              </div>
+            </div>
+            <div>
+              <div className="userNameDiv">
+                <h2 className="textUserName"> Name : {name} </h2>
+              </div>
+              <div className="bioDiv">
+                <h2 className="textBio"> Bio : {bio}</h2>
+              </div>
+              <div className="birthDayDiv">
+                <h2 className="textBirthDay"> Birthday : {age} </h2>
+              </div>
+  
+              <div className="interestsDiv">
+                <h2 className="textInterests">
+                  {" "}
+                  Interests :{" "}
+                  {interests.map((id) => {
+                    return allIn[id - 1].label + " ";
+                  })}
+                </h2>
+              </div>
+            </div>
+            <Row style={{ align: "middle" }}>
+              <Button onClick={PostsPage} className="viewProB">
+                View Posts
+              </Button>
+              <Button onClick={EditPro} className="editProB">
+                Edit Profile
+              </Button>
+              <Button onClick={() => setmyDelAc(true)} className="delProB">
+                Delete Profile
+              </Button>
+            </Row>
+          </Card>
           <div
-            className="PicandName"
             style={{
               display: "flex",
-              justifyContent: " space-between",
+              justifyContent: "space-around",
             }}
           >
-            <div>
-              <img className=" img" src={avatarArray[avatar - 1]} />
-            </div>
-            <div className="name">
-              <h1 className="nameT">{username}</h1>
-            </div>
-          </div>
-          <div>
-            <div className="userNameDiv">
-              <h2 className="textUserName"> Name : {name} </h2>
-            </div>
-            <div className="bioDiv">
-              <h2 className="textBio"> Bio : {bio}</h2>
-            </div>
-            <div className="birthDayDiv">
-              <h2 className="textBirthDay"> Birthday : {age} </h2>
-            </div>
-
-            <div className="interestsDiv">
-              <h2 className="textInterests">
-                {" "}
-                Interests :{" "}
-                {interests.map((id) => {
-                  return allIn[id - 1].label + " ";
-                })}
+            <Modal className="DelModal"
+              visible={delac}
+              closable={false}
+              footer={[
+                <Button onClick={DelAccount}>Delete</Button>,
+                <Button onClick={() => setmyDelAc(false)}>Cancel</Button>,
+              ]}
+            >
+              <h2>
+                Enter Password:{" "}
+                <Input.Password type="password" className="PassIn" placeholder="pass" onChange={setPassInput}></Input.Password>{" "}
               </h2>
-            </div>
+              <div>
+            <Modal
+              visible={okb}
+              closable={false}
+              footer={[<Button onClick={() => setmyOkB(false)}>Ok</Button>]}
+            >
+              <h2>Incorrect Password!</h2>
+            </Modal>
           </div>
-          <Row style={{ align: "middle" }}>
-            <Button onClick={PostsPage} className="viewProB">
-              View Posts
-            </Button>
-            <Button onClick={EditPro} className="editProB">
-              Edit Profile
-            </Button>
-            <Button onClick={() => setmyDelAc(true)} className="delProB">
-              Delete Profile
-            </Button>
-          </Row>
-        </Card>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <Modal className="DelModal"
-            visible={delac}
-            closable={false}
-            footer={[
-              <Button onClick={DelAccount}>Delete</Button>,
-              <Button onClick={() => setmyDelAc(false)}>Cancel</Button>,
-            ]}
-          >
-            <h2>
-              Enter Password:{" "}
-              <Input.Password type="password" className="PassIn" placeholder="pass" onChange={setPassInput}></Input.Password>{" "}
-            </h2>
-            <div>
-          <Modal
-            visible={okb}
-            closable={false}
-            footer={[<Button onClick={() => setmyOkB(false)}>Ok</Button>]}
-          >
-            <h2>Incorrect Password!</h2>
-          </Modal>
+            </Modal>
+          </div>
         </div>
-          </Modal>
-        </div>
-      </div>
-    );
+      );
+    }
+   
   } else {
     return (
       <div className="maindiv" wrap={true} justify="center">
+      <Toolbar></Toolbar>
         <Card className="container3" bordered={true} style={{ width: "580px" }}>
           <div
             className="PicandName"
@@ -455,6 +563,7 @@ const mapStateToProps = (state) => {
     delac: state.profile.delac,
     okb: state.profile.okb,
     username: state.login_signup.username,
+    usercheck: state.profile.usercheck,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -463,7 +572,7 @@ const mapDispatchToProps = (dispatch) => {
     setAge: (av) => dispatch(profile_actions.setAge(av)),
     setBio: (av) => dispatch(profile_actions.setBio(av)),
     setName: (av) => dispatch(profile_actions.setName(av)),
-    setUserName: (av) => dispatch(profile_actions.setUserName(av)),
+    // setUserName: (av) => dispatch(profile_actions.setUserName(av)),
     setInterests: (av) => dispatch(profile_actions.setInterests(av)),
     setEdit: (av) => dispatch(profile_actions.setEdit(av)),
     setEditAvatar: (av) => dispatch(profile_actions.setEditAvatar(av)),
@@ -473,7 +582,8 @@ const mapDispatchToProps = (dispatch) => {
     setOkB: (av) => dispatch(profile_actions.setOkB(av)),
     setLoginState:(f) => dispatch(login_signup_actions.setLoginState(f)),
     setToken: (l) => dispatch(login_signup_actions.setToken(l)),
-    setUsername: (u) => dispatch(login_signup_actions.setUsername(u)),
+    setLoginUsername: (u) => dispatch(login_signup_actions.setUsername(u)),
+    setUserCheck: (u) => dispatch(profile_actions.setUserCheck(u)),
   };
 };
 

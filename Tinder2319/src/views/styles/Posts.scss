@@ -13,9 +13,11 @@
 }
 @media only screen and (min-width: 1010px) {
     .Postsdiv {
+        // margin-top: 80px !important;
         width: 800px !important;
     }
     .Postsdiv2 {
+        // margin-top: 80px !important;
         width: 500px !important;
     }
     
@@ -34,21 +36,24 @@
 // }
 @media only screen and (max-width: 710px) {
     .Postsdiv {
-        width: 400px !important;
+        width: 300px !important;
     }
   
     .Postsdiv2 {
-        width: 400px !important;
+        width: 300px !important;
+        margin-left: 70px !important;
     }
     .Belse1 {
         
-        width: 400px !important;
+        width: 300px !important;
+        margin-left: 70px !important;
         
     }
     
     .Belse2 {
       
-        width: 400px !important;
+        width: 300px !important;
+        margin-left: 70px !important;
         
     }
     
@@ -57,13 +62,13 @@
     @extend .container;
     width: 400px;
     border-radius: 2px;
-    margin-top: 35px;
+    margin-top: 90px;
 }
 .Postsdiv2 {
     @extend .container;
-    width: 400px;
+    width: 350px;
     border-radius: 2px;
-    margin-top: 35px;
+    margin-top: 130px;
 }
 
 
@@ -81,22 +86,22 @@
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     width: calc(100%);
-    height: calc(90% + 18.5px);
-    margin-top: 35px;
+    height: calc(84% + 4px);
+    margin-top: 90px;
 }
 
 .Belse1 {
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     width: calc(100%);
-    height: calc(90% + 18.5px);
-    margin-top: 35px;
+    height: calc(78% + 9px);
+    margin-top: 130px;
 }
 
 .Belse2 {
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     width: calc(100%);
-    height: calc(90% + 18.5px);
-    margin-top: 35px;
+    height: calc(78% + 9px);
+    margin-top: 130px;
 }

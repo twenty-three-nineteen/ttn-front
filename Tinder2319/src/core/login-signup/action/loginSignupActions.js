@@ -85,3 +85,4 @@ export function setAllInterests(list){
         payload: { list },
     }
 }
+

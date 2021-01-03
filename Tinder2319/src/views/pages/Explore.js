@@ -7,13 +7,16 @@ import Draggable from 'react-draggable';
 import OpeningMessage from "../components/OpeningMessage.js";
 import Toolbar from "../components/Menu.js";
 import SideMenu from "../components/SlideMeny/SideMenu.js";
+import SelectorInterest from "../components/Selector/SelectorInterest.js";
+import SelectorPerson from "../components/Selector/SelectorPerson.js";
+import SelectorInterestSmall from "../components/Selector/SelectorInterestSmall.js";
+import SelectorPersonSmall from "../components/Selector/SelectorPersonSmall.js";
 import BehindOpeningMessage from "../components/BehindOpeningMessage.js";
 import {ReqOpeningMessageModal} from "../components/ReqOpeningMessageModal.js";
 import {SmallScreen} from "../components/SmallScreen.js";
 import { message,Menu, Button } from 'antd';
-import { CloseCircleFilled,CheckCircleFilled} from '@ant-design/icons';
-
-import SlideMenu from 'react-slide-menu';
+import { CloseCircleFilled,CheckCircleFilled,DownOutlined,SearchOutlined} from '@ant-design/icons';
+import Filter from "../components/FilterBar/Filter.js";
 import {HOST_URL} from '../../core/servers';
 
 class Explore extends React.Component {
@@ -28,17 +31,19 @@ class Explore extends React.Component {
     this.Rejected=this.Rejected.bind(this);
     this.Accepted=this.Accepted.bind(this);
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
+    this.ClickedFliter=this.ClickedFliter.bind(this);
 
     this.state={
       count:0,
-      persons:[],
+      persons:["Hello"],
       clicked:false,
       mouseX:0,
       fader:0,
       xxx: 0,
       degneg: "",
       showModal: false,
-      collapsed: false
+      collapsed: false,
+      showfilter:false
     };
   }
 
@@ -46,25 +51,37 @@ class Explore extends React.Component {
       const config = {
           headers: { 'Authorization': `Token ${this.props.token}` }
       };
-
-      axios.get(
-
-        `${HOST_URL}/api/account/opening_messages/page/1`,
-
-        config
-      )
+      axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
+      {
+      }
+      , config)
       .then(res => {
-        console.log(res);
-        this.setState(()=>{
+          this.setState(()=>{
           return {
-              persons: res.data.map(d=>d.message)
+              persons: [res.data.message]
           };
         });
       })
-      .catch(error =>
-        {
-          console.log(error);
-        });
+      .catch(err =>
+      {
+      });
+      // axios.get(
+      //   `${HOST_URL}/api/account/opening_messages/Dimo/1/`,
+      //   config
+      // )
+      // .then(res => {
+        
+      //   console.log(res);
+      //   this.setState(()=>{
+      //     return {
+      //         persons: res.data.map(d=>d.message)
+      //     };
+      //   });
+      // })
+      // .catch(error =>
+      //   {
+      //     console.log(error);
+      //   });
         
   }
   cancelButton(){
@@ -123,7 +140,6 @@ class Explore extends React.Component {
     });
   }
   Accepted(){
-    
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length,
@@ -170,7 +186,6 @@ class Explore extends React.Component {
     });
     
   }
-
   Fader(){
     var f=(event.clientX-this.state.mouseX)/(screen.width);
     var degree="";
@@ -365,32 +380,55 @@ class Explore extends React.Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  };
+  }
+  ClickedFliter(){
+    this.setState({
+      showfilter: !this.state.showfilter,
+    });
+    var drg=document.getElementById('mybar');
+    drg.classList.toggle('rotate');
+    var filter=document.getElementById('filters');
+    filter.classList.toggle('move');
+    var total=document.getElementById('TotalExplore');
+    total.classList.toggle('rotate');
+    var TitlePerson=document.getElementById('TitlePerson');
+    TitlePerson.classList.toggle('show');
+  }
+  ClickedFliterSmall(){
+    var smallCon=document.getElementById('smallCon');
+    smallCon.classList.toggle('move');
+    var something=document.getElementById('smallDimo');
+    something.classList.toggle('move');
+    var buttons=document.getElementById('buttons');
+    buttons.classList.toggle('move');
+  }
   render() {
       return (
-
-          <div id="container">
-            <div id="smallCon" className="smallCon">
+          <div id="container" className="exploreContainer">
+              <div className="TopBar">
+                <p className="TeamName">2319</p>
+              </div>
               <SideMenu></SideMenu>
+              <SearchOutlined className="SearchIcon" onClick={this.ClickedFliterSmall}></SearchOutlined>
+              <div id="smallDimo" className="smallDimo">
+              <SelectorPersonSmall></SelectorPersonSmall>
+              <SelectorInterestSmall></SelectorInterestSmall>
+              </div>
+            <div id="smallCon" className="smallCon">
               <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
               <div id="buttons" className="buttons">
                 <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
-                
                 <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
               </div>
             </div>
 
             <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
             <Toolbar></Toolbar>
-
-            <div className="TotalExplore">
-
+            <div id="TotalExplore" className="TotalExplore">
                 {this.openning("trash") ? 
-                    <img className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
+                    <img id="envelop_open" className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
                   : 
-                    <img className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
-
-                
+                    <img id="envelop_close" className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
                 <Draggable
                 className="handle"
                 axis="x"
@@ -409,14 +447,17 @@ class Explore extends React.Component {
                   </div>
                 </div>
                 </Draggable>
-                
-                
                 {this.openning("envelop") ? 
                   <img className="envelop_open" src={require('../../assessts/images/envelop_open.png')}></img>
                 : 
                   <img className="envelop_close" src={require('../../assessts/images/envelop_close.png')} ></img>}
             </div>
             <ReqOpeningMessageModal cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ReqOpeningMessageModal>
+            <Filter clicked={this.ClickedFliter} show={this.state.showfilter}></Filter>
+            <div id="filters" className="filters">
+            <SelectorPerson></SelectorPerson>
+            <SelectorInterest></SelectorInterest>
+            </div>
         </div>
       );
   }
