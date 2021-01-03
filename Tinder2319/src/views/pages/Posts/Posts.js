@@ -1,9 +1,10 @@
 import React from 'react'
-import { Form, Input, Button,Space,notification,message, Card,Modal,Row,Col  } from 'antd';
+import { Form, Input, Button,Space,notification,message, Card,Modal,Row,Col, Popover  } from 'antd';
 import '../../styles/Posts'
 import "../../styles/Profile.scss"
 import { useState,useEffect,useRef} from 'react';
 import history from "../../../core/modules/history"
+import {InfoCircleOutlined} from '@ant-design/icons';
 
 
 import axios from 'axios';
@@ -14,8 +15,9 @@ import * as profile_actions from "../../../core/profile/action/profileAction";
 
 import {HOST_URL} from "../../../core/servers";
 
-const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,page,setPage,addPage,username,
-  usercheck,setUserCheck}) => {
+const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,page,setPage,addPage,username,setCategories,categories,maxNumOfMember,setMaxNumOfMember,
+  usercheck,setUserCheck }) => {
+    const [allInters, setAllInters] = useState([]);
     const loader = useRef(null);
     const getPosts = (p) =>
     {
@@ -47,6 +49,29 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
       rootMargin: "20px",
       threshold: 1.0
    };
+   fetch(`${HOST_URL}/api/account/interests/`, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+   
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setAllInters(
+        data.map(
+          (object,index)=>
+          {return {
+            label: object.subject,
+            value: object.id,
+          }}
+        )
+      )
+      // setInterest(data);
+    });
     const observer = new IntersectionObserver(handleObserver, options);
     if (loader.current) {
       observer.observe(loader.current)
@@ -85,6 +110,17 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
             })
          
         }
+      
+        const content = (e,a)=> {
+          console.log(allInters[0].label);
+          return( <div>
+            <h5>Categories:  {e.map((id) => {
+                    return allInters[id - 1].label + " ";
+                  })}</h5>
+            <h5>Max number of people to chat with: {a}</h5>
+          </div>);
+         
+        }
         const PostsPage = (e)=> {
           // console.log(usercheck);
             history.push('/posts');
@@ -118,6 +154,10 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
                         posts.map((post,index) => {
                             return(
                                 <Col key={index} className = " ColStyle" span={9} onClick={()=>{setmySelect(post)}} style={{margin:'1em',padding:'1em',borderRadius:'2px',backgroundColor: "rgb(0,0,0,0.36)"}}>
+                                  <Popover content={content(post.categories,post.max_number_of_members)} title="Post Info">
+                                    <InfoCircleOutlined  style={{fontSize: '15px', color: "white"}}></InfoCircleOutlined>
+                                  </Popover>
+                               
                                 <p className = "post-text textStyle"  style={{color : "whitesmoke",fontSize:"16px"}}>{post.message}
                                 </p>
                                 </Col>
@@ -142,9 +182,11 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           <Row>
           <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
           <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
-       
-            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
-              
+          <Popover content={content(select.categories,select.max_number_of_members)} title="Post Info">
+                                    <InfoCircleOutlined  style={{fontSize: '25px', color: "grey"}}></InfoCircleOutlined>
+                                  </Popover>
+            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
+           
               <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
               </p>
                
@@ -167,9 +209,11 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           <Row>
           <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
           <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
-       
-            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
-              
+          <Popover content={content(select.categories,select.max_number_of_members)} title="Post Info">
+                                    <InfoCircleOutlined  style={{fontSize: '25px', color: "grey"}}></InfoCircleOutlined>
+                                  </Popover>
+            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
+          
               <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
               </p>
                
@@ -221,6 +265,8 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           page: state.posts.page,
           usercheck: state.profile.usercheck,
           username: state.login_signup.username,
+          categories: state.posts.categories,
+          maxNumOfMember: state.posts.maxNumOfMember,
         }
     } 
       const mapDispatchToProps = (dispatch) => {
@@ -231,9 +277,10 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
           setDel : (av) => dispatch(posts_actions.setDel(av)),
           setPage : (av) => dispatch(posts_actions.setPage(av)),
           addPage : (av) => dispatch(posts_actions.addPage(av)),
-
           setUserCheck: (u) => dispatch(profile_actions.setUserCheck(u)),
-
+          setCategories : (av) => dispatch(posts_actions.setCategories(av)),
+          setMaxNumOfMember : (av) => dispatch(posts_actions.setMaxNumOfMember(av)),
+          
         }
 }
 

@@ -14,6 +14,9 @@ import {
   Checkbox,
   Radio,
 } from "antd";
+import  {  TeamOutlined} from '@ant-design/icons';
+
+import {AppstoreOutlined} from '@ant-design/icons';
 import history from "../../../core/modules/history";
 import "../../styles/compose";
 
@@ -36,6 +39,7 @@ const Compose = ({
   setCatModal,
   setInterest,
   setNum,
+  msg,
 
   }) => {
     const closeCatModal = (e) => {
@@ -62,7 +66,8 @@ const Compose = ({
       // console.log(event.target.value);
       setMsgInput(event.target.value);
     };
-  
+    
+    
     const [catInput, setCatInput] = useState("");
     const [numInput, setNumInput] = useState(num);
     const [msgInput, setMsgInput] = useState("");
@@ -87,14 +92,17 @@ const Compose = ({
         )
   
         .then(function (response) {
+          message.success('Posted successfully!');
           console.log(response);
           ComposePage();
         })
         .catch((error) => {
+          message.error("Make sure the fields are not empty!");
           console.log(error);
 
           // ComposePage();
         });
+       
     };
     const ComposePage = (e) => {
       window.location.reload();
@@ -162,7 +170,10 @@ const Compose = ({
        
             <Row style={{backgroundColor:"rgb(0,0,0,0.36)"}} >
       
-              <Input.TextArea placeholder={"Say something..."} onChange={InChangeMsg} className="inputOPM" style={{color : "grey",fontSize: "20px",display: "inline-block",overflowWrap: "break-word",textAlign:"center",textJustify:"center"}}></Input.TextArea>
+              <Input.TextArea 
+              // showCount
+              maxLength={200} 
+              placeholder={"Say something..."} onChange={InChangeMsg} className="inputOPM" style={{color : "grey",fontSize: "20px",display: "inline-block",overflowWrap: "break-word",textAlign:"center",textJustify:"center"}}></Input.TextArea>
 
              </Row>
         
@@ -173,10 +184,12 @@ const Compose = ({
 
           <Row>
           <Col>
-          <Button className="maxReplyB" onClick={OpenMaxNumModal}>Max group number</Button>
+          <TeamOutlined className="maxReplyB" onClick={OpenMaxNumModal}
+            style={{fontSize: '40px', color: "white"}}>Max group number </TeamOutlined>
           </Col>
           <Col>
-          <Button className="catB"  onClick={OpenCatModal}>Categories</Button>
+          <AppstoreOutlined  className="catB"  onClick={OpenCatModal} 
+          style={{fontSize: '40px', color: "white"}}>Categories</AppstoreOutlined>
           </Col>
           </Row>
 
@@ -213,7 +226,7 @@ const Compose = ({
               <div
                 style={{
                   overflowY: "auto",
-                  height: "300px",
+                  height: "60px",
                   display: "flex",
                   flexDirection: "row",
                   flexWrap: "wrap",
