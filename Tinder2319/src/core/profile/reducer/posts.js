@@ -5,6 +5,8 @@ const initialstate = {
      posts:[],
      del:false,
      page: 1,
+     categories:[],
+     maxNumOfMember: undefined,
 
 }
 export default (state = initialstate, { type, payload }) => {
@@ -39,6 +41,16 @@ export default (state = initialstate, { type, payload }) => {
         return{
           ...state, 
           page : state.page+1,
+      }; 
+      case ActionTypes.SET_CATEGORIES:
+        return{
+          ...state, 
+          categories : payload.categories,
+      }; 
+      case ActionTypes.SET_MAXNUMOFMEMBER:
+        return{
+          ...state, 
+          maxNumOfMember : payload.maxNumOfMember,
       };   
     default : return state;
 

@@ -36,3 +36,15 @@ export function addPage(){
     payload: {},
     }
 }
+export function setMaxNumOfMember(maxNumOfMember){
+    return{
+    type: ActionTypes.SET_MAXNUMOFMEMBER,
+    payload: {maxNumOfMember},
+    }
+}
+export function setCategories(categories){
+    return{
+    type: ActionTypes.SET_CATEGORIES,
+    payload: {categories},
+    }
+}

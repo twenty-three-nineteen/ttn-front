@@ -9,8 +9,11 @@
 }
 .inputOPM{
     width: 460px;
-    height: 360px;
-    padding: 20px;
+    
+    padding: 50px;
+}
+textarea.ant-input {
+    height: 300px;
 }
 .maxReplyB{
     width: 250px;
@@ -32,6 +35,9 @@
         height: 210px;
         padding: 20px;
         overflow-wrap: "break-word";
+    }
+    textarea.ant-input {
+        height: 200px;
     }
     .maxReplyB{
         width: 175px;
