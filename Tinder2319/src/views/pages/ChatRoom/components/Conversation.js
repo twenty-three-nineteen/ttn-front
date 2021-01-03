@@ -106,7 +106,6 @@ const Message = (
             
             
           }   
-          <h2 className="last-msg">titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle</h2> 
           </div>      
         </div>
       
