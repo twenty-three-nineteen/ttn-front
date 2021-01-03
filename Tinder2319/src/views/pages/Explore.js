@@ -35,7 +35,7 @@ class Explore extends React.Component {
 
     this.state={
       count:0,
-      persons:[],
+      persons:["Hello"],
       clicked:false,
       mouseX:0,
       fader:0,
@@ -51,26 +51,37 @@ class Explore extends React.Component {
       const config = {
           headers: { 'Authorization': `Token ${this.props.token}` }
       };
-
-      axios.get(
-
-        `${HOST_URL}/api/account/opening_messages/page/1`,
-
-        config
-      )
+      axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
+      {
+      }
+      , config)
       .then(res => {
-
-        console.log(res);
-        this.setState(()=>{
+          this.setState(()=>{
           return {
-              persons: res.data.map(d=>d.message)
+              persons: [res.data.message]
           };
         });
       })
-      .catch(error =>
-        {
-          console.log(error);
-        });
+      .catch(err =>
+      {
+      });
+      // axios.get(
+      //   `${HOST_URL}/api/account/opening_messages/Dimo/1/`,
+      //   config
+      // )
+      // .then(res => {
+        
+      //   console.log(res);
+      //   this.setState(()=>{
+      //     return {
+      //         persons: res.data.map(d=>d.message)
+      //     };
+      //   });
+      // })
+      // .catch(error =>
+      //   {
+      //     console.log(error);
+      //   });
         
   }
   cancelButton(){
@@ -129,7 +140,6 @@ class Explore extends React.Component {
     });
   }
   Accepted(){
-    
     this.setState((prev)=>{
       return {
           count: (prev.count+1)%this.state.persons.length,
@@ -144,11 +154,6 @@ class Explore extends React.Component {
           count: (prev.count+1)%this.state.persons.length
       };
     });
-    var drg=document.getElementById('envelop_open');
-    drg.classList.toggle('move');
-
-    var close=document.getElementById('envelop_close');
-    close.classList.toggle('move');
   }
   ClickedUp(){
     var x = event.clientX-this.state.mouseX;   

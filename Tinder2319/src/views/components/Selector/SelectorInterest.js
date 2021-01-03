@@ -8,8 +8,11 @@ import {connect} from 'react-redux';
 class SelectorInterest extends React.Component {
     constructor(props){
         super(props);
+        this.onChange=this.onChange.bind(this);
+        this.showSel=this.showSel.bind(this);
         this.state={
-          interests:[]
+          interests:[],
+          selectedItems:[]
         };
     }
     componentDidMount() {
@@ -35,7 +38,9 @@ class SelectorInterest extends React.Component {
         
   }
     onChange(value) {
-        console.log(`selected ${value}`);
+        var s =`1${value}`; 
+        var res = s.split(",");
+
       }
       
     onBlur() {
@@ -49,12 +54,20 @@ class SelectorInterest extends React.Component {
     onSearch(val) {
         console.log('search:', val);
       }
+      
+      showSel(){
+        for(var x in this.state.selectedItems){
+          alert(x);
+        }
+      }
+      onSelect(e){
+        alert(e.key);
+      }
     render(){
         return (
           <div className="interestcontainer">
             <Select
             mode="multiple"
-            allowClear
             showSearch
             className="SelectorInterest"
             placeholder="Interests"
@@ -63,9 +76,12 @@ class SelectorInterest extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             onSearch={this.onSearch}
+            onSelect={this.onSelect}
+            
           >
-          {this.state.interests.map(d=><Option value={d}>{d}</Option>)}
+          {this.state.interests.map(d=><Option key={d} value={d}>{d}</Option>)}
           </Select>
+          <button onClick={this.showSel}>Hello</button>
           </div>
         );
     }

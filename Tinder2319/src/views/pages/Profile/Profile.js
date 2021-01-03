@@ -29,7 +29,6 @@ import { EditAvatarModal } from "./components/Profile";
 
 import avatarArray from "../CreateProfile/components/Avatar";
 import {HOST_URL} from "../../../core/servers";
-import Toolbar from "../../components/Menu.js";
 
 const Profile = ({
   token,
@@ -292,7 +291,6 @@ const Profile = ({
       // setOthers(usercheck);
       return (
         <div className="maindiv " wrap={true} justify="center">
-        <Toolbar></Toolbar>
           <Card
             className="container2 "
             bordered={true}
@@ -343,7 +341,6 @@ const Profile = ({
     } else {
       return (
         <div className="maindiv " wrap={true} justify="center">
-        <Toolbar></Toolbar>
           <Card
             className="container2 "
             bordered={true}
@@ -432,7 +429,6 @@ const Profile = ({
   } else {
     return (
       <div className="maindiv" wrap={true} justify="center">
-      <Toolbar></Toolbar>
         <Card className="container3" bordered={true} style={{ width: "580px" }}>
           <div
             className="PicandName"
