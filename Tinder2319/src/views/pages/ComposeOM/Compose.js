@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 import * as compose_actions from "../../../core/compose/actions/composeActions";
 
 import {HOST_URL} from "../../../core/servers";
-
+import Toolbar from "../../components/Menu.js";
 
 
 
@@ -156,7 +156,7 @@ const Compose = ({
     },[]);
         return(
           <div>
-                  
+          <Toolbar></Toolbar>
           <Row>
           <Col><div className="composeMainDiv" >
        

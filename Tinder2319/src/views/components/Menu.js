@@ -1,5 +1,5 @@
 import React from "react";
-import {CloseOutlined, HomeOutlined, UserOutlined, LogoutOutlined ,WechatOutlined,DownOutlined,FireOutlined} from '@ant-design/icons';
+import {FormOutlined, HomeOutlined, UserOutlined, LogoutOutlined ,WechatOutlined,DownOutlined,FireOutlined} from '@ant-design/icons';
 import { Menu, Dropdown,message } from 'antd';
 import "../styles/Toolbar.css";
 import axios from 'axios';
@@ -167,6 +167,11 @@ class Toolbar extends React.Component {
                 Requests <DownOutlined />
               </a>
             </Dropdown>
+          </Menu.Item>
+          <Menu.Item key="compose" icon={<FormOutlined />}>
+            <a href="http://localhost:8080/compose" rel="noopener noreferrer">
+              Compose
+            </a>
           </Menu.Item>
           
           <Menu.Item onClick={this.logout} className="logoutToolbar" key="logout" icon={ <LogoutOutlined />}>
