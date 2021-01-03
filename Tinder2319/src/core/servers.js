@@ -1,8 +1,8 @@
 
 
-let DEBUG = true;
+let DEBUG = false;
 
-let HOST_URL = "http://mytunepal.ir";// = "https://justdjango-chat.herokuapp.com";
+let HOST_URL = "https://mytunepal.ir";// = "https://justdjango-chat.herokuapp.com";
 let SOCKET_URL="wss://mytunepal.ir";// = "wss://justdjango-chat.herokuapp.com";
 
 if (DEBUG) {

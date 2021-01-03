@@ -64,7 +64,7 @@ const goToChat= (id)=>
         }
         <div className="conv-list-wrapper">
         
-        {chats.map(d=> (d.participants>1) &&
+        {chats.map(d=> (d.participants.length>1) &&
             <Conversation
             id={d.id}
             participants={d.participants}
