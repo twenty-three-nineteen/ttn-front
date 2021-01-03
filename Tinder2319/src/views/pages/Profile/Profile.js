@@ -18,7 +18,7 @@ import "../../styles/Posts.scss";
 import Animation from "react-animation";
 import Posts from "../Posts/Posts";
 import history from "../../../core/modules/history";
-
+import Toolbar from "../../components/Menu.js";
 import axios from "axios";
 
 import { connect } from "react-redux";
@@ -77,6 +77,7 @@ const Profile = ({
   const setmyOkB = (e) => {
     setOkB(e);
   };
+  const [avInput, setAvInput] = useState(avatar);
   const AvatarsImages = avatarArray.map((av, i) => {
     return (
       <div className="radio">
@@ -95,7 +96,7 @@ const Profile = ({
   });
   const [inInput, setInInput] = useState(interests);
 
-  const [avInput, setAvInput] = useState(avatar);
+ 
   const [birthdayInput, setBirthState] = useState(age);
   const [bioInput, setBioState] = useState(bio);
   const [nameInput, setNameState] = useState(name);
@@ -291,6 +292,7 @@ const Profile = ({
       // setOthers(usercheck);
       return (
         <div className="maindiv " wrap={true} justify="center">
+        <Toolbar></Toolbar>
           <Card
             className="container2 "
             bordered={true}
@@ -341,6 +343,7 @@ const Profile = ({
     } else {
       return (
         <div className="maindiv " wrap={true} justify="center">
+        <Toolbar></Toolbar>
           <Card
             className="container2 "
             bordered={true}
@@ -429,6 +432,7 @@ const Profile = ({
   } else {
     return (
       <div className="maindiv" wrap={true} justify="center">
+      <Toolbar></Toolbar>
         <Card className="container3" bordered={true} style={{ width: "580px" }}>
           <div
             className="PicandName"
