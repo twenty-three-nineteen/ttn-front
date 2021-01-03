@@ -32,10 +32,11 @@ class Explore extends React.Component {
     this.Accepted=this.Accepted.bind(this);
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
     this.ClickedFliter=this.ClickedFliter.bind(this);
+    this.loadOM=this.loadOM.bind(this);
 
     this.state={
       count:0,
-      persons:["Hello"],
+      persons:[],
       clicked:false,
       mouseX:0,
       fader:0,
@@ -43,28 +44,14 @@ class Explore extends React.Component {
       degneg: "",
       showModal: false,
       collapsed: false,
-      showfilter:false
+      showfilter:false,
+      theMessage:"",
+      theId:0,
     };
   }
 
   componentDidMount() {
-      const config = {
-          headers: { 'Authorization': `Token ${this.props.token}` }
-      };
-      axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
-      {
-      }
-      , config)
-      .then(res => {
-          this.setState(()=>{
-          return {
-              persons: [res.data.message]
-          };
-        });
-      })
-      .catch(err =>
-      {
-      });
+      this.loadOM();
       // axios.get(
       //   `${HOST_URL}/api/account/opening_messages/Dimo/1/`,
       //   config
@@ -84,6 +71,29 @@ class Explore extends React.Component {
       //   });
         
   }
+  loadOM(){
+    const config = {
+      headers: { 'Authorization': `Token ${this.props.token}` }
+    };
+    axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
+    {
+    }
+    , config)
+    .then(res => {
+      // alert(res.data.message);
+      // alert(res.data.id);
+        this.setState(()=>{
+        return {
+            persons: [res.data.message],
+            theMessage:res.data.message,
+            theId:res.data.id
+        };
+      });
+    })
+    .catch(err =>
+    {
+    });
+  }
   cancelButton(){
       this.setState(()=>{
         return {
@@ -92,8 +102,8 @@ class Explore extends React.Component {
       });
   }
   handleOk(){
-
       var messagedimo=document.getElementById('messagedimo').value;
+      // alert(this.state.theId+"***"+this.state.theMessage+"***"+messagedimo);
 
       var message_id = this.state.count-1;
       if(message_id==-1){
@@ -109,12 +119,9 @@ class Explore extends React.Component {
           'Content-Type': 'application/json'
         }
       };
-
-      axios.post('${HOST_URL}/api/account/send_chat_request/', 
+      axios.post(`${HOST_URL}/api/account/send_chat_request/`, 
       {
-        "source": 1,
-        "target": 3,
-        "opening_message": 3,
+        "opening_message": this.state.theId,
         "message": messagedimo
       }
       , config)
@@ -123,7 +130,7 @@ class Explore extends React.Component {
       })
       .catch(err =>
       {
-        message.error(err.response.data.non_field_errors[0])
+        message.error("Network error");
       })
 
       this.cancelButton();
@@ -422,7 +429,7 @@ class Explore extends React.Component {
               </div>
             </div>
 
-            <BehindOpeningMessage text={this.state.persons[(this.state.count+1)%this.state.persons.length]}></BehindOpeningMessage>
+            <BehindOpeningMessage text="hello"></BehindOpeningMessage>
             <Toolbar></Toolbar>
             <div id="TotalExplore" className="TotalExplore">
                 {this.openning("trash") ? 
