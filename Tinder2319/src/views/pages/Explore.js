@@ -52,24 +52,6 @@ class Explore extends React.Component {
 
   componentDidMount() {
       this.loadOM();
-      // axios.get(
-      //   `${HOST_URL}/api/account/opening_messages/Dimo/1/`,
-      //   config
-      // )
-      // .then(res => {
-        
-      //   console.log(res);
-      //   this.setState(()=>{
-      //     return {
-      //         persons: res.data.map(d=>d.message)
-      //     };
-      //   });
-      // })
-      // .catch(error =>
-      //   {
-      //     console.log(error);
-      //   });
-        
   }
   loadOM(){
     const config = {
@@ -100,10 +82,10 @@ class Explore extends React.Component {
           showModal: false
         };
       });
+      this.loadOM();
   }
   handleOk(){
       var messagedimo=document.getElementById('messagedimo').value;
-      // alert(this.state.theId+"***"+this.state.theMessage+"***"+messagedimo);
 
       var message_id = this.state.count-1;
       if(message_id==-1){
