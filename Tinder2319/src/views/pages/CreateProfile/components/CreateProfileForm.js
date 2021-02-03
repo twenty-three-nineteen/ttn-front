@@ -16,14 +16,8 @@ const CreateProfileForm = ({username,slider, setProfileInfo,setModal}) =>
   const [avatarModal, setavatarModal] = useState(false);
   const onFinish = (values) => {
     setProfileInfo(values);
-    // console.log(profileInfo);
   };
 
-  
-  const test = (e)=>{
-    console.log(e)
-    console.log(e.format('YYYY/MM/DD'));
-  }
   const handleAvatarModalToggle = () =>
   {
     setModal(true);
@@ -67,17 +61,16 @@ const CreateProfileForm = ({username,slider, setProfileInfo,setModal}) =>
       style={{width:"45%",display:"inline-block",margin:"0 0 0 10px"}}
       >
       <DatePicker 
-      placeholder="Birth Date" 
-          onChange={test}
-          showToday={false}
-          defaultPickerValue={
-            moment(Date.now()).subtract(18,'years')
+        placeholder="Birth Date"  
+        showToday={false}
+        defaultPickerValue={
+          moment(Date.now()).subtract(18,'years')
+        }
+        disabledDate={(current) =>
+          {
+            return (current && current.valueOf() > moment(Date.now()).subtract(18,'years'));
           }
-          disabledDate={(current) =>
-            {
-              return (current && current.valueOf() > moment(Date.now()).subtract(18,'years'));
-            }
-          }
+        }
       />
         
       </Form.Item>
