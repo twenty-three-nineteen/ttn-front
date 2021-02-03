@@ -5,6 +5,7 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import AvatarModalWindow from './AvatarModalWindow';
 
+import moment from 'moment';
 
 import {connect} from 'react-redux';
 import * as create_profile_actions from '../../../../core/create-profile/action/createProfileActions';
@@ -68,7 +69,15 @@ const CreateProfileForm = ({username,slider, setProfileInfo,setModal}) =>
       <DatePicker 
       placeholder="Birth Date" 
           onChange={test}
-     
+          showToday={false}
+          defaultPickerValue={
+            moment(Date.now()).subtract(18,'years')
+          }
+          disabledDate={(current) =>
+            {
+              return (current && current.valueOf() > moment(Date.now()).subtract(18,'years'));
+            }
+          }
       />
         
       </Form.Item>
