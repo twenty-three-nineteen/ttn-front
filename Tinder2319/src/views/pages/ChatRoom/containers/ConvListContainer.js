@@ -9,13 +9,14 @@ import {HOST_URL} from'../../../../core/servers';
 import avatarArray from '../../CreateProfile/components/Avatar';
 
 import Conversation from '../components/Conversation';
-const ConvList = ({token,username,listToggle,activeChat,isMobile,chatRef,
+const ConvList = ({token,username,listToggle,activeChat,isMobile,chatRef,update,
   SetActiveChat,setListToggle})=>
 {
   
     //const [activeChat, setactiveChat] = useState(1)
   const [chats, setchats] = useState([])
-  useEffect(() => {
+  const getConvList = () =>
+  {
     const config = {
 
       headers: { 'Authorization': `Token ${token}` }
@@ -35,8 +36,15 @@ const ConvList = ({token,username,listToggle,activeChat,isMobile,chatRef,
     {
       console.log(error);
     });
+  }
+
+  useEffect(() => {
+    getConvList()
   }, [])
 
+  useEffect(() => {
+    getConvList()
+  }, [update])
 
 const goToChat= (id)=>
 {
