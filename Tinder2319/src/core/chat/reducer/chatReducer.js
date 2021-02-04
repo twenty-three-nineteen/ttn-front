@@ -1,18 +1,21 @@
 import {ActionTypes} from "../action/chatActionTypes"
 const initialstate = { 
   id : undefined,
+  socket: undefined,
+  last_message: undefined,
   users : [],
   usersParsed: {},
   messages:[],
   chat: {},
   date: undefined,
   op: undefined,
-  socket: undefined,
-  last_message: undefined,
   users_recieved:false,
   chat_recieved:false,
   socket_connected: false,
   sent_to_chat:0,
+  loadedNumber:0,
+  all_chat_loaded:false,
+  
 }
 export default (state = initialstate, { type, payload }) => {
     switch (type) {
@@ -43,21 +46,31 @@ export default (state = initialstate, { type, payload }) => {
         return{
           ...state, 
           messages: state.messages.concat(payload.message),
+          loadedNumber: state.loadedNumber+1,
         };
 
       case ActionTypes.CHAT_RECIEVED:
       return{
           ...state, 
-          messages: payload.messages,
+          messages: payload.messages.concat(state.messages),
+          loadedNumber:state.loadedNumber+payload.messages.length,
+          all_chat_loaded: !(payload.messages.length),
           chat_recieved:true,
           
       };
 
-      // case ActionTypes.GET_CHAT_USERS:
-      //   return{
-      //     ...state, 
-      //     users : payload.users,
-      //   };
+      case ActionTypes.CHANGE_CHAT:
+        return{
+          ...state, 
+          users : [],
+          usersParsed: {},
+          messages:[],
+          date: undefined,
+          op: undefined,
+          users_recieved:false,
+          chat_recieved:false,
+          loadedNumber:0,
+        };
 
       case ActionTypes.LAST_CHAT_RECIEVED:
       return{

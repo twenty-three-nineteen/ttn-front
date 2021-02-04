@@ -12,6 +12,19 @@ function* fetchChat(params) {
 		}))
 }
 
+function* fetchPrevMessages(params) {
+  console.log('fetch prev');
+  const socket =params.payload.socket;
+  		socket.send(JSON.stringify({
+			command: 'fetch_messages',
+      chatId: params.payload.id,
+      loaded_messages_number: params.payload.loadedNumber,
+		}))
+}
+
+
+
+
 function* sendMessage(params) {
   const socket =params.payload.socket;
   		socket.send(JSON.stringify({
@@ -45,6 +58,7 @@ function* fetchInfo(params) {
           username:b.username,
           name:b.name,
           avatar:b.avatar,
+          in:true,
         }
         ,a)
       ,
@@ -63,6 +77,7 @@ function* fetchInfo(params) {
 function* actionWatcher() {
  
     yield takeLatest(ActionTypes.GET_CHAT, fetchChat)
+    yield takeLatest(ActionTypes.GET_PREV_MSG, fetchPrevMessages)
     yield takeLatest(ActionTypes.GET_CHAT_INFO, fetchInfo)
     yield takeEvery(ActionTypes.SEND_MESSAGE, sendMessage)
 }
