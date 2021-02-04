@@ -14,6 +14,7 @@ class SelectorPersonSmall extends React.Component {
     this.setState({
       value: e.target.value,
     });
+    this.props.setPerson(e.target.value);
   };
 
   render() {

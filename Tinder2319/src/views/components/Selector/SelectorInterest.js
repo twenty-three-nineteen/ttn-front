@@ -9,7 +9,6 @@ class SelectorInterest extends React.Component {
     constructor(props){
         super(props);
         this.onChange=this.onChange.bind(this);
-        this.showSel=this.showSel.bind(this);
         this.state={
           interests:[],
           selectedItems:[]
@@ -55,11 +54,6 @@ class SelectorInterest extends React.Component {
         console.log('search:', val);
       }
       
-      showSel(){
-        for(var x in this.state.selectedItems){
-          alert(x);
-        }
-      }
       onSelect(e){
         alert(e.key);
       }
@@ -81,7 +75,6 @@ class SelectorInterest extends React.Component {
           >
           {this.state.interests.map(d=><Option key={d} value={d}>{d}</Option>)}
           </Select>
-          <button onClick={this.showSel}>Hello</button>
           </div>
         );
     }

@@ -33,6 +33,7 @@ class Explore extends React.Component {
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
     this.ClickedFliter=this.ClickedFliter.bind(this);
     this.loadOM=this.loadOM.bind(this);
+    this.setPerson=this.setPerson.bind(this);
 
     this.state={
       count:0,
@@ -47,6 +48,7 @@ class Explore extends React.Component {
       showfilter:false,
       theMessage:"",
       theId:0,
+      numPerson:1
     };
   }
 
@@ -59,6 +61,7 @@ class Explore extends React.Component {
     };
     axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
     {
+      
     }
     , config)
     .then(res => {
@@ -391,6 +394,14 @@ class Explore extends React.Component {
     var buttons=document.getElementById('buttons');
     buttons.classList.toggle('move');
   }
+  setPerson(e){
+    this.setState(()=>{
+      return {
+        numPerson: e
+      };
+    });
+  }
+  
   render() {
       return (
           <div id="container" className="exploreContainer">
@@ -400,7 +411,7 @@ class Explore extends React.Component {
               <SideMenu></SideMenu>
               <SearchOutlined className="SearchIcon" onClick={this.ClickedFliterSmall}></SearchOutlined>
               <div id="smallDimo" className="smallDimo">
-              <SelectorPersonSmall></SelectorPersonSmall>
+              <SelectorPersonSmall setPerson={this.setPerson}></SelectorPersonSmall>
               <SelectorInterestSmall></SelectorInterestSmall>
               </div>
             <div id="smallCon" className="smallCon">
@@ -444,7 +455,7 @@ class Explore extends React.Component {
             <ReqOpeningMessageModal cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ReqOpeningMessageModal>
             <Filter clicked={this.ClickedFliter} show={this.state.showfilter}></Filter>
             <div id="filters" className="filters">
-            <SelectorPerson></SelectorPerson>
+            <SelectorPerson setPerson={this.setPerson}></SelectorPerson>
             <SelectorInterest></SelectorInterest>
             </div>
         </div>
