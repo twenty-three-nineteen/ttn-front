@@ -1,14 +1,40 @@
 import React from 'react'
 import { useState,useEffect} from 'react';
-
-import { Tooltip  } from 'antd';
-import { InfoCircleFilled , UnorderedListOutlined, CloseCircleFilled,DoubleLeftOutlined } from '@ant-design/icons';
+import {HOST_URL} from'../../../../core/servers';
+import axios from 'axios';
+import { Tooltip, Modal  } from 'antd';
+import { InfoCircleFilled , CloseCircleFilled,DoubleLeftOutlined } from '@ant-design/icons';
 import unknownAv from '../../../../assessts/images/avatars/unknown.png';
 import avatarArray from '../../CreateProfile/components/Avatar';
 import OPModal from '../components/OPModal';
-const ChatHeader = ({users,username, isMobile, userList, date,op,
-    handleUserList,handleConvListToggle}) => {
+const ChatHeader = ({users,username, isMobile, userList, date,op, activeChat,token,
+    handleUserList,handleConvListToggle,setupdate,setActiveChat}) => {
         const [visible, setVisible] = useState(false);
+        const leave = () =>
+        {
+            console.log('bye')
+            axios.delete(
+                `${HOST_URL}/api/chat/${activeChat}`,
+                {
+                  headers: {
+                    Authorization: `Token ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                }
+              )
+              .then(res => {
+                //update
+                setupdate(true);
+                setActiveChat(0)
+                console.log(res.data);
+                // setchats(res.data);
+              })
+              .catch(error =>
+                {
+                  console.log(error);
+                });
+        }
+
     return(
         
         <div className="chat-header">
@@ -109,7 +135,21 @@ const ChatHeader = ({users,username, isMobile, userList, date,op,
          className="info"
          onClick={()=>setVisible(true)}
          />
-         <CloseCircleFilled className="leave"/>
+         <CloseCircleFilled
+         className="leave"
+         onClick={
+             ()=>
+             {
+
+                 Modal.confirm(
+                    {
+                        content: "Do you want to leave the chat?",
+                        onOk: leave,
+                    }
+                );
+             }
+         }
+         />
         </div>
       
     )}

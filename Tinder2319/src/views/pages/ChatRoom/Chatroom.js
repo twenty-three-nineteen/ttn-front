@@ -25,6 +25,8 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
   const [activeChat, setactiveChat] = useState(0);
   const [send, setsend] = useState(false)
   const [msg, setmsg] = useState(undefined)
+  const [update, setupdate] = useState(false)
+
   const chatRef = useRef(activeChat);
   useEffect(() => {
     //connect socket
@@ -33,27 +35,45 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
   }, [])
 
   useEffect(() => {
-    if(send)
+    if(send && msg)
     {
       if(msg.chatId===activeChat)
-      {addMessage(msg);
-      console.log(activeChat)}
+      {
+        addMessage(msg);
+        console.log(activeChat)
+      }
     }
     return () => {
       setsend(false);
+      setmsg(undefined);
     }
   }, [send])
+
+  useEffect(() => {
+    if(update && msg)
+    {
+      if(msg.chatId===activeChat)
+      {
+        console.log(msg.username + " " + msg.cmd + " the chat.");
+        addMessage(
+          {
+            content: msg.username + " " + msg.cmd + " the chat.",
+          }
+        );
+        
+      }
+    }
+    return () => {
+      setupdate(false);
+      setmsg(undefined);
+    }
+  }, [update])
   
   const handleSocketConnection = (s) =>
   {
     saveSocket(s);
     socketConnected(true)
   }
-
-  useEffect(() => {
-    console.log(activeChat)
-    
-  }, [activeChat])
 
 
   const handleCommand =(data,activeChat)=>
@@ -63,28 +83,42 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
 	  {
       console.log(data);
       chatRecieved(data.messages);
-      // updateScroll();
     }
     else if(command === "new_message")
     {
       console.log(data);
       setmsg(data.message);
-      
       setsend(true);
+    }
 
-      // updateScroll();
+    else if(command === "join_the_group")
+    {
+      console.log(data);
+      setmsg({
+        ...data.message,
+        cmd: "joined",
+      });
+      setupdate(true);
+      //update conv list
+      //update header
+    }
+    else if(command === "left_the_group")
+    {
+      console.log(data);
+      setmsg({
+        ...data.message,
+        cmd: "left",
+      });
+      setupdate(true);
     }
   }
-  
-  // function updateScroll(){
-  //   messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
-  // }
+
 
     const handleConvListToggle= (e)=>
     {
       setlistToggle(!listToggle);
-      //console.log(e.target)
     }
+
     return(
       <div className="chat-page">
       <Toolbar></Toolbar>
@@ -94,9 +128,8 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
         onClick={handleConvListToggle}
         className={listToggle? "list-toggle": "list-toggle rotate"}/>}
 
-     
-
         <ConvListContainer
+        update={update}
         isMobile={isMobile}
         chatRef={chatRef}
         activeChat={activeChat}
@@ -108,7 +141,9 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
       
 
       <ChatContainer
-      
+      update={update}
+      setupdate={setupdate}
+      setActiveChat={setactiveChat}
       isMobile={isMobile}
       chatRef={chatRef}
       activeChat={activeChat}
@@ -121,21 +156,21 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
       </div>
       
     )}
-const mapStateToProps = (state) =>{
+  const mapStateToProps = (state) =>{
     return{
       token: state.login_signup.token,
       username: state.login_signup.username,
       sent_to_chat:state.chat.sent_to_chat,
       messages:state.chat.messages,
     }
-    } 
-    const mapDispatchToProps = (dispatch) => {
-    return{
+  } 
+  const mapDispatchToProps = (dispatch) => {
+  return{
       saveSocket: (c) => dispatch(chat_actions.saveSocket(c)),
       socketConnected: (c) => dispatch(chat_actions.socketConnected(c)),
       chatRecieved: (c) => dispatch(chat_actions.chatRecieved(c)),
       addMessage: (m) => dispatch(chat_actions.addMessage(m)),
     }
-    }
+  }
     
-    export default connect(mapStateToProps,mapDispatchToProps)(Chatroom);
+  export default connect(mapStateToProps,mapDispatchToProps)(Chatroom);
