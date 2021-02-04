@@ -8,11 +8,9 @@ import {connect} from 'react-redux';
 class SelectorInterest extends React.Component {
     constructor(props){
         super(props);
-        this.onChange=this.onChange.bind(this);
-        this.showSel=this.showSel.bind(this);
         this.state={
           interests:[],
-          selectedItems:[]
+          selectedItems:"",
         };
     }
     componentDidMount() {
@@ -27,7 +25,7 @@ class SelectorInterest extends React.Component {
       .then(res => {
         this.setState(()=>{
           return {
-            interests: res.data.map(d=>d.subject)
+            interests: res.data.map(d=>d)
           };
         });
       })
@@ -36,32 +34,14 @@ class SelectorInterest extends React.Component {
           alert(error);
         });
         
-  }
-    onChange(value) {
-        var s =`1${value}`; 
-        var res = s.split(",");
-
-      }
-      
-    onBlur() {
-        console.log('blur');
-      }
-      
-    onFocus() {
-        console.log('focus');
-      }
-      
-    onSearch(val) {
-        console.log('search:', val);
-      }
-      
-      showSel(){
-        for(var x in this.state.selectedItems){
-          alert(x);
-        }
-      }
+    }
       onSelect(e){
-        alert(e.key);
+        
+        var messagedimo=document.getElementById('MySelect').value;
+        alert(messagedimo);
+      }
+      onDelete(e){
+        alert(e);
       }
     render(){
         return (
@@ -71,17 +51,13 @@ class SelectorInterest extends React.Component {
             showSearch
             className="SelectorInterest"
             placeholder="Interests"
-            optionFilterProp="children"
-            onChange={this.onChange}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            onSearch={this.onSearch}
+            optionFilterProp="children"            
             onSelect={this.onSelect}
-            
-          >
-          {this.state.interests.map(d=><Option key={d} value={d}>{d}</Option>)}
+            onDeselect={this.onDelete}
+            id="MySelect"
+            >
+            {this.state.interests.map(d=><Option key={d.id} value={d.id}>{d.subject}</Option>)}
           </Select>
-          <button onClick={this.showSel}>Hello</button>
           </div>
         );
     }

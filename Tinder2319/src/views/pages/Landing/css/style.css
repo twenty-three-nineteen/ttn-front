@@ -243,7 +243,6 @@ a:focus,
 .intro {
     display: table;
     width: 100%;
-    padding: 0;
     background: url(../img/social1.jpg) center center no-repeat;
     background-color: #e5e5e5;
     -webkit-background-size: cover;
@@ -365,59 +364,6 @@ header .intro-text {
 }
 
 
-/* Services Section */
-
-#services {
-    padding: 100px 0;
-    background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%);
-    color: #fff;
-}
-
-#services .service-desc {
-    margin: 10px 10px 20px;
-}
-
-#services h2 {
-    color: #fff;
-}
-
-#services .section-title h2::after {
-    position: absolute;
-    content: "";
-    background: rgba(255, 255, 255, .3);
-    height: 4px;
-    width: 60px;
-    bottom: 0;
-    margin-left: -30px;
-    left: 50%;
-}
-
-#services i.fa {
-    font-size: 42px;
-    width: 120px;
-    height: 120px;
-    padding: 40px 0;
-    background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%);
-    border-radius: 50%;
-    color: #fff;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, .05);
-}
-
-#services h3 {
-    font-weight: 500;
-    padding: 5px 0;
-    color: #fff;
-}
-
-#services p {
-    color: rgba(255, 255, 255, .75);
-}
-
-#services .service-desc {
-    margin-bottom: 40px;
-}
-
-
 /* Portfolio Section */
 
 #portfolio {
@@ -469,56 +415,6 @@ header .intro-text {
 
 .hover-bg:hover .hover-text {
     opacity: 1;
-}
-
-
-/* Testimonials Section */
-
-#testimonials {
-    padding: 100px 0;
-    background: #f6f6f6;
-}
-
-#testimonials i {
-    color: #e6e6e6;
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.testimonial {
-    position: relative;
-    padding: 20px;
-}
-
-.testimonial-image {
-    float: left;
-    margin-right: 15px;
-}
-
-.testimonial-image,
-.testimonial-image img {
-    display: block;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-}
-
-.testimonial-content {
-    position: relative;
-    overflow: hidden;
-}
-
-.testimonial-content p {
-    margin-bottom: 0;
-    font-size: 14px;
-    font-style: italic;
-}
-
-.testimonial-meta {
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #666;
 }
 
 

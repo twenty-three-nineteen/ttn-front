@@ -5,6 +5,7 @@ import Features from './components/features';
 import Team from './components/Team';
 import Contact from './components/contact';
 import JsonData from './data/data.json';
+import SideMenu from "../../components/SlideMeny/SideMenu.js";
 
 export class TotalLanding extends Component {
   state = {
@@ -20,7 +21,7 @@ export class TotalLanding extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{overflowY:"auto"}}>
         <Navigation />
         <Header data={this.state.landingPageData.Header} />
         <Features data={this.state.landingPageData.Features} />

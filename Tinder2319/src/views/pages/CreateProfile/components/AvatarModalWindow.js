@@ -11,7 +11,6 @@ import {connect} from 'react-redux';
 import * as create_profile_actions from '../../../../core/create-profile/action/createProfileActions';
 
 
-
 const ModalWindow = ({setAvatar, avatar, visible,setModal}) => 
 {
   const onValueChange = (event) => {
@@ -60,8 +59,6 @@ const ModalWindow = ({setAvatar, avatar, visible,setModal}) =>
     className="avatar-container scrollbar">
 
     {AvatarsImages}
-
-
 
     </div>
       </div>

@@ -18,6 +18,7 @@ import { message,Menu, Button } from 'antd';
 import { CloseCircleFilled,CheckCircleFilled,DownOutlined,SearchOutlined} from '@ant-design/icons';
 import Filter from "../components/FilterBar/Filter.js";
 import {HOST_URL} from '../../core/servers';
+import NoOM from "../components/NoOM.js";
 
 class Explore extends React.Component {
   constructor(props){
@@ -33,6 +34,8 @@ class Explore extends React.Component {
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
     this.ClickedFliter=this.ClickedFliter.bind(this);
     this.loadOM=this.loadOM.bind(this);
+    this.changeNum=this.changeNum.bind(this);
+    
 
     this.state={
       count:0,
@@ -47,11 +50,35 @@ class Explore extends React.Component {
       showfilter:false,
       theMessage:"",
       theId:0,
+      noOM:false,
+      numberOM:2,
+      selectedItems:[],
     };
   }
 
   componentDidMount() {
       this.loadOM();
+  }
+  selectItem(n){
+    alert(n);
+    // var items=this.state.selectedItems;
+    // items.add(n);
+    // items.map(d=>alert(d));
+    // this.setState(()=>{
+    //     return {
+    //       selectedItems: items
+    //     };
+    // });
+    // this.loadOM();
+  }
+  
+  changeNum(n){
+    this.setState(()=>{
+        return {
+          numberOM: n
+        };
+    });
+    this.loadOM();
   }
   loadOM(){
     const config = {
@@ -59,22 +86,30 @@ class Explore extends React.Component {
     };
     axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
     {
+      "max_number_of_members": this.state.numberOM
     }
     , config)
     .then(res => {
       // alert(res.data.message);
       // alert(res.data.id);
         this.setState(()=>{
-        return {
-            persons: [res.data.message],
-            theMessage:res.data.message,
-            theId:res.data.id
-        };
+          return {
+              persons: [res.data.message],
+              theMessage:res.data.message,
+              theId:res.data.id,
+              noOM: false
+          };
       });
     })
     .catch(err =>
     {
+      this.setState(()=>{
+        return {
+          noOM: true
+        };
+      });
     });
+    
   }
   cancelButton(){
       this.setState(()=>{
@@ -131,18 +166,20 @@ class Explore extends React.Component {
   Accepted(){
     this.setState((prev)=>{
       return {
-          count: (prev.count+1)%this.state.persons.length,
+          // count: (prev.count+1)%this.state.persons.length,
           showModal: true
       };
     });
+    this.loadOM();
   }
   Rejected(){
     message.success('Rejected successfully!');
-    this.setState((prev)=>{
-      return {
-          count: (prev.count+1)%this.state.persons.length
-      };
-    });
+    // this.setState((prev)=>{
+    //   return {
+    //       count: (prev.count+1)%this.state.persons.length
+    //   };
+    // });
+    this.loadOM();
   }
   ClickedUp(){
     var x = event.clientX-this.state.mouseX;   
@@ -400,25 +437,43 @@ class Explore extends React.Component {
               <SideMenu></SideMenu>
               <SearchOutlined className="SearchIcon" onClick={this.ClickedFliterSmall}></SearchOutlined>
               <div id="smallDimo" className="smallDimo">
-              <SelectorPersonSmall></SelectorPersonSmall>
+              <SelectorPersonSmall numChanger={this.changeNum}></SelectorPersonSmall>
               <SelectorInterestSmall></SelectorInterestSmall>
               </div>
             <div id="smallCon" className="smallCon">
-              <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
-              <div id="buttons" className="buttons">
-                <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
-                <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
-              </div>
+              {this.state.noOM ? 
+                <div className="SmallTotalExploreNO" id="SmallTotalExploreNO">
+                <p className="textOpenningMessage">There are no openning message to show</p>
+                </div>
+              :  
+              <div>             
+                <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
+                <div id="buttons" className="buttons">
+                  <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
+                  <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
+                </div>
+              </div>}
+              
             </div>
 
             <BehindOpeningMessage text="hello"></BehindOpeningMessage>
             <Toolbar></Toolbar>
             <div id="TotalExplore" className="TotalExplore">
+                {this.state.noOM ? 
+                  <p></p>
+                : 
+                <div>
                 {this.openning("trash") ? 
                     <img id="envelop_open" className="envelop_open" src={require('../../assessts/images/trash_open.png')}></img>
                   : 
                     <img id="envelop_close" className="envelop_close" src={require('../../assessts/images/trash_close.png')} ></img>}
+                </div>}
+                {this.state.noOM ? 
+                  <NoOM></NoOM>
+                :                 
+                  <p></p>}
                 <Draggable
+                draggable={false}
                 className="handle"
                 axis="x"
                 handle=".handle"
@@ -432,20 +487,28 @@ class Explore extends React.Component {
                 >
                 <div className="handle">
                   <div>
-                    <OpeningMessage text={this.state.persons[this.state.count]}></OpeningMessage>
+                    {this.state.noOM ? 
+                      <p></p>
+                    : 
+                      <OpeningMessage text={this.state.persons[this.state.count]}></OpeningMessage>}
                   </div>
                 </div>
                 </Draggable>
-                {this.openning("envelop") ? 
-                  <img className="envelop_open" src={require('../../assessts/images/envelop_open.png')}></img>
+                {this.state.noOM ? 
+                  <p></p>
                 : 
-                  <img className="envelop_close" src={require('../../assessts/images/envelop_close.png')} ></img>}
+                <div>
+                {this.openning("envelop") ? 
+                <img className="envelop_open" src={require('../../assessts/images/envelop_open.png')}></img>
+                : 
+                <img className="envelop_close" src={require('../../assessts/images/envelop_close.png')} ></img>}
+                </div>}
             </div>
             <ReqOpeningMessageModal cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ReqOpeningMessageModal>
             <Filter clicked={this.ClickedFliter} show={this.state.showfilter}></Filter>
             <div id="filters" className="filters">
-            <SelectorPerson></SelectorPerson>
-            <SelectorInterest></SelectorInterest>
+            <SelectorPerson numberOfPersons={this.state.numberOM} numChanger={this.changeNum}></SelectorPerson>
+            <SelectorInterest selectAnItem={this.selectItem}></SelectorInterest>
             </div>
         </div>
       );

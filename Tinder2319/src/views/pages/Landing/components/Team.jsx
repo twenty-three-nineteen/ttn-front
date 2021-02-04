@@ -57,7 +57,7 @@ export class Team extends Component {
                   <div key="Sadra" className="col-md-3 col-sm-6 team">
                     <div className="thumbnail">
                       {" "}
-                      <img src={require('../img/team/AmirH.png')} alt="..." className="team-img" />
+                      <img src={require('../img/team/Sadra.png')} alt="..." className="team-img" />
                       <div className="caption">
                         <h4>Sadra</h4>
                         <p>Backend Developer</p>

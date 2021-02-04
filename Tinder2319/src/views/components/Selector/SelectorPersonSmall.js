@@ -14,15 +14,14 @@ class SelectorPersonSmall extends React.Component {
     this.setState({
       value: e.target.value,
     });
+    this.props.setPerson(e.target.value);
   };
 
   render() {
     const { value } = this.state;
     return (
       <div className="interestcontainer">
-        
         <Radio.Group onChange={this.onChange} value={value}>
-        <p id="TitlePerson" className="TitlePerson">Chat Participants</p>
           <Radio className="SelectorPerson" value={1}>
             1 Person
           </Radio>

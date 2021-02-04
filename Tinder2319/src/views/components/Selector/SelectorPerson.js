@@ -5,35 +5,30 @@ import "./style.css";
 class SelectorPerson extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-            value: 1
-        };
+        
     }
   onChange = e => {
+    // alert(e.target.value+1);
     console.log('radio checked', e.target.value);
-    this.setState({
-      value: e.target.value,
-    });
+    this.props.numChanger(e.target.value);    
   };
 
   render() {
-    const { value } = this.state;
     return (
       <div className="interestcontainer">
         
-        <Radio.Group onChange={this.onChange} value={value}>
-        <p id="TitlePerson" className="TitlePerson">Chat Participants</p>
-          <Radio className="SelectorPerson" value={1}>
-            1 Person
-          </Radio>
+        <Radio.Group onChange={this.onChange} value={this.props.numberOfPersons}>
           <Radio className="SelectorPerson" value={2}>
             2 Persons
           </Radio>
           <Radio className="SelectorPerson" value={3}>
             3 Persons
           </Radio>
-          <Radio className="SelectorPerson"  value={4}>
+          <Radio className="SelectorPerson" value={4}>
             4 Persons
+          </Radio>
+          <Radio className="SelectorPerson"  value={5}>
+            5 Persons
           </Radio>
         </Radio.Group>
       </div>
