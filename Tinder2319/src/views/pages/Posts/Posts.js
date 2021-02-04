@@ -5,6 +5,7 @@ import "../../styles/Profile.scss"
 import { useState,useEffect,useRef} from 'react';
 import history from "../../../core/modules/history"
 import {InfoCircleOutlined} from '@ant-design/icons';
+import Toolbar from "../../components/Menu.js";
 
 
 import axios from 'axios';
@@ -140,11 +141,13 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
     const setmyDel= (e)=>{
       setDel(e);
   }
+
     if (select == undefined) {
-     
-        return(
+        console.log(posts.length);
+        if (posts.length != 0) {
+          return(
             <div>
-                
+                <Toolbar></Toolbar>
          <Row>
          <Col><Button  onClick={ProPage} className="Bif">View Profile</Button></Col>
          <Col><div className="Postsdiv" style={{overflowY:"auto",height:"500px",justify:"center"}}>
@@ -172,20 +175,41 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
          
         </div>
         )
+          
+          
+        } else {
+          return(
+            <div>
+            <Toolbar></Toolbar>
+     <Row>
+     <Col><Button  onClick={ProPage} className="Bif">View Profile</Button></Col>
+     <Col><div className="Postsdiv" style={{overflowY:"auto",height:"500px",justify:"center"}}>
+  
+       <Row className = " RowStyle"  justify="center" >
+       <p style={{color : "grey",fontSize:"16px", justify:"center",marginTop:"200px"}}> No posts to show! </p>
+              
+        </Row>
+        <div ref={loader}></div> 
+    </div></Col>
+     </Row>
+     
+    </div>
+          )
+        }
     } else {
        if (usercheck != username) {
     
         return(
       
           <div>
-                  
+              <Toolbar></Toolbar>    
           <Row>
           <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
           <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
           <Popover content={content(select.categories,select.max_number_of_members)} title="Post Info">
                                     <InfoCircleOutlined  style={{fontSize: '25px', color: "grey"}}></InfoCircleOutlined>
                                   </Popover>
-            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
+            <Row className = " RowStyle"  justify="center" style={{overflowY:"auto",backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
            
               <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
               </p>
@@ -205,14 +229,14 @@ const Posts = ({text,setText,select,setSelect,posts,setPosts,token,del,setDel,pa
         return(
       
           <div>
-                  
+             <Toolbar></Toolbar>     
           <Row>
           <Col><Button onClick={PostsPage} className="Belse1">View Posts</Button></Col>
           <Col><div className="Postsdiv2" style={{height:"500px",width:"400px",justify:"center"}}>
           <Popover content={content(select.categories,select.max_number_of_members)} title="Post Info">
                                     <InfoCircleOutlined  style={{fontSize: '25px', color: "grey"}}></InfoCircleOutlined>
                                   </Popover>
-            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
+            <Row className = " RowStyle"  justify="center" style={{overflowY:"auto", backgroundColor:"rgb(0,0,0,0.36)",height:"400px"}} >
           
               <p style={{color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{select.message}
               </p>

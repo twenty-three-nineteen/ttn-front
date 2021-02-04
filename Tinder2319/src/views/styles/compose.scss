@@ -10,10 +10,47 @@
 .inputOPM{
     width: 460px;
     
-    padding: 50px;
+    padding: 20px;
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+.modalOfcompose{
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+.checkboxsCompose{
+    display: flex;
+        flex-direction: column;
 }
 textarea.ant-input {
     height: 300px;
+    resize: none;
+    font-size: 25px;
 }
 .maxReplyB{
     width: 250px;
@@ -27,17 +64,20 @@ textarea.ant-input {
 @media only screen and (max-width: 600px) {
     .composeMainDiv{
         width: 350px;
-        height: 250px;
+        height: 260px;
         margin-top: 190px !important;
     }
     .inputOPM{
         width: 310px;
-        height: 210px;
-        padding: 20px;
+        height: 220px;
+        padding: 16px;
         overflow-wrap: "break-word";
+        
     }
     textarea.ant-input {
         height: 200px;
+        resize: none;
+        font-size: 15px;
     }
     .maxReplyB{
         width: 175px;

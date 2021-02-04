@@ -105,6 +105,7 @@ const Compose = ({
        
     };
     const ComposePage = (e) => {
+      history.push('/posts');
       window.location.reload();
     };
     // const setAllInterest = (e) => {
@@ -173,7 +174,7 @@ const Compose = ({
               <Input.TextArea 
               // showCount
               maxLength={200} 
-              placeholder={"Say something..."} onChange={InChangeMsg} className="inputOPM" style={{color : "grey",fontSize: "20px",display: "inline-block",overflowWrap: "break-word",textAlign:"center",textJustify:"center"}}></Input.TextArea>
+              placeholder={"Say something..."} showCount onChange={InChangeMsg} className="inputOPM" style={{color : "grey",fontSize: "20px",display: "inline-block",overflowWrap: "break-word",textAlign:"center",textJustify:"center"}}></Input.TextArea>
 
              </Row>
         
@@ -200,12 +201,14 @@ const Compose = ({
           </Col>
           </Row>
           <Modal
+         
               visible={catmodal}
               title="Pick the post's categories!"
               closable={false}
               footer={[<Button onClick={closeCatModal}>Done</Button>]}
             >
               <div
+               className={"modalOfcompose"}
                 style={{
                   overflowY: "auto",
                   height: "300px",
@@ -214,16 +217,18 @@ const Compose = ({
                   flexWrap: "wrap",
                 }}
               >
-                <Checkbox.Group onChange={InChangeCat} options={allInterests} />
+                <Checkbox.Group className={"checkboxsCompose"} onChange={InChangeCat} options={allInterests} />
               </div>
             </Modal>
             <Modal
+           
               visible={maxnummodal}
               title="Pick the max number of people to start a chat!"
               closable={false}
               footer={[<Button onClick={closeMaxNumModal}>Done</Button>]}
             >
               <div
+               className={"modalOfcompose"}
                 style={{
                   overflowY: "auto",
                   height: "60px",
@@ -232,7 +237,7 @@ const Compose = ({
                   flexWrap: "wrap",
                 }}
               >
-                <Radio.Group onChange={InChangeNum} options={allNum} />
+                <Radio.Group className={"checkboxsCompose"} onChange={InChangeNum} options={allNum} />
               </div>
             </Modal>
          </div>

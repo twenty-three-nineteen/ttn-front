@@ -145,12 +145,20 @@
                 padding-bottom: 0;
             }
         }
+        margin-top: 25px;
         display: flex;
         justify-self: center;
         justify-content: center;
     }
 }
+// .ant-picker-focused {
+//     margin-left: 15.5px !important;
+// }
 
+.ant-picker.birthIn{
+    margin-left: 15px !important;
+    margin-bottom: 5px !important;
+}
 .container2 {
     @extend .container;
     padding: 1px;
@@ -459,7 +467,9 @@
 .viewPostB2{
     width: calc(100% + 50px);
     margin: 10px -25px -1px -25px;
+    
 }
+
 
 .EditInB {
     margin: 2.5%;
@@ -468,3 +478,27 @@
 .PassIn{
     margin-top: 20px;
 }
+.checkboxinterests{
+   
+    display: flex;
+        flex-direction: column;
+}
+.editinterestsmodals{
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+// .ant-checkbox-group {
+//     grid-columns: length;
+// }

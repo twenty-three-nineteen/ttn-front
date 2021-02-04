@@ -12,7 +12,9 @@ import {
   Row,
   Col,
   Checkbox,
+  DatePicker,
 } from "antd";
+import moment from 'moment';
 import "../../styles/Profile.scss";
 import "../../styles/Posts.scss";
 import Animation from "react-animation";
@@ -94,12 +96,12 @@ const Profile = ({
 
     );
   });
-  const [inInput, setInInput] = useState(interests);
+  const [inInput, setInInput] = useState([]);
 
  
-  const [birthdayInput, setBirthState] = useState(age);
-  const [bioInput, setBioState] = useState(bio);
-  const [nameInput, setNameState] = useState(name);
+  const [birthdayInput, setBirthState] = useState("");
+  const [bioInput, setBioState] = useState("");
+  const [nameInput, setNameState] = useState("");
   const [passInput, setPassState] = useState("");
   const setBioInput = (e) => {
     setBioState(e.target.value);
@@ -114,7 +116,8 @@ const Profile = ({
     console.log(nameInput);
   };
   const setBirthInput = (e) => {
-    setBirthState(e.target.value);
+    console.log(e);
+    setBirthState(e.format('YYYY-MM-DD'));
   };
   useEffect(() => {
     const u = window.location.href.split("/").reverse()[0];
@@ -248,16 +251,34 @@ const Profile = ({
   const CloseEdit = (e) => {
     console.log(bioInput);
     console.log(nameInput);
+    let info = {}
+    if(bioInput)
+    {
+      info['bio']=bioInput;
+    } 
+    if(nameInput)
+    {
+      info['name']=nameInput;
+    } 
+    if(birthdayInput)
+    {
+      info['birthday']=birthdayInput;
+    } 
+    if(inInput.length)
+    {
+      info['interests']=inInput;
+    } 
     axios
       .put(
-        `${HOST_URL}/api/account/userprofile/` + username,
-        {
-          bio: bioInput,
-          avatar: avInput,
-          name: nameInput,
-          birthday: birthdayInput,
-          interests: inInput,
-        },
+        `${HOST_URL}/api/account/userprofile/` + username, info
+        // {
+        //   // bio: bioInput,
+        //   avatar: avInput,
+        //   name: nameInput,
+        //   birthday: birthdayInput,
+        //   interests: inInput,
+        // }
+        ,
         {
           headers: {
             Authorization: `Token ${token}`,
@@ -503,11 +524,34 @@ const Profile = ({
               <h2 className="textBirthDay">
                 {" "}
                 Birthday:
-                <Input
+                {/* <Input
                   className="birthIn"
                   placeholder={age}
                   onChange={setBirthInput}
-                ></Input>{" "}
+                >    */}
+                {/* <Form.Item
+                className="birthIn"
+                name="birth"       
+              style={{width:"45%",display:"inline-block",margin:"0 0 0 10px"}}
+              > */}
+              <DatePicker 
+               className="birthIn"
+                placeholder="Birth Date"  
+                onChange={setBirthInput}
+                showToday={false}
+                defaultPickerValue={
+                  moment(Date.now()).subtract(18,'years')
+                }
+                disabledDate={(current) =>
+                  {
+                    return (current && current.valueOf() > moment(Date.now()).subtract(18,'years'));
+                  }
+                }
+              />
+                
+              {/* </Form.Item> */}
+              {/* </Input> */}
+              {" "}
               </h2>
             </div>
             <div className="interestsDiv">
@@ -526,6 +570,7 @@ const Profile = ({
               footer={[<Button onClick={closeModalInter}>Done</Button>]}
             >
               <div
+              className={"editinterestsmodals"}
                 style={{
                   overflowY: "auto",
                   height: "300px",
@@ -534,7 +579,7 @@ const Profile = ({
                   flexWrap: "wrap",
                 }}
               >
-                <Checkbox.Group onChange={InChange} options={allIn} />
+                <Checkbox.Group className="checkboxinterests" onChange={InChange} options={allIn} />
               </div>
             </Modal>
             <Button onClick={CloseEdit} className="doneB">
@@ -553,7 +598,7 @@ const mapStateToProps = (state) => {
     age: state.profile.age,
     bio: state.profile.bio,
     name: state.profile.name,
-    interests: state.profile.interests,
+    interests: Array.from(state.profile.interests),
     edit: state.profile.edit,
     editavatar: state.profile.editavatar,
     editinterests: state.profile.editinterests,
