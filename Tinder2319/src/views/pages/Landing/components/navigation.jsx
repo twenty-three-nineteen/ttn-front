@@ -7,7 +7,7 @@ export class Navigation extends Component {
         <div className="containersss">
           <div className="navbar-header">
             
-            <a className="navbar-brand page-scroll" href="#page-top">
+            <a className="navbar-brand page-scroll" href="">
               2319 Team
             </a>{" "}
           </div>

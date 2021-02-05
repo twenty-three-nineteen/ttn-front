@@ -47,13 +47,13 @@
             "text": "Discuss opinions from all over the world."
         },
         {
-            "icon": "fa fa-group",
-            "title": "Group chat",
+            "icon": "fa fa-search",
+            "title": "Explore",
             "text": "Explore your favourite categories for different ideas."
         },
         {
-            "icon": "fa fa-calendar",
-            "title": "Date",
+            "icon": "fa fa-user",
+            "title": "Profile",
             "text": "Create a profile that can introduce you in a unique way."
         }
     ]
