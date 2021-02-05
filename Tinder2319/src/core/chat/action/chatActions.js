@@ -43,6 +43,13 @@ export function getChat(socket, id){
     }
 }
 
+export function getPrevMsg(socket, id,loadedNumber){
+    return{
+        type: ActionTypes.GET_PREV_MSG,
+        payload: { socket,id,loadedNumber },
+    }
+}
+
 export function chatRecieved(messages){
     return{
         type: ActionTypes.CHAT_RECIEVED,
@@ -79,3 +86,11 @@ export function setChatId(id){
         payload: { id },
     }
 }
+
+export function changeChat(){
+    return{
+        type: ActionTypes.CHANGE_CHAT,
+        payload: {  },
+    }
+}
+

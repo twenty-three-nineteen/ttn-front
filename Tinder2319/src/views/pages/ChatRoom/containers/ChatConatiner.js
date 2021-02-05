@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState,useEffect,useRef } from 'react';
-import { Form, Input, Button, Popover } from 'antd';
+import { Form, Input, Button, Popover,Spin } from 'antd';
 
 import { SendOutlined,SmileOutlined,InfoCircleFilled,TeamOutlined,CaretRightOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import avatarArray from '../../CreateProfile/components/Avatar';
 import Message from '../components/Message';
 import User from '../components/User';
 import Emojis from './Emoji';
@@ -14,50 +13,128 @@ import * as chat_actions from '../../../../core/chat/action/chatActions';
 import ChatHeader from './ChatHeader';
 import UserList from './UserList';
 
-const ChatContainer = ({socket,username, messages,token, users,usersParsed, usersState, chatState,
-  activeChat,isMobile,listToggle, date,op,
-    getChat,sendMessage,getChatInfo,handleConvListToggle,addMessage
+const ChatContainer = ({socket,username, messages,token, users,usersParsed, usersState, chatState,update,
+  activeChat,isMobile,listToggle, date,op,loadedNumber,changeChat,allChatLoaded,
+    getChat,sendMessage,getChatInfo,handleConvListToggle,getPrevMsg,setupdate,setActiveChat
    }) => {
-     const [userList, setuserList] = useState(false);
-    const [newMsgScroll, setnewMsgScroll] = useState(true);
-    let messagesClasses = document.getElementsByClassName("message");
+    const [userList, setuserList] = useState(false);
+    const [load, setLoad] = useState(false);
+    const [updateScroll, setUpdateScroll] = useState(false);
+    const [containerH, setContainerH] = useState(0)
+    const [prevScroll, setPrevScroll] = useState(0)
+
     const loader = useRef(null);
     const messageContainer = useRef(null);
+    const bottomDummy = useRef(null);
 
-    const didMountRef = useRef(false);
+
+    const handleObserver = (entities) => {
+      const target = entities[0];
+      if (target.isIntersecting) { 
+        setLoad(true);
+      }
+    }
+    
+    var options = {
+      threshold: 1.0
+   };
+    const observer = new IntersectionObserver(handleObserver,options);
 
     useEffect(() => {
-      if (activeChat && messages) {
-        updateScroll()
-      } 
-    },)
 
-    useEffect(() => {
-        if(activeChat)
+      if(updateScroll)
+      {
+        if(load)
         {
-          setuserList(false);
-          getChat(socket, activeChat);
-          getChatInfo(activeChat,token);
-          console.log(activeChat)
+          messageContainer.current.scrollTo(0,messageContainer.current.scrollHeight- containerH);
         }
-    }, [activeChat])
+        else{
+          scrollToBottom()
+          if(loadedNumber >= 10)
+          {
+            
+        if (loader.current) {
+          observer.observe(loader.current)
+        }
+          }
+        }
+      }
+      return () => {
+        setLoad(false)
+        setUpdateScroll(false)
+        setContainerH(messageContainer.current.scrollHeight);
+        setPrevScroll(messageContainer.current.scrollTop);
+      }
+    }, [updateScroll])
 
-  function updateScroll(){
-    // messageContainer.current.scrollTop = messageContainer.current.scrollHeight;
-    messageContainer.current.scrollIntoView();
+
+    useEffect(() => {
+      const timer = setTimeout(() => 
+        {
+          if(load)
+          {
+            if(loadedNumber>=10)
+            {
+              getPrevMsg(socket,activeChat,loadedNumber);
+            }
+          }
+        }
+      , 500);
+
+      return () => {
+        clearTimeout(timer);
+      }
+    }, [load])
+
+
+    useEffect(() => {
+      if(allChatLoaded)
+      {
+        console.log("done");
+        observer.unobserve(loader.current);
+      }
+      
+    }, [allChatLoaded])
+
+    
+
+    useEffect(() => {
+    
+      if(activeChat)
+      {
+        
+        if(messageContainer)
+        {
+          setContainerH(messageContainer.current.scrollHeight);
+          setPrevScroll(messageContainer.current.scrollHeight);
+          messageContainer.current.addEventListener('DOMNodeInserted', event =>
+          {
+            setUpdateScroll(true)
+          })
+        }
+
+        setuserList(false);
+        changeChat();
+        getChatInfo(activeChat,token);
+        getChat(socket, activeChat);
+
+      }
+  }, [activeChat])
+
+   
+
+useEffect(() => {
+  if(activeChat)
+  {
+    getChatInfo(activeChat,token);
+    //getChat(socket, activeChat);
   }
+}, [update])
+   
 
-  
-  
-  // const handleObserver = (entities) => {
-  //   const target = entities[0];
-  //   if (target.isIntersecting) { 
-  //     let before = messageContainer.current.scrollHeight;
-  //     // lastChatRecieved();
-  //     let after = messageContainer.current.scrollHeight;
-  //     messageContainer.current.scrollTop = after - before;
-  //   }
-  // }
+  function scrollToBottom(){
+    bottomDummy.current.scrollIntoView();
+  }
 
   const [form] = Form.useForm();
 
@@ -104,11 +181,6 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
     setuserList(!userList);
   }
 
-  useEffect(() => {
-    if(activeChat)
-      updateScroll();
-  }, [messages])
-
     return(
       
         (activeChat)?
@@ -118,12 +190,16 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
          
        
       <ChatHeader
+      setActiveChat={setActiveChat}
+      setupdate={setupdate}
       isMobile={isMobile}
       users={users}
       username={username}
       userList={userList}
       date={parseDate(date)}
       op={op}
+      token={token}
+      activeChat={activeChat}
       handleUserList={handleUserList}
       handleConvListToggle={handleConvListToggle}
       />
@@ -141,25 +217,32 @@ const ChatContainer = ({socket,username, messages,token, users,usersParsed, user
         :
         undefined
       }
-       <div className="message-wrapper">
+       <div ref={messageContainer} className="message-wrapper">
        
        
-       <div ref={loader}></div>
+       <div ref={loader} style={{textAlign:"center"}}>
+       {(allChatLoaded||(loadedNumber<10))?
+        <div className="chat-notif">Your chat starts here!</div>
+      :
+      <Spin size="small" />}
+    </div>
         {
           messages.map(
             (m) =>
             {
               
-              return (usersParsed[m.author])? <Message user={usersParsed[m.author]}
-              avatar={avatarArray[usersParsed[m.author].avatar - 1]} 
+              return ('author' in m)?
+              <Message user={m.authorName}
+              avatar={m.avatarId} 
               content={m.content} 
               date={parseDate(m.send_date)} 
               self={username === m.author}/> 
-              : undefined;
+              :
+            <div className="chat-notif">{m.content}</div>
             }
           )
         }
-        <div ref={messageContainer}></div>
+        <div ref={bottomDummy}></div>
         </div>
         <div className="send-message-wrapper">
         <Form
@@ -232,6 +315,8 @@ const mapStateToProps = (state) =>{
         usersParsed: state.chat.usersParsed,
         date: state.chat.date,
         op: state.chat.op,
+        loadedNumber: state.chat.loadedNumber,
+        allChatLoaded: state.chat.all_chat_loaded,
     }
     } 
     const mapDispatchToProps = (dispatch) => {
@@ -246,7 +331,9 @@ const mapStateToProps = (state) =>{
         socketConnected: (c) => dispatch(chat_actions.socketConnected(c)),
         getChatInfo:(id,token) => dispatch(chat_actions.getChatInfo(id,token)),
         addMessage: (m) => dispatch(chat_actions.addMessage(m)),
+        getPrevMsg:(s,i,l) => dispatch(chat_actions.getPrevMsg(s,i,l)),
+        changeChat:(m) => dispatch(chat_actions.changeChat(m)),
     }
     }
     
-    export default connect(mapStateToProps,mapDispatchToProps)(ChatContainer);
+  export default connect(mapStateToProps,mapDispatchToProps)(ChatContainer);

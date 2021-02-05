@@ -10,7 +10,9 @@ class SelectorPerson extends React.Component {
   onChange = e => {
     // alert(e.target.value+1);
     console.log('radio checked', e.target.value);
+
     this.props.numChanger(e.target.value);    
+
   };
 
   render() {

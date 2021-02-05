@@ -33,6 +33,7 @@ class SelectorInterest extends React.Component {
           alert(error);
         });
         
+
     }
       onSelect=e=>{
         document.getElementById('replaceDimo').innerText = document.getElementById('replaceDimo').innerText+e.toString()+",";
@@ -50,6 +51,7 @@ class SelectorInterest extends React.Component {
         } 
         document.getElementById('replaceDimo').innerText=final;
         this.props.myChange();
+
       }
     render(){
         return (

@@ -34,7 +34,9 @@ class Explore extends React.Component {
     this.toggleCollapsed=this.toggleCollapsed.bind(this);
     this.ClickedFliter=this.ClickedFliter.bind(this);
     this.loadOM=this.loadOM.bind(this);
+
     this.changeNum=this.changeNum.bind(this);
+
 
     this.state={
       count:0,
@@ -430,6 +432,14 @@ class Explore extends React.Component {
     var buttons=document.getElementById('buttons');
     buttons.classList.toggle('move');
   }
+  setPerson(e){
+    this.setState(()=>{
+      return {
+        numPerson: e
+      };
+    });
+  }
+  
   render() {
       return (
           <div id="container" className="exploreContainer">
