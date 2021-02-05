@@ -13,6 +13,7 @@ import ForgotPassword from "./views/pages/ForgotPassword/ForgotPassword";
 import ComposeOpeningMsg from "./views/pages/ComposeOM/Compose";
 
 import Chat from './views/pages/ChatRoom/Chatroom';
+import TotalLanding from './views/pages/Landing/Total';
 
 import ProtectedRoute from './core/ProtectedRoute';
 
@@ -36,6 +37,7 @@ const App = ({logged_in}) => {
       <ProtectedRoute exact path='/Explore' auth={logged_in} unauthLocation="/login_signup" component={Explore} />
       <ProtectedRoute exact path='/compose' auth={logged_in} unauthLocation="/login_signup" component={ComposeOpeningMsg} />
       <ProtectedRoute exact path='/chat' auth={logged_in} unauthLocation="/login_signup" component={Chat} />
+      <ProtectedRoute exact path='/' auth={logged_in} unauthLocation="/" component={TotalLanding} />
 
       </Switch>
     </Router>

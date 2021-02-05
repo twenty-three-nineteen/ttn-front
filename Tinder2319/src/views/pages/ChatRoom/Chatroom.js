@@ -15,7 +15,8 @@ import '../../styles/chat/userlist.scss';
 import * as chat_actions from '../../../core/chat/action/chatActions';
 import * as socket_actions from '../../../core/chat/socket/index';
 import Toolbar from "../../components/Menu.js";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
+import SideMenu from "../../components/SlideMeny/SideMenu.js";
 
 
 const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
@@ -122,6 +123,10 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
     return(
       <div className="chat-page">
       <Toolbar></Toolbar>
+      <div className="TopBar">
+        <p className="TeamName">2319</p>
+      </div>
+
       {isMobile? undefined
         :
         <CaretRightOutlined
@@ -154,7 +159,6 @@ const Chatroom = ({sent_to_chat,saveSocket,token,username,messages,
       />
 
       </div>
-      
     )}
   const mapStateToProps = (state) =>{
     return{

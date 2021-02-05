@@ -8,10 +8,8 @@ import {connect} from 'react-redux';
 class SelectorInterest extends React.Component {
     constructor(props){
         super(props);
-        this.onChange=this.onChange.bind(this);
         this.state={
           interests:[],
-          selectedItems:[]
         };
     }
     componentDidMount() {
@@ -26,7 +24,7 @@ class SelectorInterest extends React.Component {
       .then(res => {
         this.setState(()=>{
           return {
-            interests: res.data.map(d=>d.subject)
+            interests: res.data.map(d=>d)
           };
         });
       })
@@ -35,27 +33,25 @@ class SelectorInterest extends React.Component {
           alert(error);
         });
         
-  }
-    onChange(value) {
-        var s =`1${value}`; 
-        var res = s.split(",");
 
+    }
+      onSelect=e=>{
+        document.getElementById('replaceDimo').innerText = document.getElementById('replaceDimo').innerText+e.toString()+",";
+        this.props.myChange();
       }
-      
-    onBlur() {
-        console.log('blur');
-      }
-      
-    onFocus() {
-        console.log('focus');
-      }
-      
-    onSearch(val) {
-        console.log('search:', val);
-      }
-      
-      onSelect(e){
-        alert(e.key);
+      onDelete=e=>{
+        var str = document.getElementById('replaceDimo').innerText;
+        var res = str.split(",");
+        var i;
+        var final="";
+        for (i = 0; i < res.length-1; i++) {
+          if(res[i]!=e.toString()){
+            final=final+res[i]+",";
+          }
+        } 
+        document.getElementById('replaceDimo').innerText=final;
+        this.props.myChange();
+
       }
     render(){
         return (
@@ -65,15 +61,11 @@ class SelectorInterest extends React.Component {
             showSearch
             className="SelectorInterest"
             placeholder="Interests"
-            optionFilterProp="children"
-            onChange={this.onChange}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            onSearch={this.onSearch}
+            optionFilterProp="children"            
             onSelect={this.onSelect}
-            
-          >
-          {this.state.interests.map(d=><Option key={d} value={d}>{d}</Option>)}
+            onDeselect={this.onDelete}
+            >
+            {this.state.interests.map(d=><Option key={d.id} value={d.id}>{d.subject}</Option>)}
           </Select>
           </div>
         );

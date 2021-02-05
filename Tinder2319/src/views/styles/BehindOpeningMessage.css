@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Rubik+Mono+One&display=swap');
 #BOM {
+    visibility: hidden;
     width: 480px;
     height: 380px;
     text-justify: center;

@@ -1,0 +1,60 @@
+{
+    "Header": {
+        "title": "Talkzone",
+        "paragraph": "TalkZone focuses on your opinion, so that you can find someone without judging them by looks, style, or where they live. Ready? Have fun! :D"
+    },
+    "Team": [{
+            "img": "../img/team/AmirH.jpg",
+            "name": "Amirhossein Ahmadi",
+            "job": "Director"
+        },
+        {
+            "img": "img/team/02.jpg",
+            "name": "Hasti Karamdel",
+            "job": "Senior Designer"
+        }, {
+            "img": "img/team/03.jpg",
+            "name": "Omid Mirzajani",
+            "job": "Senior Designer"
+        },
+        {
+            "img": "img/team/04.jpg",
+            "name": "Yasaman Lotfollahi",
+            "job": "Project Manager"
+        },
+        {
+            "img": "img/team/04.jpg",
+            "name": "Sadra Khamooshi far",
+            "job": "Project Manager"
+        }
+    ],
+    "Contact": {
+        "address": "4321 California St, San Francisco, CA 12345 ",
+        "phone": "+1 123 456 1234",
+        "email": "info@company.com",
+        "facebook": "fb.com",
+        "twitter": "twitter.com",
+        "youtube": "youtube.com"
+    },
+    "Features": [{
+            "icon": "fa fa-file-text",
+            "title": "Text",
+            "text": "Share your thoughts through words."
+        },
+        {
+            "icon": "fa fa-wechat",
+            "title": "Chat",
+            "text": "Discuss opinions from all over the world."
+        },
+        {
+            "icon": "fa fa-search",
+            "title": "Explore",
+            "text": "Explore your favourite categories for different ideas."
+        },
+        {
+            "icon": "fa fa-user",
+            "title": "Profile",
+            "text": "Create a profile that can introduce you in a unique way."
+        }
+    ]
+}
