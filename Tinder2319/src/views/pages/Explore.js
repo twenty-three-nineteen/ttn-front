@@ -76,16 +76,17 @@ class Explore extends React.Component {
         for (i = 0; i < res.length-1; i++) {
           final.push(parseInt(res[i]));
         }
-        for (i = 0; i < final.length; i++) {
-          alert(final[i]);
-        }
+        // for (i = 0; i < final.length; i++) {
+        //   alert(final[i]);
+        // }
         
     const config = {
       headers: { 'Authorization': `Token ${this.props.token}` }
     };
     axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
     {
-      "max_number_of_members": this.state.numberOM      
+      "max_number_of_members": this.state.numberOM      ,
+      "categories" : final
     }
     , config)
     .then(res => {
@@ -143,6 +144,7 @@ class Explore extends React.Component {
       , config)
       .then(res => {
         message.success('You requested successfully!');
+        
       })
       .catch(err =>
       {
@@ -150,6 +152,7 @@ class Explore extends React.Component {
       })
 
       this.cancelButton();
+      window.location.replace("/chat");
   }
 
   ClickedDown(){
