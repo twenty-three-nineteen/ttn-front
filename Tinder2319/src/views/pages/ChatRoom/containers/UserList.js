@@ -30,7 +30,7 @@ const UserList = (props) => {
                         onClick={
                           ()=>
                           {
-                              window.open('http://localhost:8080/profile/'+user.username);
+                              window.open('https://talkzone.ir/profile/'+user.username);
                               // window.location.href = 'http://localhost:8080/profile/'+u.username; 
                           }
                       }
