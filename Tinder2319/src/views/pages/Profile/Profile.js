@@ -79,7 +79,7 @@ const Profile = ({
   const setmyOkB = (e) => {
     setOkB(e);
   };
-  const [avInput, setAvInput] = useState(avatar);
+  const [avInput, setAvInput] = useState(0);
   const AvatarsImages = avatarArray.map((av, i) => {
     return (
       <div className="radio">
@@ -252,6 +252,10 @@ const Profile = ({
     console.log(bioInput);
     console.log(nameInput);
     let info = {}
+    if(avInput)
+    {
+      info['avatar']=avInput;
+    } 
     if(bioInput)
     {
       info['bio']=bioInput;
