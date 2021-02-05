@@ -10,7 +10,6 @@ class SelectorInterest extends React.Component {
         super(props);
         this.state={
           interests:[],
-          selectedItems:"",
         };
     }
     componentDidMount() {
@@ -35,13 +34,22 @@ class SelectorInterest extends React.Component {
         });
         
     }
-      onSelect(e){
-        
-        var messagedimo=document.getElementById('MySelect').value;
-        alert(messagedimo);
+      onSelect=e=>{
+        document.getElementById('replaceDimo').innerText = document.getElementById('replaceDimo').innerText+e.toString()+",";
+        this.props.myChange();
       }
-      onDelete(e){
-        alert(e);
+      onDelete=e=>{
+        var str = document.getElementById('replaceDimo').innerText;
+        var res = str.split(",");
+        var i;
+        var final="";
+        for (i = 0; i < res.length-1; i++) {
+          if(res[i]!=e.toString()){
+            final=final+res[i]+",";
+          }
+        } 
+        document.getElementById('replaceDimo').innerText=final;
+        this.props.myChange();
       }
     render(){
         return (
@@ -54,7 +62,6 @@ class SelectorInterest extends React.Component {
             optionFilterProp="children"            
             onSelect={this.onSelect}
             onDeselect={this.onDelete}
-            id="MySelect"
             >
             {this.state.interests.map(d=><Option key={d.id} value={d.id}>{d.subject}</Option>)}
           </Select>

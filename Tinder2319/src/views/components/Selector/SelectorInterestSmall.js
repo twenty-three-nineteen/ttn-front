@@ -24,7 +24,7 @@ class SelectorInterestSmall extends React.Component {
       .then(res => {
         this.setState(()=>{
           return {
-            interests: res.data.map(d=>d.subject)
+            interests: res.data.map(d=>d)
           };
         });
       })
@@ -34,21 +34,23 @@ class SelectorInterestSmall extends React.Component {
         });
         
   }
-    onChange(value) {
-        console.log(`selected ${value}`);
+  onSelect=e=>{
+    document.getElementById('replaceDimo').innerText = document.getElementById('replaceDimo').innerText+e.toString()+",";
+    this.props.myChange();
+  }
+  onDelete=e=>{
+    var str = document.getElementById('replaceDimo').innerText;
+    var res = str.split(",");
+    var i;
+    var final="";
+    for (i = 0; i < res.length-1; i++) {
+      if(res[i]!=e.toString()){
+        final=final+res[i]+",";
       }
-      
-    onBlur() {
-        console.log('blur');
-      }
-      
-    onFocus() {
-        console.log('focus');
-      }
-      
-    onSearch(val) {
-        console.log('search:', val);
-      }
+    } 
+    document.getElementById('replaceDimo').innerText=final;
+    this.props.myChange();
+  }
     render(){
         return (
           <div className="interestcontainer">
@@ -59,12 +61,10 @@ class SelectorInterestSmall extends React.Component {
             className="SelectorInterest"
             placeholder="Interests"
             optionFilterProp="children"
-            onChange={this.onChange}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            onSearch={this.onSearch}
+            onSelect={this.onSelect}
+            onDeselect={this.onDelete}
           >
-          {this.state.interests.map(d=><Option value={d}>{d}</Option>)}
+          {this.state.interests.map(d=><Option key={d.id} value={d.id}>{d.subject}</Option>)}
           </Select>
           </div>
         );

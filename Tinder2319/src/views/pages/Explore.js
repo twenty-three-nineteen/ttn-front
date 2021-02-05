@@ -35,7 +35,6 @@ class Explore extends React.Component {
     this.ClickedFliter=this.ClickedFliter.bind(this);
     this.loadOM=this.loadOM.bind(this);
     this.changeNum=this.changeNum.bind(this);
-    
 
     this.state={
       count:0,
@@ -50,7 +49,7 @@ class Explore extends React.Component {
       showfilter:false,
       theMessage:"",
       theId:0,
-      noOM:false,
+      noOM:true,
       numberOM:2,
       selectedItems:[],
     };
@@ -59,18 +58,7 @@ class Explore extends React.Component {
   componentDidMount() {
       this.loadOM();
   }
-  selectItem(n){
-    alert(n);
-    // var items=this.state.selectedItems;
-    // items.add(n);
-    // items.map(d=>alert(d));
-    // this.setState(()=>{
-    //     return {
-    //       selectedItems: items
-    //     };
-    // });
-    // this.loadOM();
-  }
+ 
   
   changeNum(n){
     this.setState(()=>{
@@ -81,12 +69,23 @@ class Explore extends React.Component {
     this.loadOM();
   }
   loadOM(){
+        var str = document.getElementById('replaceDimo').innerText;
+        var res = str.split(",");
+        var i;
+        var final=[];
+        for (i = 0; i < res.length-1; i++) {
+          final.push(parseInt(res[i]));
+        }
+        for (i = 0; i < final.length; i++) {
+          alert(final[i]);
+        }
+        
     const config = {
       headers: { 'Authorization': `Token ${this.props.token}` }
     };
     axios.post(`${HOST_URL}/api/account/explore/suggested_opening_message/`, 
     {
-      "max_number_of_members": this.state.numberOM
+      "max_number_of_members": this.state.numberOM      
     }
     , config)
     .then(res => {
@@ -431,30 +430,32 @@ class Explore extends React.Component {
   render() {
       return (
           <div id="container" className="exploreContainer">
+              <p id="replaceDimo" className="replaceDimo"></p>
               <div className="TopBar">
                 <p className="TeamName">2319</p>
+
               </div>
               <SideMenu></SideMenu>
+
               <SearchOutlined className="SearchIcon" onClick={this.ClickedFliterSmall}></SearchOutlined>
               <div id="smallDimo" className="smallDimo">
-              <SelectorPersonSmall numChanger={this.changeNum}></SelectorPersonSmall>
-              <SelectorInterestSmall></SelectorInterestSmall>
+              <SelectorPersonSmall numberOfPersons={this.state.numberOM} numChanger={this.changeNum}></SelectorPersonSmall>
+              <SelectorInterestSmall myChange={this.loadOM}></SelectorInterestSmall>
               </div>
-            <div id="smallCon" className="smallCon">
               {this.state.noOM ? 
                 <div className="SmallTotalExploreNO" id="SmallTotalExploreNO">
                 <p className="textOpenningMessage">There are no openning message to show</p>
                 </div>
               :  
-              <div>             
+              <div id="smallCon" className="smallCon">
                 <SmallScreen text={this.state.persons[this.state.count]}></SmallScreen>
                 <div id="buttons" className="buttons">
                   <CheckCircleFilled className="MyCheck" onClick={this.Accepted}></CheckCircleFilled>
                   <CloseCircleFilled className="MyZarb" onClick={this.Rejected}></CloseCircleFilled>
                 </div>
-              </div>}
+              </div>
+            }
               
-            </div>
 
             <BehindOpeningMessage text="hello"></BehindOpeningMessage>
             <Toolbar></Toolbar>
@@ -508,7 +509,7 @@ class Explore extends React.Component {
             <Filter clicked={this.ClickedFliter} show={this.state.showfilter}></Filter>
             <div id="filters" className="filters">
             <SelectorPerson numberOfPersons={this.state.numberOM} numChanger={this.changeNum}></SelectorPerson>
-            <SelectorInterest selectAnItem={this.selectItem}></SelectorInterest>
+            <SelectorInterest myChange={this.loadOM}></SelectorInterest>
             </div>
         </div>
       );

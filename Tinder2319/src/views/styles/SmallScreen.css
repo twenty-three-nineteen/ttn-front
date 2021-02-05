@@ -38,6 +38,10 @@
     visibility: hidden;
 }
 
+.SmallTotalExploreNO {
+    visibility: hidden;
+}
+
 @media screen and (max-width: 780px) {
     html,
     body {
@@ -46,7 +50,9 @@
     }
     .SmallTotalExplore {
         top: 15px;
-        position: relative;
+        width: 45px;
+        position: absolute;
+        font-size: 30px;
         text-align: center;
         word-wrap: break-word;
         visibility: visible;
@@ -65,7 +71,7 @@
         margin-left: 5%;
     }
     .SmallTotalExploreNO {
-        top: 15px;
+        top: 100px;
         position: relative;
         text-align: center;
         word-wrap: break-word;
@@ -94,6 +100,7 @@
         visibility: visible;
     }
     .smallCon {
+        top: -50px;
         position: relative;
         margin-right: 20px;
         visibility: visible;
@@ -113,8 +120,11 @@
         transition: all 0.4s ease-in-out;
     }
     .buttons {
+        width: 100%;
         margin-top: 25px;
         margin-left: 5%;
+        bottom: 50px;
+        position: fixed;
     }
     .buttons.move {
         margin-bottom: -1000px;

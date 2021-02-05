@@ -152,12 +152,12 @@ class Toolbar extends React.Component {
         <ViewRequest message={this.state.message} cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ViewRequest>
         <Menu className="toolbar" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
           <Menu.Item key="home" icon={<HomeOutlined />}>
-          <a href="http://localhost:8080/explore" rel="noopener noreferrer">
+          <a href="/explore" rel="noopener noreferrer">
           Home
           </a>
           </Menu.Item>
           <Menu.Item key="chat" icon={<WechatOutlined />}>
-            <a href="http://localhost:8080/Chat" rel="noopener noreferrer">
+            <a href="/Chat" >
               Chat
             </a>
           </Menu.Item>
@@ -169,18 +169,18 @@ class Toolbar extends React.Component {
             </Dropdown>
           </Menu.Item>
           <Menu.Item key="compose" icon={<FormOutlined />}>
-            <a href="http://localhost:8080/compose" rel="noopener noreferrer">
+            <a href="/compose" rel="noopener noreferrer">
               Compose
             </a>
           </Menu.Item>
           
           <Menu.Item onClick={this.logout} className="logoutToolbar" key="logout" icon={ <LogoutOutlined />}>
-            <a href="http://localhost:8080/login_signup" rel="noopener noreferrer">
+            <a href="/login_signup" rel="noopener noreferrer">
               Log Out
             </a>
           </Menu.Item>
           <Menu.Item  style={{float: 'right'}} key="profile" icon={<UserOutlined />}>
-            <a href="http://localhost:8080/profile" rel="noopener noreferrer">
+            <a href="/profile" rel="noopener noreferrer">
               Profile
             </a>
           </Menu.Item>

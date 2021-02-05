@@ -23,13 +23,17 @@ class MenuContent extends Component {
       reqid:0
     };
   }
+  logout(){
+    message.success('Logged out successfully!');
+    localStorage.clear();
+  }
   componentDidMount() {
     const config = {
       headers: { 'Authorization': `Token ${this.props.token}` }
     };
 
     axios.get(
-      'http://localhost:8000/api/account/myRequests/',
+      `${HOST_URL}/api/account/myRequests/`,
       config
     )
     .then(res => {
@@ -144,7 +148,7 @@ class MenuContent extends Component {
       <ViewRequest message={this.state.message} cancelButton={this.cancelButton} okbtn={this.handleOk} showORnot={this.state.showModal}></ViewRequest>
           <div className="menu-item" key={1}>
             <a
-              href="http://localhost:8080/Explore"
+              href="/Explore"
               onClick={this.props.closeCallback}
               rel="noopener noreferrer">
               <HomeOutlined />  Home
@@ -153,7 +157,7 @@ class MenuContent extends Component {
 
           <div className="menu-item" key={2}>
             <a
-              href="http://localhost:8080/ChatList"
+              href="/Chat"
               onClick={this.props.closeCallback}
               rel="noopener noreferrer">
               <WechatOutlined /> Chat
@@ -173,7 +177,7 @@ class MenuContent extends Component {
 
           <div className="menu-item" key={4}>
             <a
-              href="http://localhost:8080/profile"
+              href="/profile"
               onClick={this.props.closeCallback}
               rel="noopener noreferrer">
               <UserOutlined /> Profile
@@ -182,8 +186,8 @@ class MenuContent extends Component {
         
           <div className="menu-item" key={5}>
             <a
-              href="http://localhost:8080/login_signup"
-              onClick={this.props.closeCallback}
+              href="/login_signup"
+              onClick={this.logout}
               rel="noopener noreferrer">
               <LogoutOutlined /> Logout
             </a>

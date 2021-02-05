@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/OpeningMessage.css';
 import {Row,Col  } from 'antd';
 
-class NoOM extends React.Component {
+class NoOMSmall extends React.Component {
     constructor(props){
         super(props);
     }
@@ -12,9 +12,9 @@ class NoOM extends React.Component {
             <Row>
             <Col><div style={{height:"500px",width:"400px",justify:"center"}}>
      
-            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px"}} >
+            <Row className = " RowStyle"  justify="center" style={{backgroundColor:"rgb(0,0,0,0.36)",height:"450px",}} >
               
-              <p style={{marginTop:"50px", color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{this.props.text}
+              <p style={{marginTop:"150px", color : "whitesmoke",fontSize: "20px",width:"200px",overflowWrap: "break-word",padding:"10px",textAlign:"center",textJustify:"center"}}>{this.props.text}
               </p>
              </Row>
              
@@ -24,5 +24,5 @@ class NoOM extends React.Component {
         );
     }
 }
-export default NoOM;
+export default NoOMSmall;
 
