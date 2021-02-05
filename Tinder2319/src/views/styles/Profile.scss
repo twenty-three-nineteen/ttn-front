@@ -180,10 +180,14 @@
     border-color: rgb(34, 75, 75);
 }
 @media only screen and (max-width: 600px) {
+    .ant-picker.birthIn{
+        margin-left: 10px !important;
+        margin-bottom: 0px !important;
+    }
     .container2 {
         margin-top: 160px !important;
         width: 350px !important;
-        height: 300px !important;
+      
     }
     .container3 {
         margin-top: 100px !important;
@@ -228,14 +232,14 @@
         width: calc(30% + 27px) !important;
         font-size: 10px !important;
         text-align: center !important;
-        margin-top: 22px !important;
+        margin-top: 45px !important;
         margin-left: -25.5px !important;
     }
     .delProB{
         width: calc(30% + 27px) !important;
         font-size: 10px !important;
         text-align: center !important;
-        margin-top: 22px !important;
+        margin-top: 45px !important;
         margin-right: -40px !important;
     }
     .viewPostB2{
@@ -249,7 +253,7 @@
         width: calc(30% + 26.5px) !important;
         font-size: 10px !important;
         text-align: center !important;
-        margin-top: 22px !important;
+        margin-top: 45px !important;
     }
     .ant-btn{
         height: 25px !important;
@@ -257,7 +261,7 @@
         text-align: center !important;
     }
     .doneB{
-        margin-top: 25px !important;
+        margin-top: 37px !important;
     }
     .ant-modal{
         width: 270px !important;
