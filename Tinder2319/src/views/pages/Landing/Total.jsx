@@ -21,7 +21,7 @@ export class TotalLanding extends Component {
 
   render() {
     return (
-      <div style={{overflowY:"auto"}}>
+      <div className="landing" style={{overflowY:"auto"}}>
         <Navigation />
         <Header data={this.state.landingPageData.Header} />
         <Features data={this.state.landingPageData.Features} />
