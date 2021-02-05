@@ -120,7 +120,7 @@ const ChatHeader = ({users,username, isMobile, userList, date,op, activeChat,tok
                         onClick={
                             ()=>
                             {
-                                window.open('http://talkzone.ir/profile/'+u.username);
+                                window.open('https://talkzone.ir/profile/'+u.username);
                                 // window.location.href = 'http://localhost:8080/profile/'+u.username; 
                             }
                         }
