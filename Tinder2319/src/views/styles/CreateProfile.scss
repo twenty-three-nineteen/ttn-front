@@ -13,23 +13,23 @@ textarea.ant-input {
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: space-around;
-    .radio {
-        margin-top: 0 !important;
-        label{
-            padding-left: 0 !important;
-        }
-        @extend .avatar;
-        input[type="radio"] {
-            &:checked~img {
-                border: 1px $color-2 solid;
-                background-color: $color-2;
-            }
-            display: none;
-        }
-    }
+    
 }
 
-
+.radio {
+    margin-top: 0 !important;
+    label{
+        padding-left: 0 !important;
+    }
+    @extend .avatar;
+    input[type="radio"] {
+        &:checked~img {
+            border: 1px $color-2 solid;
+            background-color: $color-2;
+        }
+        display: none;
+    }
+}
 
 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
     background-color: transparent !important;
